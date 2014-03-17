@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+	<html>
+	<head>
+			<meta charset="utf-8">
+			<meta http-equiv="X-UA-Compatible" content="IE=edge">
+			<title>Fiche praticien</title>
+			<link rel="stylesheet" href="../../style/bootstrap.css">
+	</head>
+	<body>
+		<?php 
+			include "../include/barre_navigation.html"
+		?>
+
+		<div class="container">
+			<div class="row">
+				<form action="../maps/test.php" type="POST">
+					<div class="col-md-4">
+						<div class="form-group">
+					    	<label for="code">Code médicament</label>
+					    	<input class="form-control" id="code">
+					  	</div>
+					  	<div class="form-group">
+					    	<label for="nom">Nom commerciale</label>
+					    	<input class="form-control" id="nom">
+					  	</div>
+					  	<div class="form-group">
+					    	<label for="famille">Famille</label>
+					    	<input class="form-control" id="famille">
+					  	</div>
+					  	<div class="form-group">
+					    	<label for="composition">Composition</label>
+					    	<textarea class="form-control" style="height: 101px;" id="composition"></textarea>
+					  	</div>
+					</div>
+					<div class="col-md-4">
+					  	<div class="form-group">
+					    	<label for="effets_indesirables">Effets indésirables</label>
+					    	<textarea class="form-control" rows="5" id="effets_indesirables"></textarea>
+					  	</div>
+					  	<div class="form-group">
+					    	<label for="contres_indications">Contres indications</label>
+					    	<textarea class="form-control" rows="4" id="contres_indications"></textarea>
+					  	</div>
+					  	<div class="form-group">
+					    	<label for="prix_echantillon">Prix échantillon</label>
+					    	<input class="form-control" style="width: 90px;" id="prix_echantillon">
+					  	</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+	</body>
+</html>

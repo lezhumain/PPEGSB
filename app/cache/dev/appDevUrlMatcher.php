@@ -27,6 +27,19 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         $context = $this->context;
         $request = $this->request;
 
+        if (0 === strpos($pathinfo, '/js/db602d5')) {
+            // _assetic_db602d5
+            if ($pathinfo === '/js/db602d5.js') {
+                return array (  '_controller' => 'assetic.controller:render',  'name' => 'db602d5',  'pos' => NULL,  '_format' => 'js',  '_route' => '_assetic_db602d5',);
+            }
+
+            // _assetic_db602d5_0
+            if ($pathinfo === '/js/db602d5_jquery_1.js') {
+                return array (  '_controller' => 'assetic.controller:render',  'name' => 'db602d5',  'pos' => 0,  '_format' => 'js',  '_route' => '_assetic_db602d5_0',);
+            }
+
+        }
+
         if (0 === strpos($pathinfo, '/_')) {
             // _wdt
             if (0 === strpos($pathinfo, '/_wdt') && preg_match('#^/_wdt/(?P<token>[^/]++)$#s', $pathinfo, $matches)) {
@@ -136,8 +149,8 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         }
 
         // ppegsb_homepage
-        if (0 === strpos($pathinfo, '/hello') && preg_match('#^/hello/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'ppegsb_homepage')), array (  '_controller' => 'PPE\\GSBBundle\\Controller\\DefaultController::indexAction',));
+        if ($pathinfo === '/helloGSB') {
+            return array (  '_controller' => 'PPE\\GSBBundle\\Controller\\DefaultController::indexAction',  '_route' => 'ppegsb_homepage',);
         }
 
         // _welcome

@@ -1,5 +1,13 @@
-Hello {{ name }}! Et oui
+{% extends 'PPEGSBBundle::layout.html.twig' %}
+
+{% block title %}GSB - Connexion{% endblock %}
 
 
-
-^plop
+{% block body %}
+<form class="form-signin">
+	<h2 class="form-signin-heading">Connectez-vous</h2>
+	<input type="text" class="form-control" placeholder="Identifiant" required autofocus>
+	<input type="password" class="form-control" placeholder="Mot de passe" required>
+	<button class="btn btn-lg btn-primary btn-block" type="submit">Connexion</button>
+</form>
+{% endblock %}
