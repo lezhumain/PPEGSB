@@ -8,7 +8,7 @@ class DefaultController extends Controller
 {
     public function indexAction($name)
     {
-    	echo "sisPLOPi";
+    	echo "sislèièPLOPi";
         return $this->render('PPEGSBBundle:Default:index.html.twig', array('name' => $name));
     }
 }
