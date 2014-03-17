@@ -1,0 +1,53 @@
+<?php
+
+namespace PPE\GSBBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Prescrire
+ *
+ * @ORM\Table(name="PRESCRIRE", indexes={@ORM\Index(name="IDX_905658D21C5F7A71", columns={"depot_legal_prescr"}), @ORM\Index(name="IDX_905658D261B89203", columns={"code_dosage"}), @ORM\Index(name="IDX_905658D2A76557E5", columns={"code_individu"})})
+ * @ORM\Entity
+ */
+class Prescrire
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="posologie", type="string", length=25, nullable=false)
+     */
+    private $posologie;
+
+    /**
+     * @var \PPE\GSBBundle\Entity\Medicament
+     *
+     * @ORM\OneToOne(targetEntity="PPE\GSBBundle\Entity\Medicament")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="depot_legal_prescr", referencedColumnName="depot_legal", unique=true)
+     * })
+     */
+    private $depotLegalPrescr;
+
+    /**
+     * @var \PPE\GSBBundle\Entity\Dosage
+     *
+     * @ORM\OneToOne(targetEntity="PPE\GSBBundle\Entity\Dosage")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="code_dosage", referencedColumnName="code_dosage", unique=true)
+     * })
+     */
+    private $codeDosage;
+
+    /**
+     * @var \PPE\GSBBundle\Entity\TypeIndividu
+     *
+     * @ORM\OneToOne(targetEntity="PPE\GSBBundle\Entity\TypeIndividu")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="code_individu", referencedColumnName="code_individu", unique=true)
+     * })
+     */
+    private $codeIndividu;
+
+
+}

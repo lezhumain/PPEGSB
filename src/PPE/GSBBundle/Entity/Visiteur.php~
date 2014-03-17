@@ -1,0 +1,36 @@
+<?php
+
+namespace PPE\GSBBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Visiteur
+ *
+ * @ORM\Table(name="VISITEUR", indexes={@ORM\Index(name="IDX_88961BF470E4A9D4", columns={"code_region"})})
+ * @ORM\Entity
+ */
+class Visiteur
+{
+    /**
+     * @var \PPE\GSBBundle\Entity\Collaborateur
+     *
+     * @ORM\OneToOne(targetEntity="PPE\GSBBundle\Entity\Collaborateur")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="matricule_col_vis", referencedColumnName="matricule_col", unique=true)
+     * })
+     */
+    private $matriculeColVis;
+
+    /**
+     * @var \PPE\GSBBundle\Entity\Region
+     *
+     * @ORM\ManyToOne(targetEntity="PPE\GSBBundle\Entity\Region")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="code_region", referencedColumnName="code_region")
+     * })
+     */
+    private $codeRegion;
+
+
+}

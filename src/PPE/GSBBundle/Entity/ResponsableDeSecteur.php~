@@ -1,0 +1,26 @@
+<?php
+
+namespace PPE\GSBBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ResponsableDeSecteur
+ *
+ * @ORM\Table(name="RESPONSABLE_DE_SECTEUR")
+ * @ORM\Entity
+ */
+class ResponsableDeSecteur
+{
+    /**
+     * @var \PPE\GSBBundle\Entity\Collaborateur
+     *
+     * @ORM\OneToOne(targetEntity="PPE\GSBBundle\Entity\Collaborateur")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="matricule_col_res", referencedColumnName="matricule_col", unique=true)
+     * })
+     */
+    private $matriculeColRes;
+
+
+}

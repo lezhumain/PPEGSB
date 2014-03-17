@@ -1,0 +1,54 @@
+<?php
+
+namespace PPE\GSBBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Specialite
+ *
+ * @ORM\Table(name="SPECIALITE")
+ * @ORM\Entity
+ */
+class Specialite
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="code_spec", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $codeSpec;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="libelle_spec", type="string", length=250, nullable=false)
+     */
+    private $libelleSpec;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="PPE\GSBBundle\Entity\Praticien", inversedBy="codeSpec")
+     * @ORM\JoinTable(name="posseder",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="code_spec", referencedColumnName="code_spec")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="matricule_praticien", referencedColumnName="matricule_praticien")
+     *   }
+     * )
+     */
+    private $matriculePraticien;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->matriculePraticien = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}

@@ -1,0 +1,26 @@
+<?php
+
+namespace PPE\GSBBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * DirecteurRegional
+ *
+ * @ORM\Table(name="DIRECTEUR_REGIONAL")
+ * @ORM\Entity
+ */
+class DirecteurRegional
+{
+    /**
+     * @var \PPE\GSBBundle\Entity\Collaborateur
+     *
+     * @ORM\OneToOne(targetEntity="PPE\GSBBundle\Entity\Collaborateur")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="matricule_col_dir", referencedColumnName="matricule_col", unique=true)
+     * })
+     */
+    private $matriculeColDir;
+
+
+}

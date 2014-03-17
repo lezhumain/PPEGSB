@@ -1,0 +1,4 @@
+ppegsb:
+    resource: "@PPEGSBBundle/Resources/config/routing.yml"
+    prefix:   /
+
