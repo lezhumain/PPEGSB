@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 7edd22,127.0.0.1,GET,http://localhost/EPSI/PPEGSB/web/app_dev.php/hello/sisi,1395093107,
 b67124,127.0.0.1,GET,http://localhost/EPSI/PPEGSB/web/app_dev.php/hello/sisi,1395093806,
 6ed7ca,127.0.0.1,GET,http://localhost/EPSI/PPEGSB/web/app_dev.php/helloGSB/sisi,1395094507,
@@ -24,3 +25,7 @@ ef3348,127.0.0.1,GET,http://localhost/EPSI/PPEGSB/web/app_dev.php/helloGSB,13950
 6fd3f6,127.0.0.1,GET,http://localhost/EPSI/PPEGSB/web/app_dev.php/helloGSB,1395098532,
 46886e,127.0.0.1,GET,http://localhost/EPSI/PPEGSB/web/app_dev.php/helloGSB,1395098738,
 3c3f32,127.0.0.1,GET,http://localhost/EPSI/PPEGSB/web/app_dev.php/helloGSB,1395099203,
+=======
+90f9a5,::1,GET,http://localhost/PPEGSB/web/app_dev.php/hello/sisi,1395073144,
+1dcd5d,::1,GET,http://localhost/PPEGSB/web/app_dev.php/hello/sisi,1395073169,
+>>>>>>> d9e932f4fd1e87449a492bbb03706655790aa4e8
