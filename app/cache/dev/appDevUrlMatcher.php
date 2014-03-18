@@ -27,19 +27,6 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         $context = $this->context;
         $request = $this->request;
 
-        if (0 === strpos($pathinfo, '/js/db602d5')) {
-            // _assetic_db602d5
-            if ($pathinfo === '/js/db602d5.js') {
-                return array (  '_controller' => 'assetic.controller:render',  'name' => 'db602d5',  'pos' => NULL,  '_format' => 'js',  '_route' => '_assetic_db602d5',);
-            }
-
-            // _assetic_db602d5_0
-            if ($pathinfo === '/js/db602d5_jquery_1.js') {
-                return array (  '_controller' => 'assetic.controller:render',  'name' => 'db602d5',  'pos' => 0,  '_format' => 'js',  '_route' => '_assetic_db602d5_0',);
-            }
-
-        }
-
         if (0 === strpos($pathinfo, '/_')) {
             // _wdt
             if (0 === strpos($pathinfo, '/_wdt') && preg_match('#^/_wdt/(?P<token>[^/]++)$#s', $pathinfo, $matches)) {

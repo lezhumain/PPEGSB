@@ -2,8 +2,4 @@ _assetic:
     resource: .
     type: assetic
 _app:
-<<<<<<< HEAD
     resource: 'C:/wamp/www/EPSI/PPEGSB/app/config/routing_dev.yml'
-=======
-    resource: 'C:/wamp/www/PPEGSB/app/config/routing_dev.yml'
->>>>>>> d9e932f4fd1e87449a492bbb03706655790aa4e8
