@@ -25,26 +25,27 @@
                             <span class="icon-bar"></span>
                         </button>
                       
-                        <a class="navbar-brand" href="#">Application GSB</a>
+                        <a class="navbar-brand" href="{{ path('ppegsb_homepage' ) }}">Application GSB</a>
+                        
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li><a href="../praticiens/liste.php">Praticiens</a></li>
-                            <li><a href="../medicaments/liste.php">Medicaments</a></li>
-                            <li><a href="../maps/geolocalisation.php">Carte</a></li>
+                            <li><a href="{{ path('ppesgb_listePra') }}">Praticiens</a></li>
+                            <li><a href="{{ path('ppesgb_listeMed') }}">Medicaments</a></li>
+                            <li><a href="#">Carte</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Actions rapport <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="../../rapports/liste.php">Mes rapports</a></li>
-                                    <li><a href="#">Mes brouillons</a></li>
+                                    <li><a href="{{ path('ppegsb_homepage' ) }}">Mes rapports</a></li>
+                                    <!-- <li><a href="#">Mes brouillons</a></li> -->
                                     <li class="divider"></li>
-                                    <li><a href="#"><button type="button" id="rapport_dropdown" class="btn btn-primary">Nouveau Rapport</button></a></li>
+                                    <li><a href="{{ path('ppegsb_newFicheRp') }}">Nouveau Rapport</a></li>
                                 </ul>
                             </li>
                       </ul>
                     </div><!--/.nav-collapse -->
                     <div class="nav navbar-nav navbar-right" id="bouton-deco-new">
-                        <a href="#"><button type="button" class="btn btn-primary">Nouveau Rapport</button></a>
+                        <a href="{{ path('ppegsb_newFicheRp') }}"><button type="button" class="btn btn-primary">Nouveau Rapport</button></a>
                         <a href="#"><button type="button" class="btn btn-danger">Deconnexion</button></a>
                     </div>
                 </div>

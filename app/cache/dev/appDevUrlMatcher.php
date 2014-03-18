@@ -136,8 +136,62 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         }
 
         // ppegsb_homepage
-        if ($pathinfo === '/index') {
+        if ($pathinfo === '/Index') {
             return array (  '_controller' => 'PPE\\GSBBundle\\Controller\\DefaultController::indexAction',  '_route' => 'ppegsb_homepage',);
+        }
+
+        if (0 === strpos($pathinfo, '/RP')) {
+            // ppegsb_ficheRp
+            if ($pathinfo === '/RP/Fiche') {
+                return array (  '_controller' => 'PPE\\GSBBundle\\Controller\\DefaultController::ficheRpAction',  'new' => 0,  '_route' => 'ppegsb_ficheRp',);
+            }
+
+            // ppegsb_newFicheRp
+            if ($pathinfo === '/RP/new') {
+                return array (  '_controller' => 'PPE\\GSBBundle\\Controller\\DefaultController::ficheRpAction',  'new' => 1,  '_route' => 'ppegsb_newFicheRp',);
+            }
+
+        }
+
+        if (0 === strpos($pathinfo, '/Praticien')) {
+            // ppesgb_listePra
+            if ($pathinfo === '/Praticien/Liste') {
+                return array (  '_controller' => 'PPE\\GSBBundle\\Controller\\DefaultController::listePraAction',  '_route' => 'ppesgb_listePra',);
+            }
+
+            // ppegsb_fichePra
+            if ($pathinfo === '/Praticien/Fiche') {
+                return array (  '_controller' => 'PPE\\GSBBundle\\Controller\\DefaultController::fichePraAction',  'new' => 0,  '_route' => 'ppegsb_fichePra',);
+            }
+
+            // ppegsb_newFichePra
+            if ($pathinfo === '/Praticien/new') {
+                return array (  '_controller' => 'PPE\\GSBBundle\\Controller\\DefaultController::fichePraAction',  'new' => 1,  '_route' => 'ppegsb_newFichePra',);
+            }
+
+        }
+
+        if (0 === strpos($pathinfo, '/Medicament')) {
+            // ppesgb_listeMed
+            if ($pathinfo === '/Medicament/Liste') {
+                return array (  '_controller' => 'PPE\\GSBBundle\\Controller\\DefaultController::listeMedAction',  '_route' => 'ppesgb_listeMed',);
+            }
+
+            // ppegsb_ficheMed
+            if ($pathinfo === '/Medicament/Fiche') {
+                return array (  '_controller' => 'PPE\\GSBBundle\\Controller\\DefaultController::ficheMedAction',  'new' => 0,  '_route' => 'ppegsb_ficheMed',);
+            }
+
+            // ppegsb_newFicheMed
+            if ($pathinfo === '/Medicament/new') {
+                return array (  '_controller' => 'PPE\\GSBBundle\\Controller\\DefaultController::ficheMedAction',  'new' => 1,  '_route' => 'ppegsb_newFicheMed',);
+            }
+
+        }
+
+        // ppegsb_connexion
+        if ($pathinfo === '/Connexion') {
+            return array (  '_controller' => 'PPE\\GSBBundle\\Controller\\DefaultController::connexionAction',  '_route' => 'ppegsb_connexion',);
         }
 
         // _welcome

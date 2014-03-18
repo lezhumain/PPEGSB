@@ -41,30 +41,30 @@ class __TwigTemplate_99aad333ae44105510a2914abe6d68c252fdefe52cdcab4cb280fcaebc0
         ";
         // line 17
         $this->displayBlock('navigation', $context, $blocks);
-        // line 53
+        // line 54
         echo "        </section>
 
 
         <section class=\"content\">
         ";
-        // line 57
+        // line 58
         $this->displayBlock('body', $context, $blocks);
-        // line 59
+        // line 60
         echo "        </section>
 
 
         <section id=\"foot\">
         ";
-        // line 63
+        // line 64
         $this->displayBlock('footer', $context, $blocks);
-        // line 66
+        // line 67
         echo "        </section>
 
         <!-- javascripts -->
         ";
-        // line 69
+        // line 70
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 75
+        // line 76
         echo "        
     </body>
 </html>
@@ -114,26 +114,45 @@ class __TwigTemplate_99aad333ae44105510a2914abe6d68c252fdefe52cdcab4cb280fcaebc0
                             <span class=\"icon-bar\"></span>
                         </button>
                       
-                        <a class=\"navbar-brand\" href=\"#\">Application GSB</a>
+                        <a class=\"navbar-brand\" href=\"";
+        // line 28
+        echo $this->env->getExtension('routing')->getPath("ppegsb_homepage");
+        echo "\">Application GSB</a>
+                        
                     </div>
                     <div class=\"navbar-collapse collapse\">
                         <ul class=\"nav navbar-nav\">
-                            <li><a href=\"../praticiens/liste.php\">Praticiens</a></li>
-                            <li><a href=\"../medicaments/liste.php\">Medicaments</a></li>
-                            <li><a href=\"../maps/geolocalisation.php\">Carte</a></li>
+                            <li><a href=\"";
+        // line 33
+        echo $this->env->getExtension('routing')->getPath("ppesgb_listePra");
+        echo "\">Praticiens</a></li>
+                            <li><a href=\"";
+        // line 34
+        echo $this->env->getExtension('routing')->getPath("ppesgb_listeMed");
+        echo "\">Medicaments</a></li>
+                            <li><a href=\"#\">Carte</a></li>
                             <li class=\"dropdown\">
                                 <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">Actions rapport <b class=\"caret\"></b></a>
                                 <ul class=\"dropdown-menu\">
-                                    <li><a href=\"../../rapports/liste.php\">Mes rapports</a></li>
-                                    <li><a href=\"#\">Mes brouillons</a></li>
+                                    <li><a href=\"";
+        // line 39
+        echo $this->env->getExtension('routing')->getPath("ppegsb_homepage");
+        echo "\">Mes rapports</a></li>
+                                    <!-- <li><a href=\"#\">Mes brouillons</a></li> -->
                                     <li class=\"divider\"></li>
-                                    <li><a href=\"#\"><button type=\"button\" id=\"rapport_dropdown\" class=\"btn btn-primary\">Nouveau Rapport</button></a></li>
+                                    <li><a href=\"";
+        // line 42
+        echo $this->env->getExtension('routing')->getPath("ppegsb_newFicheRp");
+        echo "\">Nouveau Rapport</a></li>
                                 </ul>
                             </li>
                       </ul>
                     </div><!--/.nav-collapse -->
                     <div class=\"nav navbar-nav navbar-right\" id=\"bouton-deco-new\">
-                        <a href=\"#\"><button type=\"button\" class=\"btn btn-primary\">Nouveau Rapport</button></a>
+                        <a href=\"";
+        // line 48
+        echo $this->env->getExtension('routing')->getPath("ppegsb_newFicheRp");
+        echo "\"><button type=\"button\" class=\"btn btn-primary\">Nouveau Rapport</button></a>
                         <a href=\"#\"><button type=\"button\" class=\"btn btn-danger\">Deconnexion</button></a>
                     </div>
                 </div>
@@ -141,42 +160,42 @@ class __TwigTemplate_99aad333ae44105510a2914abe6d68c252fdefe52cdcab4cb280fcaebc0
         ";
     }
 
-    // line 57
+    // line 58
     public function block_body($context, array $blocks = array())
     {
-        // line 58
+        // line 59
         echo "        ";
     }
 
-    // line 63
+    // line 64
     public function block_footer($context, array $blocks = array())
     {
-        // line 64
+        // line 65
         echo "           <!--  GSB - JUJU - CLECLE - MOMO -->
         ";
     }
 
-    // line 69
+    // line 70
     public function block_javascripts($context, array $blocks = array())
     {
-        // line 70
+        // line 71
         echo "        <script src=\"";
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/ppegsb/js/jquery.js"), "html", null, true);
         echo "\" type=\"text/javascript\"></script>
         <script src=\"";
-        // line 71
+        // line 72
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/ppegsb/js/jquery-ui.js"), "html", null, true);
         echo "\" type=\"text/javascript\" ></script>
         <script src=\"";
-        // line 72
+        // line 73
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/ppegsb/js/bootstrap.min.js"), "html", null, true);
         echo "\" type=\"text/javascript\" ></script>
         <script src=\"";
-        // line 73
+        // line 74
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/ppegsb/js/jquery.datetimepicker.js"), "html", null, true);
         echo "\" type=\"text/javascript\" ></script>
         <script src=\"";
-        // line 74
+        // line 75
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/ppegsb/js/maplace.min.js"), "html", null, true);
         echo "\" type=\"text/javascript\" ></script>
         ";
@@ -189,6 +208,6 @@ class __TwigTemplate_99aad333ae44105510a2914abe6d68c252fdefe52cdcab4cb280fcaebc0
 
     public function getDebugInfo()
     {
-        return array (  180 => 74,  176 => 73,  172 => 72,  168 => 71,  163 => 70,  160 => 69,  155 => 64,  152 => 63,  148 => 58,  145 => 57,  107 => 18,  104 => 17,  98 => 12,  94 => 11,  90 => 10,  85 => 9,  82 => 8,  76 => 7,  68 => 75,  66 => 69,  61 => 66,  59 => 63,  53 => 59,  51 => 57,  45 => 53,  43 => 17,  38 => 14,  36 => 8,  32 => 7,  25 => 2,);
+        return array (  195 => 74,  191 => 73,  174 => 65,  167 => 59,  127 => 33,  104 => 17,  90 => 10,  76 => 7,  53 => 60,  480 => 162,  474 => 161,  469 => 158,  461 => 155,  457 => 153,  453 => 151,  444 => 149,  440 => 148,  437 => 147,  435 => 146,  430 => 144,  427 => 143,  423 => 142,  413 => 134,  409 => 132,  407 => 131,  402 => 130,  398 => 129,  393 => 126,  387 => 122,  384 => 121,  381 => 120,  379 => 119,  374 => 116,  368 => 112,  365 => 111,  362 => 110,  360 => 109,  355 => 106,  341 => 105,  337 => 103,  322 => 101,  314 => 99,  312 => 98,  309 => 97,  305 => 95,  298 => 91,  294 => 90,  285 => 89,  283 => 88,  278 => 86,  268 => 85,  264 => 84,  258 => 81,  252 => 80,  247 => 78,  241 => 77,  229 => 73,  220 => 70,  214 => 69,  177 => 65,  169 => 60,  140 => 55,  132 => 51,  128 => 49,  107 => 18,  61 => 67,  273 => 96,  269 => 94,  254 => 92,  243 => 88,  240 => 86,  238 => 85,  235 => 74,  230 => 82,  227 => 81,  224 => 71,  221 => 77,  219 => 76,  217 => 75,  208 => 68,  204 => 72,  179 => 70,  159 => 61,  143 => 56,  135 => 53,  119 => 28,  102 => 32,  71 => 19,  67 => 15,  63 => 15,  59 => 64,  38 => 14,  94 => 11,  89 => 20,  85 => 9,  75 => 17,  68 => 76,  56 => 9,  87 => 25,  21 => 2,  26 => 6,  93 => 28,  88 => 6,  78 => 21,  46 => 7,  27 => 4,  44 => 9,  31 => 5,  28 => 3,  201 => 92,  196 => 90,  183 => 82,  171 => 64,  166 => 71,  163 => 62,  158 => 67,  156 => 66,  151 => 63,  142 => 59,  138 => 54,  136 => 56,  121 => 46,  117 => 44,  105 => 40,  91 => 27,  62 => 23,  49 => 19,  24 => 4,  25 => 2,  19 => 1,  79 => 18,  72 => 16,  69 => 25,  47 => 9,  40 => 8,  37 => 10,  22 => 2,  246 => 90,  157 => 56,  145 => 42,  139 => 39,  131 => 34,  123 => 47,  120 => 40,  115 => 43,  111 => 37,  108 => 36,  101 => 32,  98 => 12,  96 => 31,  83 => 25,  74 => 14,  66 => 70,  55 => 15,  52 => 21,  50 => 10,  43 => 17,  41 => 8,  35 => 5,  32 => 7,  29 => 3,  209 => 82,  203 => 78,  199 => 75,  193 => 73,  189 => 71,  187 => 72,  182 => 71,  176 => 64,  173 => 65,  168 => 72,  164 => 58,  162 => 57,  154 => 48,  149 => 51,  147 => 58,  144 => 49,  141 => 48,  133 => 55,  130 => 41,  125 => 44,  122 => 43,  116 => 41,  112 => 42,  109 => 34,  106 => 36,  103 => 32,  99 => 31,  95 => 28,  92 => 21,  86 => 28,  82 => 8,  80 => 19,  73 => 19,  64 => 17,  60 => 6,  57 => 11,  54 => 10,  51 => 58,  48 => 13,  45 => 54,  42 => 7,  39 => 9,  36 => 8,  33 => 4,  30 => 3,);
     }
 }

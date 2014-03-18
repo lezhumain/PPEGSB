@@ -1,3 +1,48 @@
 ppegsb_homepage:
-    pattern:  /index
+    pattern:  /Index
     defaults: { _controller: PPEGSBBundle:Default:index }
+
+ppegsb_ficheRp:
+    pattern:  /RP/Fiche
+    defaults: { _controller: PPEGSBBundle:Default:ficheRp, new: 0 }
+
+ppegsb_newFicheRp:
+    pattern:  /RP/new
+    defaults: { _controller: PPEGSBBundle:Default:ficheRp, new: 1 }
+
+
+
+
+
+ppesgb_listePra:
+    pattern: /Praticien/Liste
+    defaults: { _controller: PPEGSBBundle:Default:listePra }
+
+ppegsb_fichePra:
+    pattern:  /Praticien/Fiche
+    defaults: { _controller: PPEGSBBundle:Default:fichePra, new: 0 }
+
+ppegsb_newFichePra:
+    pattern:  /Praticien/new
+    defaults: { _controller: PPEGSBBundle:Default:fichePra, new: 1 }
+
+
+
+
+
+ppesgb_listeMed:
+    pattern: /Medicament/Liste
+    defaults: { _controller: PPEGSBBundle:Default:listeMed }
+
+ppegsb_ficheMed:
+    pattern:  /Medicament/Fiche
+    defaults: { _controller: PPEGSBBundle:Default:ficheMed, new: 0 }
+
+ppegsb_newFicheMed:
+    pattern:  /Medicament/new
+    defaults: { _controller: PPEGSBBundle:Default:ficheMed, new: 1 }
+
+
+ppegsb_connexion:
+    pattern:  /Connexion
+    defaults: { _controller: PPEGSBBundle:Default:connexion }

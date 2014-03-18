@@ -1,0 +1,21 @@
+{% extends 'PPEGSBBundle::layout.html.twig' %}
+
+{% block title %}GSB - Connexion{% endblock %}
+
+{% block navigation %}{% endblock %}
+
+
+{% block body %}
+		<div class="col-md-6 col-md-offset-3 well" id = "formConnexion">
+			<form>
+				<h2>Connectez-vous</h2>
+				<input type="text" class="form-control" placeholder="Matricule" required autofocus>
+				<input type="password" class="form-control" placeholder="Mot de passe" required>
+				<button class="btn btn-primary col-md-6 col-md-offset-3" type="submit">Connexion</button>
+			</form>
+			<div class="col-md-12" id = "formConnexionFooter">
+				<a href="#">Contact administration</a>
+				<a href="#"> - Application GSB</a>
+			</div>
+		</div>
+{% endblock %}
