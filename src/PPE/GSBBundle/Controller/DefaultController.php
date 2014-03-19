@@ -43,7 +43,23 @@ class DefaultController extends Controller
      * 						=>  1 praticien	
      */
     public function fichePraAction($new){
-        return $this->render('PPEGSBBundle:Default:fiche_prat.html.twig', array('new' => $new ));
+        $tab = $this->getMapFromAdress("32 rue des granges Lyon");
+
+        return $this->render('PPEGSBBundle:Default:fiche_prat.html.twig', array('new' => $new, "gps" => $tab ));
+    }
+
+    public function getMapFromAdress($adresse) {
+        $url = "http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($adresse)."&sensor=false";
+        $req = file_get_contents($url);
+        $gps = json_decode($req, true);
+         
+        $lat = $gps['results'][0]['geometry']['location']['lat'];
+        $lng = $gps['results'][0]['geometry']['location']['lng'];
+         
+        $tab["lat"] = $lat;
+        $tab["lng"] = $lng;
+
+        return $tab;
     }
 /******************************/
 
