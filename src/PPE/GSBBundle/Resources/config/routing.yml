@@ -46,3 +46,19 @@ ppegsb_newFicheMed:
 ppegsb_connexion:
     pattern:  /Connexion
     defaults: { _controller: PPEGSBBundle:Default:connexion }
+    
+
+ppegsb_login:
+    pattern:  /login
+    defaults: { _controller: PPEGSBBundle:Security:login }
+
+ppegsb_logincheck:
+    pattern:  /login_check
+
+ppegsb_logout:
+    pattern:  /logout
+    
+ppegsb_admin:
+    pattern:  /admin
+    defaults: { _controller: PPEGSBBundle:Default:admin }
+    
