@@ -7,7 +7,10 @@ use PPE\GSBBundle\Entity;
 
 class DefaultController extends Controller
 {
-
+	public function adminAction()
+	{
+		return $this->render('PPEGSBBundle:Default:admin.html.twig');
+	}
 
 /*BLOC DE GESTION DES RP*/
 	/**
