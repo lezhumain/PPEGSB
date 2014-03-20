@@ -36,7 +36,9 @@ class DefaultController extends Controller
 
 /*BLOC GESTION DES PRATICIEN*/
     public function listePraAction(){
-    	return $this->render('PPEGSBBundle:Default:liste_prat.html.twig');
+        $em = $this->getDoctrine()->getEntityManager();
+        $praticien = $em->getRepository('PPEGSBBundle:praticien')->FindAll();
+    	return $this->render('PPEGSBBundle:Default:liste_prat.html.twig', array('praticiens' => $praticien));
     }
 
     /**

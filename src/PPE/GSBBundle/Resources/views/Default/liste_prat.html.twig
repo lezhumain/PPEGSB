@@ -20,6 +20,20 @@
 			</tr>
 		</thead>
 		<!-- fin de l'entête -->
+		<tbody>
+		{% for praticien in praticiens %}
+			<tr>
+				<td><a href="Fiche-{{praticien.matriculePraticien}}">{{praticien.matriculePraticien}}</a></td>
+				<td>{{praticien.nomPraticien}}</td>
+				<td>{{praticien.prenomPraticien}}</td>
+				<td>{{praticien.adressePraticien}}</td>
+				<td>{{praticien.cpPraticien}}</td>
+				<td>{{praticien.villePraticien}}</td>
+				<td>{{praticien.coefnotorietePraticien}}</td>
+				<td>Nope</td>
+			</tr>
+		{% endfor %}
+		</tbody>
 	</table>
 </div>
 {% endblock %}
