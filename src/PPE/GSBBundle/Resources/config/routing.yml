@@ -19,8 +19,9 @@ ppesgb_listePra:
     defaults: { _controller: PPEGSBBundle:Default:listePra }
 
 ppegsb_fichePra:
-    pattern:  /Praticien/Fiche
-    defaults: { _controller: PPEGSBBundle:Default:fichePra, new: 0 }
+    pattern:  /Praticien/Fiche-{id}
+    defaults: { _controller: PPEGSBBundle:Default:fichePra, new: 0}
+    requirements: {id: \d+}
 
 ppegsb_newFichePra:
     pattern:  /Praticien/new

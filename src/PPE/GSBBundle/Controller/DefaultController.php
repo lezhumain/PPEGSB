@@ -45,10 +45,18 @@ class DefaultController extends Controller
      *   					=>	0 affichage read only
      * 						=>  1 praticien	
      */
-    public function fichePraAction($new){
-        $tab = $this->getMapFromAdress("32 rue des granges Lyon");
+    public function fichePraAction($new, $id){
 
-        return $this->render('PPEGSBBundle:Default:fiche_prat.html.twig', array('new' => $new, "gps" => $tab ));
+        $em = $this->getDoctrine()->getEntityManager();
+        $praticien = $em->getRepository('PPEGSBBundle:praticien')->FindOneBy(array("matriculePraticien" => $id));
+
+        if (empty($praticien)) {
+            throw $this->createNotFoundException("Praticien inconnu :(");
+        }
+
+        $tab = $this->getMapFromAdress($praticien->getAdressePraticien()." ".$praticien->getCpPraticien()." ".$praticien->getVillePraticien());
+
+        return $this->render('PPEGSBBundle:Default:fiche_prat.html.twig', array('new' => $new, "gps" => $tab, 'praticien' => $praticien ));
     }
 
     public function getMapFromAdress($adresse) {
