@@ -23,7 +23,7 @@
 		<tbody>
 		{% for praticien in praticiens %}
 			<tr>
-				<td><a href="Fiche-{{praticien.matriculePraticien}}">{{praticien.matriculePraticien}}</a></td>
+				<td><a href="Fiche-{{praticien.matriculePraticien}}"><button class="btn btn-primary"><span class="glyphicon glyphicon-user"></span>{{praticien.matriculePraticien}}</button></a></td>
 				<td>{{praticien.nomPraticien}}</td>
 				<td>{{praticien.prenomPraticien}}</td>
 				<td>{{praticien.adressePraticien}}</td>

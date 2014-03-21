@@ -14,7 +14,7 @@ ppegsb_newFicheRp:
 
 
 
-ppesgb_listePra:
+ppegsb_listePra:
     pattern: /Praticien/Liste
     defaults: { _controller: PPEGSBBundle:Default:listePra }
 
@@ -27,11 +27,16 @@ ppegsb_newFichePra:
     pattern:  /Praticien/new
     defaults: { _controller: PPEGSBBundle:Default:fichePra, new: 1 }
 
+ppegsb_mapPra:
+    pattern: /Praticien/map
+    defaults: { _controller: PPEGSBBundle:Default:mapPra}
 
 
 
 
-ppesgb_listeMed:
+
+
+ppegsb_listeMed:
     pattern: /Medicament/Liste
     defaults: { _controller: PPEGSBBundle:Default:listeMed }
 

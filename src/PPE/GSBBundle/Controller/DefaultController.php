@@ -61,6 +61,21 @@ class DefaultController extends Controller
         return $this->render('PPEGSBBundle:Default:fiche_prat.html.twig', array('new' => $new, "gps" => $tab, 'praticien' => $praticien ));
     }
 
+    public function mapPraAction() {
+        $em = $this->getDoctrine()->getEntityManager();
+        $praticien = $em->getRepository('PPEGSBBundle:praticien')->FindAll();
+
+        if (empty($praticien)) {
+            throw $this->createNotFoundException("Pas de praticien à localiser :(");
+        }
+
+        foreach ($praticien as $data) {
+            $gpsCoo[] = $this->getMapFromAdress($data->getAdressePraticien()." ".$data->getCpPraticien()." ".$data->getVillePraticien());
+        }
+
+        return $this->render('PPEGSBBundle:Default:map.html.twig', array('gpsCoo' => $gpsCoo, 'praticiens' => $praticien));
+    }
+
     public function getMapFromAdress($adresse) {
         $url = "http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($adresse)."&sensor=false";
         $req = file_get_contents($url);
