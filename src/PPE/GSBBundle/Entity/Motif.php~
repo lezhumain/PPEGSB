@@ -29,4 +29,37 @@ class Motif
     private $libelleMotif;
 
 
+
+    /**
+     * Get codeMotif
+     *
+     * @return integer 
+     */
+    public function getCodeMotif()
+    {
+        return $this->codeMotif;
+    }
+
+    /**
+     * Set libelleMotif
+     *
+     * @param string $libelleMotif
+     * @return Motif
+     */
+    public function setLibelleMotif($libelleMotif)
+    {
+        $this->libelleMotif = $libelleMotif;
+
+        return $this;
+    }
+
+    /**
+     * Get libelleMotif
+     *
+     * @return string 
+     */
+    public function getLibelleMotif()
+    {
+        return $this->libelleMotif;
+    }
 }

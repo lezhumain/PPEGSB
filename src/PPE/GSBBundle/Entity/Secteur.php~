@@ -29,4 +29,37 @@ class Secteur
     private $libelleSecteur;
 
 
+
+    /**
+     * Get codeSecteur
+     *
+     * @return string 
+     */
+    public function getCodeSecteur()
+    {
+        return $this->codeSecteur;
+    }
+
+    /**
+     * Set libelleSecteur
+     *
+     * @param string $libelleSecteur
+     * @return Secteur
+     */
+    public function setLibelleSecteur($libelleSecteur)
+    {
+        $this->libelleSecteur = $libelleSecteur;
+
+        return $this;
+    }
+
+    /**
+     * Get libelleSecteur
+     *
+     * @return string 
+     */
+    public function getLibelleSecteur()
+    {
+        return $this->libelleSecteur;
+    }
 }

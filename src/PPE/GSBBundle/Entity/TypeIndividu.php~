@@ -29,4 +29,37 @@ class TypeIndividu
     private $libelleIndividu;
 
 
+
+    /**
+     * Get codeIndividu
+     *
+     * @return integer 
+     */
+    public function getCodeIndividu()
+    {
+        return $this->codeIndividu;
+    }
+
+    /**
+     * Set libelleIndividu
+     *
+     * @param string $libelleIndividu
+     * @return TypeIndividu
+     */
+    public function setLibelleIndividu($libelleIndividu)
+    {
+        $this->libelleIndividu = $libelleIndividu;
+
+        return $this;
+    }
+
+    /**
+     * Get libelleIndividu
+     *
+     * @return string 
+     */
+    public function getLibelleIndividu()
+    {
+        return $this->libelleIndividu;
+    }
 }

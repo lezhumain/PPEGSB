@@ -1,5 +1,5 @@
 <?php
-
+// src/Acme/UserBundle/Entity/Visiteur.php
 namespace PPE\GSBBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Visiteur
  *
  * @ORM\Table(name="VISITEUR", indexes={@ORM\Index(name="IDX_88961BF470E4A9D4", columns={"code_region"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="PPE\GSBBundle\Entity\VisiteurRepository")
  */
 class Visiteur
 {
@@ -19,6 +19,7 @@ class Visiteur
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="matricule_col_vis", referencedColumnName="matricule_col", unique=true)
      * })
+     * @ORM\Id
      */
     private $matriculeColVis;
 
@@ -78,5 +79,13 @@ class Visiteur
     public function getCodeRegion()
     {
         return $this->codeRegion;
+    }
+    
+    public function toString()
+    {
+    	return 	"[VISITEUR]" .
+    			$this->matriculeColVis->getPrenomCol() . " " .
+				$this->matriculeColVis->getNomCol() . ", " .
+				$this->matriculeColVis->getMatriculeCol();
     }
 }

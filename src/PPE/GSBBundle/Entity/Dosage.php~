@@ -36,4 +36,60 @@ class Dosage
     private $quantiteDosage;
 
 
+
+    /**
+     * Get codeDosage
+     *
+     * @return integer 
+     */
+    public function getCodeDosage()
+    {
+        return $this->codeDosage;
+    }
+
+    /**
+     * Set uniteDosage
+     *
+     * @param string $uniteDosage
+     * @return Dosage
+     */
+    public function setUniteDosage($uniteDosage)
+    {
+        $this->uniteDosage = $uniteDosage;
+
+        return $this;
+    }
+
+    /**
+     * Get uniteDosage
+     *
+     * @return string 
+     */
+    public function getUniteDosage()
+    {
+        return $this->uniteDosage;
+    }
+
+    /**
+     * Set quantiteDosage
+     *
+     * @param float $quantiteDosage
+     * @return Dosage
+     */
+    public function setQuantiteDosage($quantiteDosage)
+    {
+        $this->quantiteDosage = $quantiteDosage;
+
+        return $this;
+    }
+
+    /**
+     * Get quantiteDosage
+     *
+     * @return float 
+     */
+    public function getQuantiteDosage()
+    {
+        return $this->quantiteDosage;
+    }
 }

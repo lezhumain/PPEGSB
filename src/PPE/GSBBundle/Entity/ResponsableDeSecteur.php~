@@ -23,4 +23,27 @@ class ResponsableDeSecteur
     private $matriculeColRes;
 
 
+
+    /**
+     * Set matriculeColRes
+     *
+     * @param \PPE\GSBBundle\Entity\Collaborateur $matriculeColRes
+     * @return ResponsableDeSecteur
+     */
+    public function setMatriculeColRes(\PPE\GSBBundle\Entity\Collaborateur $matriculeColRes = null)
+    {
+        $this->matriculeColRes = $matriculeColRes;
+
+        return $this;
+    }
+
+    /**
+     * Get matriculeColRes
+     *
+     * @return \PPE\GSBBundle\Entity\Collaborateur 
+     */
+    public function getMatriculeColRes()
+    {
+        return $this->matriculeColRes;
+    }
 }

@@ -19,6 +19,7 @@ class DirecteurRegional
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="matricule_col_dir", referencedColumnName="matricule_col", unique=true)
      * })
+     * @ORM\Id
      */
     private $matriculeColDir;
 

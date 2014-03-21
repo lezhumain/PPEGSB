@@ -50,4 +50,96 @@ class EtreResponsable
     private $codeSecteur;
 
 
+
+    /**
+     * Set jjmmaaaaFin
+     *
+     * @param \DateTime $jjmmaaaaFin
+     * @return EtreResponsable
+     */
+    public function setJjmmaaaaFin($jjmmaaaaFin)
+    {
+        $this->jjmmaaaaFin = $jjmmaaaaFin;
+
+        return $this;
+    }
+
+    /**
+     * Get jjmmaaaaFin
+     *
+     * @return \DateTime 
+     */
+    public function getJjmmaaaaFin()
+    {
+        return $this->jjmmaaaaFin;
+    }
+
+    /**
+     * Set matriculeColEtr
+     *
+     * @param \PPE\GSBBundle\Entity\Collaborateur $matriculeColEtr
+     * @return EtreResponsable
+     */
+    public function setMatriculeColEtr(\PPE\GSBBundle\Entity\Collaborateur $matriculeColEtr = null)
+    {
+        $this->matriculeColEtr = $matriculeColEtr;
+
+        return $this;
+    }
+
+    /**
+     * Get matriculeColEtr
+     *
+     * @return \PPE\GSBBundle\Entity\Collaborateur 
+     */
+    public function getMatriculeColEtr()
+    {
+        return $this->matriculeColEtr;
+    }
+
+    /**
+     * Set jjmmaaaaDeb
+     *
+     * @param \PPE\GSBBundle\Entity\Calendrier $jjmmaaaaDeb
+     * @return EtreResponsable
+     */
+    public function setJjmmaaaaDeb(\PPE\GSBBundle\Entity\Calendrier $jjmmaaaaDeb = null)
+    {
+        $this->jjmmaaaaDeb = $jjmmaaaaDeb;
+
+        return $this;
+    }
+
+    /**
+     * Get jjmmaaaaDeb
+     *
+     * @return \PPE\GSBBundle\Entity\Calendrier 
+     */
+    public function getJjmmaaaaDeb()
+    {
+        return $this->jjmmaaaaDeb;
+    }
+
+    /**
+     * Set codeSecteur
+     *
+     * @param \PPE\GSBBundle\Entity\Secteur $codeSecteur
+     * @return EtreResponsable
+     */
+    public function setCodeSecteur(\PPE\GSBBundle\Entity\Secteur $codeSecteur = null)
+    {
+        $this->codeSecteur = $codeSecteur;
+
+        return $this;
+    }
+
+    /**
+     * Get codeSecteur
+     *
+     * @return \PPE\GSBBundle\Entity\Secteur 
+     */
+    public function getCodeSecteur()
+    {
+        return $this->codeSecteur;
+    }
 }

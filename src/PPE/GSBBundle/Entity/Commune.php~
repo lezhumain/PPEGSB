@@ -39,4 +39,60 @@ class Commune
     private $codeDep;
 
 
+
+    /**
+     * Get codeCommune
+     *
+     * @return string 
+     */
+    public function getCodeCommune()
+    {
+        return $this->codeCommune;
+    }
+
+    /**
+     * Set libelleCommun
+     *
+     * @param string $libelleCommun
+     * @return Commune
+     */
+    public function setLibelleCommun($libelleCommun)
+    {
+        $this->libelleCommun = $libelleCommun;
+
+        return $this;
+    }
+
+    /**
+     * Get libelleCommun
+     *
+     * @return string 
+     */
+    public function getLibelleCommun()
+    {
+        return $this->libelleCommun;
+    }
+
+    /**
+     * Set codeDep
+     *
+     * @param \PPE\GSBBundle\Entity\Departement $codeDep
+     * @return Commune
+     */
+    public function setCodeDep(\PPE\GSBBundle\Entity\Departement $codeDep = null)
+    {
+        $this->codeDep = $codeDep;
+
+        return $this;
+    }
+
+    /**
+     * Get codeDep
+     *
+     * @return \PPE\GSBBundle\Entity\Departement 
+     */
+    public function getCodeDep()
+    {
+        return $this->codeDep;
+    }
 }

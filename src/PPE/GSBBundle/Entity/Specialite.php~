@@ -51,4 +51,70 @@ class Specialite
         $this->matriculePraticien = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+
+    /**
+     * Get codeSpec
+     *
+     * @return integer 
+     */
+    public function getCodeSpec()
+    {
+        return $this->codeSpec;
+    }
+
+    /**
+     * Set libelleSpec
+     *
+     * @param string $libelleSpec
+     * @return Specialite
+     */
+    public function setLibelleSpec($libelleSpec)
+    {
+        $this->libelleSpec = $libelleSpec;
+
+        return $this;
+    }
+
+    /**
+     * Get libelleSpec
+     *
+     * @return string 
+     */
+    public function getLibelleSpec()
+    {
+        return $this->libelleSpec;
+    }
+
+    /**
+     * Add matriculePraticien
+     *
+     * @param \PPE\GSBBundle\Entity\Praticien $matriculePraticien
+     * @return Specialite
+     */
+    public function addMatriculePraticien(\PPE\GSBBundle\Entity\Praticien $matriculePraticien)
+    {
+        $this->matriculePraticien[] = $matriculePraticien;
+
+        return $this;
+    }
+
+    /**
+     * Remove matriculePraticien
+     *
+     * @param \PPE\GSBBundle\Entity\Praticien $matriculePraticien
+     */
+    public function removeMatriculePraticien(\PPE\GSBBundle\Entity\Praticien $matriculePraticien)
+    {
+        $this->matriculePraticien->removeElement($matriculePraticien);
+    }
+
+    /**
+     * Get matriculePraticien
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMatriculePraticien()
+    {
+        return $this->matriculePraticien;
+    }
 }

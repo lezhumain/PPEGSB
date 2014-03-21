@@ -140,4 +140,317 @@ class Medicament
         $this->numRapportPresente = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+
+    /**
+     * Get depotLegal
+     *
+     * @return string 
+     */
+    public function getDepotLegal()
+    {
+        return $this->depotLegal;
+    }
+
+    /**
+     * Set composition
+     *
+     * @param string $composition
+     * @return Medicament
+     */
+    public function setComposition($composition)
+    {
+        $this->composition = $composition;
+
+        return $this;
+    }
+
+    /**
+     * Get composition
+     *
+     * @return string 
+     */
+    public function getComposition()
+    {
+        return $this->composition;
+    }
+
+    /**
+     * Set effet
+     *
+     * @param string $effet
+     * @return Medicament
+     */
+    public function setEffet($effet)
+    {
+        $this->effet = $effet;
+
+        return $this;
+    }
+
+    /**
+     * Get effet
+     *
+     * @return string 
+     */
+    public function getEffet()
+    {
+        return $this->effet;
+    }
+
+    /**
+     * Set contreindic
+     *
+     * @param string $contreindic
+     * @return Medicament
+     */
+    public function setContreindic($contreindic)
+    {
+        $this->contreindic = $contreindic;
+
+        return $this;
+    }
+
+    /**
+     * Get contreindic
+     *
+     * @return string 
+     */
+    public function getContreindic()
+    {
+        return $this->contreindic;
+    }
+
+    /**
+     * Set prixechantillon
+     *
+     * @param float $prixechantillon
+     * @return Medicament
+     */
+    public function setPrixechantillon($prixechantillon)
+    {
+        $this->prixechantillon = $prixechantillon;
+
+        return $this;
+    }
+
+    /**
+     * Get prixechantillon
+     *
+     * @return float 
+     */
+    public function getPrixechantillon()
+    {
+        return $this->prixechantillon;
+    }
+
+    /**
+     * Set codeFamille
+     *
+     * @param \PPE\GSBBundle\Entity\Famille $codeFamille
+     * @return Medicament
+     */
+    public function setCodeFamille(\PPE\GSBBundle\Entity\Famille $codeFamille = null)
+    {
+        $this->codeFamille = $codeFamille;
+
+        return $this;
+    }
+
+    /**
+     * Get codeFamille
+     *
+     * @return \PPE\GSBBundle\Entity\Famille 
+     */
+    public function getCodeFamille()
+    {
+        return $this->codeFamille;
+    }
+
+    /**
+     * Set codePresent
+     *
+     * @param \PPE\GSBBundle\Entity\Presentation $codePresent
+     * @return Medicament
+     */
+    public function setCodePresent(\PPE\GSBBundle\Entity\Presentation $codePresent = null)
+    {
+        $this->codePresent = $codePresent;
+
+        return $this;
+    }
+
+    /**
+     * Get codePresent
+     *
+     * @return \PPE\GSBBundle\Entity\Presentation 
+     */
+    public function getCodePresent()
+    {
+        return $this->codePresent;
+    }
+
+    /**
+     * Add matriculeColAvo
+     *
+     * @param \PPE\GSBBundle\Entity\Collaborateur $matriculeColAvo
+     * @return Medicament
+     */
+    public function addMatriculeColAvo(\PPE\GSBBundle\Entity\Collaborateur $matriculeColAvo)
+    {
+        $this->matriculeColAvo[] = $matriculeColAvo;
+
+        return $this;
+    }
+
+    /**
+     * Remove matriculeColAvo
+     *
+     * @param \PPE\GSBBundle\Entity\Collaborateur $matriculeColAvo
+     */
+    public function removeMatriculeColAvo(\PPE\GSBBundle\Entity\Collaborateur $matriculeColAvo)
+    {
+        $this->matriculeColAvo->removeElement($matriculeColAvo);
+    }
+
+    /**
+     * Get matriculeColAvo
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMatriculeColAvo()
+    {
+        return $this->matriculeColAvo;
+    }
+
+    /**
+     * Add codeComp
+     *
+     * @param \PPE\GSBBundle\Entity\Composant $codeComp
+     * @return Medicament
+     */
+    public function addCodeComp(\PPE\GSBBundle\Entity\Composant $codeComp)
+    {
+        $this->codeComp[] = $codeComp;
+
+        return $this;
+    }
+
+    /**
+     * Remove codeComp
+     *
+     * @param \PPE\GSBBundle\Entity\Composant $codeComp
+     */
+    public function removeCodeComp(\PPE\GSBBundle\Entity\Composant $codeComp)
+    {
+        $this->codeComp->removeElement($codeComp);
+    }
+
+    /**
+     * Get codeComp
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCodeComp()
+    {
+        return $this->codeComp;
+    }
+
+    /**
+     * Add numRapportOffre
+     *
+     * @param \PPE\GSBBundle\Entity\RapportDeVisite $numRapportOffre
+     * @return Medicament
+     */
+    public function addNumRapportOffre(\PPE\GSBBundle\Entity\RapportDeVisite $numRapportOffre)
+    {
+        $this->numRapportOffre[] = $numRapportOffre;
+
+        return $this;
+    }
+
+    /**
+     * Remove numRapportOffre
+     *
+     * @param \PPE\GSBBundle\Entity\RapportDeVisite $numRapportOffre
+     */
+    public function removeNumRapportOffre(\PPE\GSBBundle\Entity\RapportDeVisite $numRapportOffre)
+    {
+        $this->numRapportOffre->removeElement($numRapportOffre);
+    }
+
+    /**
+     * Get numRapportOffre
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getNumRapportOffre()
+    {
+        return $this->numRapportOffre;
+    }
+
+    /**
+     * Add depotLegalPerturbe
+     *
+     * @param \PPE\GSBBundle\Entity\Medicament $depotLegalPerturbe
+     * @return Medicament
+     */
+    public function addDepotLegalPerturbe(\PPE\GSBBundle\Entity\Medicament $depotLegalPerturbe)
+    {
+        $this->depotLegalPerturbe[] = $depotLegalPerturbe;
+
+        return $this;
+    }
+
+    /**
+     * Remove depotLegalPerturbe
+     *
+     * @param \PPE\GSBBundle\Entity\Medicament $depotLegalPerturbe
+     */
+    public function removeDepotLegalPerturbe(\PPE\GSBBundle\Entity\Medicament $depotLegalPerturbe)
+    {
+        $this->depotLegalPerturbe->removeElement($depotLegalPerturbe);
+    }
+
+    /**
+     * Get depotLegalPerturbe
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDepotLegalPerturbe()
+    {
+        return $this->depotLegalPerturbe;
+    }
+
+    /**
+     * Add numRapportPresente
+     *
+     * @param \PPE\GSBBundle\Entity\RapportDeVisite $numRapportPresente
+     * @return Medicament
+     */
+    public function addNumRapportPresente(\PPE\GSBBundle\Entity\RapportDeVisite $numRapportPresente)
+    {
+        $this->numRapportPresente[] = $numRapportPresente;
+
+        return $this;
+    }
+
+    /**
+     * Remove numRapportPresente
+     *
+     * @param \PPE\GSBBundle\Entity\RapportDeVisite $numRapportPresente
+     */
+    public function removeNumRapportPresente(\PPE\GSBBundle\Entity\RapportDeVisite $numRapportPresente)
+    {
+        $this->numRapportPresente->removeElement($numRapportPresente);
+    }
+
+    /**
+     * Get numRapportPresente
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getNumRapportPresente()
+    {
+        return $this->numRapportPresente;
+    }
 }

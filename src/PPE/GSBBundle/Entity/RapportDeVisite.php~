@@ -101,4 +101,195 @@ class RapportDeVisite
         $this->depotLegalPres = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+
+    /**
+     * Get numRapport
+     *
+     * @return integer 
+     */
+    public function getNumRapport()
+    {
+        return $this->numRapport;
+    }
+
+    /**
+     * Set dateRapport
+     *
+     * @param \DateTime $dateRapport
+     * @return RapportDeVisite
+     */
+    public function setDateRapport($dateRapport)
+    {
+        $this->dateRapport = $dateRapport;
+
+        return $this;
+    }
+
+    /**
+     * Get dateRapport
+     *
+     * @return \DateTime 
+     */
+    public function getDateRapport()
+    {
+        return $this->dateRapport;
+    }
+
+    /**
+     * Set dateVisite
+     *
+     * @param \DateTime $dateVisite
+     * @return RapportDeVisite
+     */
+    public function setDateVisite($dateVisite)
+    {
+        $this->dateVisite = $dateVisite;
+
+        return $this;
+    }
+
+    /**
+     * Get dateVisite
+     *
+     * @return \DateTime 
+     */
+    public function getDateVisite()
+    {
+        return $this->dateVisite;
+    }
+
+    /**
+     * Set bilanVisite
+     *
+     * @param string $bilanVisite
+     * @return RapportDeVisite
+     */
+    public function setBilanVisite($bilanVisite)
+    {
+        $this->bilanVisite = $bilanVisite;
+
+        return $this;
+    }
+
+    /**
+     * Get bilanVisite
+     *
+     * @return string 
+     */
+    public function getBilanVisite()
+    {
+        return $this->bilanVisite;
+    }
+
+    /**
+     * Set codeMotif
+     *
+     * @param \PPE\GSBBundle\Entity\Motif $codeMotif
+     * @return RapportDeVisite
+     */
+    public function setCodeMotif(\PPE\GSBBundle\Entity\Motif $codeMotif = null)
+    {
+        $this->codeMotif = $codeMotif;
+
+        return $this;
+    }
+
+    /**
+     * Get codeMotif
+     *
+     * @return \PPE\GSBBundle\Entity\Motif 
+     */
+    public function getCodeMotif()
+    {
+        return $this->codeMotif;
+    }
+
+    /**
+     * Set matriculePraticien
+     *
+     * @param \PPE\GSBBundle\Entity\Praticien $matriculePraticien
+     * @return RapportDeVisite
+     */
+    public function setMatriculePraticien(\PPE\GSBBundle\Entity\Praticien $matriculePraticien = null)
+    {
+        $this->matriculePraticien = $matriculePraticien;
+
+        return $this;
+    }
+
+    /**
+     * Get matriculePraticien
+     *
+     * @return \PPE\GSBBundle\Entity\Praticien 
+     */
+    public function getMatriculePraticien()
+    {
+        return $this->matriculePraticien;
+    }
+
+    /**
+     * Add depotLegalOffre
+     *
+     * @param \PPE\GSBBundle\Entity\Medicament $depotLegalOffre
+     * @return RapportDeVisite
+     */
+    public function addDepotLegalOffre(\PPE\GSBBundle\Entity\Medicament $depotLegalOffre)
+    {
+        $this->depotLegalOffre[] = $depotLegalOffre;
+
+        return $this;
+    }
+
+    /**
+     * Remove depotLegalOffre
+     *
+     * @param \PPE\GSBBundle\Entity\Medicament $depotLegalOffre
+     */
+    public function removeDepotLegalOffre(\PPE\GSBBundle\Entity\Medicament $depotLegalOffre)
+    {
+        $this->depotLegalOffre->removeElement($depotLegalOffre);
+    }
+
+    /**
+     * Get depotLegalOffre
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDepotLegalOffre()
+    {
+        return $this->depotLegalOffre;
+    }
+
+    /**
+     * Add depotLegalPres
+     *
+     * @param \PPE\GSBBundle\Entity\Medicament $depotLegalPres
+     * @return RapportDeVisite
+     */
+    public function addDepotLegalPre(\PPE\GSBBundle\Entity\Medicament $depotLegalPres)
+    {
+        $this->depotLegalPres[] = $depotLegalPres;
+
+        return $this;
+    }
+
+    /**
+     * Remove depotLegalPres
+     *
+     * @param \PPE\GSBBundle\Entity\Medicament $depotLegalPres
+     */
+    public function removeDepotLegalPre(\PPE\GSBBundle\Entity\Medicament $depotLegalPres)
+    {
+        $this->depotLegalPres->removeElement($depotLegalPres);
+    }
+
+    /**
+     * Get depotLegalPres
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDepotLegalPres()
+    {
+        return $this->depotLegalPres;
+    }
 }

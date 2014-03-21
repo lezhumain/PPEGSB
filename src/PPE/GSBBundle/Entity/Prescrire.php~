@@ -50,4 +50,96 @@ class Prescrire
     private $codeIndividu;
 
 
+
+    /**
+     * Set posologie
+     *
+     * @param string $posologie
+     * @return Prescrire
+     */
+    public function setPosologie($posologie)
+    {
+        $this->posologie = $posologie;
+
+        return $this;
+    }
+
+    /**
+     * Get posologie
+     *
+     * @return string 
+     */
+    public function getPosologie()
+    {
+        return $this->posologie;
+    }
+
+    /**
+     * Set depotLegalPrescr
+     *
+     * @param \PPE\GSBBundle\Entity\Medicament $depotLegalPrescr
+     * @return Prescrire
+     */
+    public function setDepotLegalPrescr(\PPE\GSBBundle\Entity\Medicament $depotLegalPrescr = null)
+    {
+        $this->depotLegalPrescr = $depotLegalPrescr;
+
+        return $this;
+    }
+
+    /**
+     * Get depotLegalPrescr
+     *
+     * @return \PPE\GSBBundle\Entity\Medicament 
+     */
+    public function getDepotLegalPrescr()
+    {
+        return $this->depotLegalPrescr;
+    }
+
+    /**
+     * Set codeDosage
+     *
+     * @param \PPE\GSBBundle\Entity\Dosage $codeDosage
+     * @return Prescrire
+     */
+    public function setCodeDosage(\PPE\GSBBundle\Entity\Dosage $codeDosage = null)
+    {
+        $this->codeDosage = $codeDosage;
+
+        return $this;
+    }
+
+    /**
+     * Get codeDosage
+     *
+     * @return \PPE\GSBBundle\Entity\Dosage 
+     */
+    public function getCodeDosage()
+    {
+        return $this->codeDosage;
+    }
+
+    /**
+     * Set codeIndividu
+     *
+     * @param \PPE\GSBBundle\Entity\TypeIndividu $codeIndividu
+     * @return Prescrire
+     */
+    public function setCodeIndividu(\PPE\GSBBundle\Entity\TypeIndividu $codeIndividu = null)
+    {
+        $this->codeIndividu = $codeIndividu;
+
+        return $this;
+    }
+
+    /**
+     * Get codeIndividu
+     *
+     * @return \PPE\GSBBundle\Entity\TypeIndividu 
+     */
+    public function getCodeIndividu()
+    {
+        return $this->codeIndividu;
+    }
 }

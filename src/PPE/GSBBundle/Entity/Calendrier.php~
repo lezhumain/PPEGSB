@@ -22,4 +22,14 @@ class Calendrier
     private $jjmmaaaaDeb;
 
 
+
+    /**
+     * Get jjmmaaaaDeb
+     *
+     * @return \DateTime 
+     */
+    public function getJjmmaaaaDeb()
+    {
+        return $this->jjmmaaaaDeb;
+    }
 }

@@ -29,4 +29,37 @@ class Famille
     private $libelleFamille;
 
 
+
+    /**
+     * Get codeFamille
+     *
+     * @return integer 
+     */
+    public function getCodeFamille()
+    {
+        return $this->codeFamille;
+    }
+
+    /**
+     * Set libelleFamille
+     *
+     * @param string $libelleFamille
+     * @return Famille
+     */
+    public function setLibelleFamille($libelleFamille)
+    {
+        $this->libelleFamille = $libelleFamille;
+
+        return $this;
+    }
+
+    /**
+     * Get libelleFamille
+     *
+     * @return string 
+     */
+    public function getLibelleFamille()
+    {
+        return $this->libelleFamille;
+    }
 }

@@ -39,4 +39,60 @@ class Region
     private $codeSecteur;
 
 
+
+    /**
+     * Get codeRegion
+     *
+     * @return string 
+     */
+    public function getCodeRegion()
+    {
+        return $this->codeRegion;
+    }
+
+    /**
+     * Set nomRegion
+     *
+     * @param string $nomRegion
+     * @return Region
+     */
+    public function setNomRegion($nomRegion)
+    {
+        $this->nomRegion = $nomRegion;
+
+        return $this;
+    }
+
+    /**
+     * Get nomRegion
+     *
+     * @return string 
+     */
+    public function getNomRegion()
+    {
+        return $this->nomRegion;
+    }
+
+    /**
+     * Set codeSecteur
+     *
+     * @param \PPE\GSBBundle\Entity\Secteur $codeSecteur
+     * @return Region
+     */
+    public function setCodeSecteur(\PPE\GSBBundle\Entity\Secteur $codeSecteur = null)
+    {
+        $this->codeSecteur = $codeSecteur;
+
+        return $this;
+    }
+
+    /**
+     * Get codeSecteur
+     *
+     * @return \PPE\GSBBundle\Entity\Secteur 
+     */
+    public function getCodeSecteur()
+    {
+        return $this->codeSecteur;
+    }
 }

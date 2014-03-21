@@ -22,4 +22,14 @@ class Date
     private $jjmmaaaa;
 
 
+
+    /**
+     * Get jjmmaaaa
+     *
+     * @return \DateTime 
+     */
+    public function getJjmmaaaa()
+    {
+        return $this->jjmmaaaa;
+    }
 }

@@ -50,4 +50,96 @@ class Gere
     private $jjmmaaaaDeb;
 
 
+
+    /**
+     * Set jjmmaaaaFin
+     *
+     * @param \DateTime $jjmmaaaaFin
+     * @return Gere
+     */
+    public function setJjmmaaaaFin($jjmmaaaaFin)
+    {
+        $this->jjmmaaaaFin = $jjmmaaaaFin;
+
+        return $this;
+    }
+
+    /**
+     * Get jjmmaaaaFin
+     *
+     * @return \DateTime 
+     */
+    public function getJjmmaaaaFin()
+    {
+        return $this->jjmmaaaaFin;
+    }
+
+    /**
+     * Set matriculeColGer
+     *
+     * @param \PPE\GSBBundle\Entity\Collaborateur $matriculeColGer
+     * @return Gere
+     */
+    public function setMatriculeColGer(\PPE\GSBBundle\Entity\Collaborateur $matriculeColGer = null)
+    {
+        $this->matriculeColGer = $matriculeColGer;
+
+        return $this;
+    }
+
+    /**
+     * Get matriculeColGer
+     *
+     * @return \PPE\GSBBundle\Entity\Collaborateur 
+     */
+    public function getMatriculeColGer()
+    {
+        return $this->matriculeColGer;
+    }
+
+    /**
+     * Set codeRegion
+     *
+     * @param \PPE\GSBBundle\Entity\Region $codeRegion
+     * @return Gere
+     */
+    public function setCodeRegion(\PPE\GSBBundle\Entity\Region $codeRegion = null)
+    {
+        $this->codeRegion = $codeRegion;
+
+        return $this;
+    }
+
+    /**
+     * Get codeRegion
+     *
+     * @return \PPE\GSBBundle\Entity\Region 
+     */
+    public function getCodeRegion()
+    {
+        return $this->codeRegion;
+    }
+
+    /**
+     * Set jjmmaaaaDeb
+     *
+     * @param \PPE\GSBBundle\Entity\Calendrier $jjmmaaaaDeb
+     * @return Gere
+     */
+    public function setJjmmaaaaDeb(\PPE\GSBBundle\Entity\Calendrier $jjmmaaaaDeb = null)
+    {
+        $this->jjmmaaaaDeb = $jjmmaaaaDeb;
+
+        return $this;
+    }
+
+    /**
+     * Get jjmmaaaaDeb
+     *
+     * @return \PPE\GSBBundle\Entity\Calendrier 
+     */
+    public function getJjmmaaaaDeb()
+    {
+        return $this->jjmmaaaaDeb;
+    }
 }

@@ -36,4 +36,60 @@ class Presentation
     private $depotLegalPresent;
 
 
+
+    /**
+     * Get codePresent
+     *
+     * @return integer 
+     */
+    public function getCodePresent()
+    {
+        return $this->codePresent;
+    }
+
+    /**
+     * Set libellePresent
+     *
+     * @param string $libellePresent
+     * @return Presentation
+     */
+    public function setLibellePresent($libellePresent)
+    {
+        $this->libellePresent = $libellePresent;
+
+        return $this;
+    }
+
+    /**
+     * Get libellePresent
+     *
+     * @return string 
+     */
+    public function getLibellePresent()
+    {
+        return $this->libellePresent;
+    }
+
+    /**
+     * Set depotLegalPresent
+     *
+     * @param string $depotLegalPresent
+     * @return Presentation
+     */
+    public function setDepotLegalPresent($depotLegalPresent)
+    {
+        $this->depotLegalPresent = $depotLegalPresent;
+
+        return $this;
+    }
+
+    /**
+     * Get depotLegalPresent
+     *
+     * @return string 
+     */
+    public function getDepotLegalPresent()
+    {
+        return $this->depotLegalPresent;
+    }
 }

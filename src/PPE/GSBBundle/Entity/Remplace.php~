@@ -43,4 +43,73 @@ class Remplace
     private $jjmmaaaa;
 
 
+
+    /**
+     * Set matriculePraticienRemplace
+     *
+     * @param \PPE\GSBBundle\Entity\Praticien $matriculePraticienRemplace
+     * @return Remplace
+     */
+    public function setMatriculePraticienRemplace(\PPE\GSBBundle\Entity\Praticien $matriculePraticienRemplace = null)
+    {
+        $this->matriculePraticienRemplace = $matriculePraticienRemplace;
+
+        return $this;
+    }
+
+    /**
+     * Get matriculePraticienRemplace
+     *
+     * @return \PPE\GSBBundle\Entity\Praticien 
+     */
+    public function getMatriculePraticienRemplace()
+    {
+        return $this->matriculePraticienRemplace;
+    }
+
+    /**
+     * Set matriculePraticienRemplacant
+     *
+     * @param \PPE\GSBBundle\Entity\Praticien $matriculePraticienRemplacant
+     * @return Remplace
+     */
+    public function setMatriculePraticienRemplacant(\PPE\GSBBundle\Entity\Praticien $matriculePraticienRemplacant = null)
+    {
+        $this->matriculePraticienRemplacant = $matriculePraticienRemplacant;
+
+        return $this;
+    }
+
+    /**
+     * Get matriculePraticienRemplacant
+     *
+     * @return \PPE\GSBBundle\Entity\Praticien 
+     */
+    public function getMatriculePraticienRemplacant()
+    {
+        return $this->matriculePraticienRemplacant;
+    }
+
+    /**
+     * Set jjmmaaaa
+     *
+     * @param \PPE\GSBBundle\Entity\Date $jjmmaaaa
+     * @return Remplace
+     */
+    public function setJjmmaaaa(\PPE\GSBBundle\Entity\Date $jjmmaaaa = null)
+    {
+        $this->jjmmaaaa = $jjmmaaaa;
+
+        return $this;
+    }
+
+    /**
+     * Get jjmmaaaa
+     *
+     * @return \PPE\GSBBundle\Entity\Date 
+     */
+    public function getJjmmaaaa()
+    {
+        return $this->jjmmaaaa;
+    }
 }

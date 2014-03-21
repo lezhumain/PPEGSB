@@ -39,4 +39,60 @@ class Departement
     private $codeRegion;
 
 
+
+    /**
+     * Get codeDep
+     *
+     * @return string 
+     */
+    public function getCodeDep()
+    {
+        return $this->codeDep;
+    }
+
+    /**
+     * Set libelleDep
+     *
+     * @param string $libelleDep
+     * @return Departement
+     */
+    public function setLibelleDep($libelleDep)
+    {
+        $this->libelleDep = $libelleDep;
+
+        return $this;
+    }
+
+    /**
+     * Get libelleDep
+     *
+     * @return string 
+     */
+    public function getLibelleDep()
+    {
+        return $this->libelleDep;
+    }
+
+    /**
+     * Set codeRegion
+     *
+     * @param \PPE\GSBBundle\Entity\Region $codeRegion
+     * @return Departement
+     */
+    public function setCodeRegion(\PPE\GSBBundle\Entity\Region $codeRegion = null)
+    {
+        $this->codeRegion = $codeRegion;
+
+        return $this;
+    }
+
+    /**
+     * Get codeRegion
+     *
+     * @return \PPE\GSBBundle\Entity\Region 
+     */
+    public function getCodeRegion()
+    {
+        return $this->codeRegion;
+    }
 }

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Collaborateur
  *
  * @ORM\Table(name="COLLABORATEUR")
- * @ORM\Entity(repositoryClass="PPE\GSBBundle\Repository\CollaborateurRepository")
+ * @ORM\Entity
  */
 class Collaborateur
 {
@@ -48,13 +48,6 @@ class Collaborateur
      * @ORM\Column(name="cp_col", type="string", length=5, nullable=false)
      */
     private $cpCol;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="ville_col", type="string", length=25, nullable=false)
-     */
-    private $villeCol;
 
     /**
      * @var string
@@ -202,29 +195,6 @@ class Collaborateur
     public function getCpCol()
     {
         return $this->cpCol;
-    }
-
-    /**
-     * Set villeCol
-     *
-     * @param string $villeCol
-     * @return Collaborateur
-     */
-    public function setVilleCol($villeCol)
-    {
-        $this->villeCol = $villeCol;
-
-        return $this;
-    }
-
-    /**
-     * Get villeCol
-     *
-     * @return string 
-     */
-    public function getVilleCol()
-    {
-        return $this->villeCol;
     }
 
     /**
