@@ -3,7 +3,10 @@
 namespace PPE\GSBBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use PPE\GSBBundle\Entity;
+use Symfony\Component\Form\FormBuilder;
+use PPE\GSBBundle\Entity\RapportDeVisite;
+use PPE\GSBBundle\Entity\Motif;
+use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
@@ -27,8 +30,35 @@ class DefaultController extends Controller
      *   					=>	0 affichage read only
      * 						=>  1 nouveau rapport	
      */
-    public function ficheRpAction($new){
-        return $this->render('PPEGSBBundle:Default:fiche_rp.html.twig', array('new' => $new ));
+    public function ficheRpAction($new, Request $request){
+
+            // just setup a fresh $task object (remove the dummy data)
+        $task = new RapportDeVisite();
+
+        
+
+        $form = $this->createFormBuilder($task)
+            ->add('date_rapport', 'date')
+            ->add('date_visite', 'date')
+            ->add('bilan_visite', 'textarea')
+            ->add('save', 'submit')
+            ->add('Motif', 'entity', array('class' => 'PPEGSBBundle:Motif',
+                                           'property' => 'libelle_motif'))
+            ->getForm();
+
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            // fait quelque chose comme sauvegarder la tâche dans la bdd
+
+            return $this->redirect($this->generateUrl('ppegsb_homepage'));
+        }
+
+
+
+
+        return $this->render('PPEGSBBundle:Default:fiche_rp.html.twig', array('new' => $new, 'form' => $form->createView() ));
     }   
 /******************************/
 
@@ -69,10 +99,16 @@ class DefaultController extends Controller
             throw $this->createNotFoundException("Pas de praticien à localiser :(");
         }
 
+        $i = 0;
         foreach ($praticien as $data) {
-            $gpsCoo[] = $this->getMapFromAdress($data->getAdressePraticien()." ".$data->getCpPraticien()." ".$data->getVillePraticien());
+            $coo = $this->getMapFromAdress($data->getAdressePraticien()." ".$data->getCpPraticien()." ".$data->getVillePraticien());
+            if ($coo == 0) {
+                $i++;
+            } else {
+                $gpsCoo[] = $coo;
+            }
         }
-
+        echo $i;
         return $this->render('PPEGSBBundle:Default:map.html.twig', array('gpsCoo' => $gpsCoo, 'praticiens' => $praticien));
     }
 
@@ -81,13 +117,19 @@ class DefaultController extends Controller
         $req = file_get_contents($url);
         $gps = json_decode($req, true);
          
-        $lat = $gps['results'][0]['geometry']['location']['lat'];
-        $lng = $gps['results'][0]['geometry']['location']['lng'];
-         
-        $tab["lat"] = $lat;
-        $tab["lng"] = $lng;
 
-        return $tab;
+        if ($gps['status'] !=  'ZERO_RESULTS') {
+            $lat = $gps['results'][0]['geometry']['location']['lat'];
+            $lng = $gps['results'][0]['geometry']['location']['lng'];
+            $tab["lat"] = $lat;
+            $tab["lng"] = $lng;
+            return $tab;
+         }
+         else{
+            return 0;
+         }
+         
+
     }
 /******************************/
 
