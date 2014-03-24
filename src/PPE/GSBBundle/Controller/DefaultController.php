@@ -5,19 +5,23 @@ namespace PPE\GSBBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use PPE\GSBBundle\Entity;
 use PPE\GSBBundle\Entity\Visiteur;
+use Symfony\Component\Form\FormBuilder;
+use PPE\GSBBundle\Entity\RapportDeVisite;
+use Symfony\Component\HttpFoundation\Request;
+use PPE\GSBBundle\Form\RapportDeVisiteType;
+use PPE\GSBBundle\Form\RapportDeVisiteHandler;
 
 class DefaultController extends Controller
 {
-	public function adminAction()
-	{
-		return $this->render('PPEGSBBundle:Default:admin.html.twig');
-	}
+    public function adminAction()
+    {
+        return $this->render('PPEGSBBundle:Default:admin.html.twig');
+    }
 
-/*BLOC DE GESTION DES RP*/
 	/**
 	 * \brief Index renvoi a la liste des rapports
 	 */
-    public function indexAction()
+    public function indexActionTest()
     {
     	// Code pour recup un user
     	$repo = $this->get('doctrine')->getManager()->getRepository("PPEGSBBundle:Visiteur");
@@ -41,30 +45,53 @@ class DefaultController extends Controller
         
         return $this->render('PPEGSBBundle:Default:liste_rp.html.twig');
     }
+        
+    /**
+     * Index renvoi a la liste des rapports
+     */
+    public function indexAction()
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $rapports = $em->getRepository('PPEGSBBundle:RapportDeVisite')->FindAll();
+
+        return $this->render('PPEGSBBundle:Default:liste_rp.html.twig', array('rapports' => $rapports));
+	}
 
 
     /**
-     * \brief Fonction d'affichage du formulaire dun rapport de visite
+     * \brief 
+     * 		Fonction d'affichage du formulaire dun rapport de visite
      * \param new
      *   	0 affichage read only
      * 		1 nouveau rapport	
      */
-    public function ficheRpAction($new){
-        return $this->render('PPEGSBBundle:Default:fiche_rp.html.twig', array('new' => $new ));
+    public function ficheRpAction($new, Request $request)
+    {
+        $rp = new RapportDeVisite();
+        $form = $this->createForm(new RapportDeVisiteType, $rp);
+
+        $formHandler = new RapportDeVisiteHandler($form, $this->get('request'), $this->getDoctrine()->getEntityManager());
+
+        if ($formHandler->process()) {
+            return $this->redirect($this->generateUrl('ppegsb_homepage'));
+        }
+
+        return $this->render('PPEGSBBundle:Default:fiche_rp.html.twig', array('new' => $new, 'form' => $form->createView() ));
     }   
 /******************************/
 
 
 
 /*BLOC GESTION DES PRATICIEN*/
-    public function listePraAction(){
+    public function listePraAction()
+    {
         $em = $this->getDoctrine()->getEntityManager();
         $praticien = $em->getRepository('PPEGSBBundle:praticien')->FindAll();
-    	return $this->render('PPEGSBBundle:Default:liste_prat.html.twig', array('praticiens' => $praticien));
+        return $this->render('PPEGSBBundle:Default:liste_prat.html.twig', array('praticiens' => $praticien));
     }
 
     /**
-     * \brief Fonction d'affichage du formulaire dun praticien
+	 * \brief Fonction d'affichage du formulaire dun praticien
      * \param 
      * 		new
      *   		0 affichage read only
@@ -72,8 +99,8 @@ class DefaultController extends Controller
      * 		id
      * 			l'id du praticien
      */
-    public function fichePraAction($new, $id){
-
+    public function fichePraAction($id)
+    {
         $em = $this->getDoctrine()->getEntityManager();
         $praticien = $em->getRepository('PPEGSBBundle:praticien')->FindOneBy(array("matriculePraticien" => $id));
 
@@ -83,21 +110,47 @@ class DefaultController extends Controller
 
         $tab = $this->getMapFromAdress($praticien->getAdressePraticien()." ".$praticien->getCpPraticien()." ".$praticien->getVillePraticien());
 
-        return $this->render('PPEGSBBundle:Default:fiche_prat.html.twig', array('new' => $new, "gps" => $tab, 'praticien' => $praticien ));
+        return $this->render('PPEGSBBundle:Default:fiche_prat.html.twig', array("gps" => $tab, 'praticien' => $praticien ));
     }
 
-    public function mapPraAction() {
+    public function mapPraAction()
+    {
         $em = $this->getDoctrine()->getEntityManager();
         $praticien = $em->getRepository('PPEGSBBundle:praticien')->FindAll();
 
-        if (empty($praticien)) {
+        if (empty($praticien))
+        {
             throw $this->createNotFoundException("Pas de praticien à localiser :(");
         }
 
-        foreach ($praticien as $data) {
+        $adresses = '';
+        foreach ($praticien as $data)
+        {
+            $adresses .= $data->getAdressePraticien()." ".$data->getCpPraticien()." ".$data->getVillePraticien()."/";
+        }
+        
+//        print_r($adresses);
+
+//        $adresses = json_encode($adresses);
+
+//        print_r($adresses);
+
+        return $this->render('PPEGSBBundle:Default:map.html.twig', array('adresses' => $adresses, 'praticiens' => $praticien));
+    }
+
+    public function mapPraAction()
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $praticien = $em->getRepository('PPEGSBBundle:praticien')->FindAll();
+
+        if (empty($praticien))
+            throw $this->createNotFoundException("Pas de praticien à localiser :(");
+
+        foreach ($praticien as $data)
+        {
             $gpsCoo[] = $this->getMapFromAdress($data->getAdressePraticien()." ".$data->getCpPraticien()." ".$data->getVillePraticien());
         }
-
+        
         return $this->render('PPEGSBBundle:Default:map.html.twig', array('gpsCoo' => $gpsCoo, 'praticiens' => $praticien));
     }
 
@@ -111,35 +164,46 @@ class DefaultController extends Controller
      * 			lat : la latitude
      * 			lng : la longitude
      */
-    public function getMapFromAdress($adresse) {
+    public function getMapFromAdress($adresse)
+    {
         $url = "http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($adresse)."&sensor=false";
         $req = file_get_contents($url);
         $gps = json_decode($req, true);
-         
-        $lat = $gps['results'][0]['geometry']['location']['lat'];
-        $lng = $gps['results'][0]['geometry']['location']['lng'];
-         
-        $tab["lat"] = $lat;
-        $tab["lng"] = $lng;
 
-        return $tab;
+
+        if ($gps['status'] !=  'ZERO_RESULTS')
+        {
+            $lat = $gps['results'][0]['geometry']['location']['lat'];
+            $lng = $gps['results'][0]['geometry']['location']['lng'];
+            $tab["lat"] = $lat;
+            $tab["lng"] = $lng;
+            return $tab;
+         }
+         else
+         {
+            return 0;
+         }
+         
+
     }
 /******************************/
 
 
 /*BLOC GESTION DES MEDICAMENT*/
-    public function listeMedAction(){
-    	return $this->render('PPEGSBBundle:Default:liste_medicament.html.twig');
+    public function listeMedAction()
+    {
+        return $this->render('PPEGSBBundle:Default:liste_medicament.html.twig');
     }
 
     /**
      * Fonction d'affichage du formulaire dun medicamentz
-     * 		Paramettre : new
-     *   					=>	0 affichage read only
-     * 						=>  1 praticien	
+     *      Paramettre : new
+     *                      =>  0 affichage read only
+     *                      =>  1 praticien 
      */
-    public function ficheMedAction($new){
-        return $this->render('PPEGSBBundle:Default:fiche_medicament.html.twig', array('new' => $new ));
+    public function ficheMedAction()
+    {
+        return $this->render('PPEGSBBundle:Default:fiche_medicament.html.twig');
     }
 /******************************/
 
@@ -218,3 +282,5 @@ class DefaultController extends Controller
 */
 /******************************/
 }
+
+

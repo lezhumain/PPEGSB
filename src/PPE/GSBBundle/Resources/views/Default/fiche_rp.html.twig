@@ -5,41 +5,9 @@
 {% block body %}
 
 <div class="container">
-	<div class="row">
-		<form action="../maps/test.php" type="POST">
-			<div class="col-md-3">
-				<div class="form-group">
-			    	<label for="numero">Numéro du rapport</label>
-			    	<input name="numero" class="form-control" id="numero" style="width: 80px;">
-			  	</div>
-			  	<div class="form-group">
-			    	<label for="praticien">Praticien</label>
-			    	<select name="praticien" class="form-control" id="praticien">
-			    	</select>
-			    	<button>Détails</button>
-			  	</div>
-			  	<div class="form-group">
-			    	<label for="motif">Motif</label>
-			    	<input name ="motif" class="form-control" id="motif">
-			  	</div>
-			</div>
-			<div class="col-md-4">
-				<div class="form-group">
-			    	<label for="bilan">Bilan</label>
-			    	<textarea name="bilan" class="form-control" style="height: 101px;" id="bilan"></textarea>
-			  	</div>
-			  	<div class="form-group">
-			    	<label for="effets_indesirables">Effets indésirables</label>
-			    	<textarea class="form-control" rows="5" id="effets_indesirables"></textarea>
-			  	</div>
-			</div>
-		</form>
-	</div>
+	{{ form(form.codeMotif) }}
+	{{ form(form) }}
+
 </div>
 
-{% if new  == 1 %}
-formulaire dajout
-{% else %}
-affichage du rp
-{% endif %}
 {% endblock %}
