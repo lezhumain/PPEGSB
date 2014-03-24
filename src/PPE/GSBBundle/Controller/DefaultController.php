@@ -113,7 +113,7 @@ class DefaultController extends Controller
         return $this->render('PPEGSBBundle:Default:fiche_prat.html.twig', array("gps" => $tab, 'praticien' => $praticien ));
     }
 
-    public function mapPraAction()
+/*    public function mapPraAction()
     {
         $em = $this->getDoctrine()->getEntityManager();
         $praticien = $em->getRepository('PPEGSBBundle:praticien')->FindAll();
@@ -136,7 +136,7 @@ class DefaultController extends Controller
 //        print_r($adresses);
 
         return $this->render('PPEGSBBundle:Default:map.html.twig', array('adresses' => $adresses, 'praticiens' => $praticien));
-    }
+    }*/
 
     public function mapPraAction()
     {
