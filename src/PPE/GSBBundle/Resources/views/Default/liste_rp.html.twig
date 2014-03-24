@@ -11,17 +11,19 @@
 	 		<tr>
 	 			<th>Numero</th>
 	 			<th>Praticien</th>
-	 			<th>Date</th>
-	 			<th>Motif</th>
+	 			<th>Date visite</th>
+	 			<th>Date rapport</th>
 	 		</tr>
 	 	</thead>
 	 	<tbody>
+	 		{% for rp in rapports %}
 	 		<tr>
-	 			<td>plop</td>
-	 			<td>plop</td>
-	 			<td>plop</td>
-	 			<td>plop</td>
+				<td>{{rp.numRapport}}</td>
+				<td>{{rp.dateVisite|date("m/d/Y")}}</td>
+				<td>{{rp.dateRapport|date("m/d/Y")}}</td>
+				<td>{{rp.matriculePraticien.nomPraticien}} - {{rp.matriculePraticien.prenomPraticien}}</td>
 	 		</tr>
+	 		{% endfor %}
 	 	</tbody>
 	 	<!-- fin de l'entête -->
 	 </table>

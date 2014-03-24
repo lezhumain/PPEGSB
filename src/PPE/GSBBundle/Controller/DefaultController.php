@@ -5,8 +5,10 @@ namespace PPE\GSBBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormBuilder;
 use PPE\GSBBundle\Entity\RapportDeVisite;
-use PPE\GSBBundle\Entity\Motif;
 use Symfony\Component\HttpFoundation\Request;
+
+use PPE\GSBBundle\Form\RapportDeVisiteType;
+use PPE\GSBBundle\Form\RapportDeVisiteHandler;
 
 class DefaultController extends Controller
 {
@@ -20,7 +22,10 @@ class DefaultController extends Controller
      * Index renvoi a la liste des rapports
      */
     public function indexAction(){
-        return $this->render('PPEGSBBundle:Default:liste_rp.html.twig');
+        $em = $this->getDoctrine()->getEntityManager();
+        $rapports = $em->getRepository('PPEGSBBundle:RapportDeVisite')->FindAll();
+
+        return $this->render('PPEGSBBundle:Default:liste_rp.html.twig', array('rapports' => $rapports));
     }
 
 
@@ -31,32 +36,14 @@ class DefaultController extends Controller
      *                      =>  1 nouveau rapport   
      */
     public function ficheRpAction($new, Request $request){
+        $rp = new RapportDeVisite();
+        $form = $this->createForm(new RapportDeVisiteType, $rp);
 
-            // just setup a fresh $task object (remove the dummy data)
-        $task = new RapportDeVisite();
+        $formHandler = new RapportDeVisiteHandler($form, $this->get('request'), $this->getDoctrine()->getEntityManager());
 
-        
-
-        $form = $this->createFormBuilder($task)
-            ->add('date_rapport', 'date')
-            ->add('date_visite', 'date')
-            ->add('bilan_visite', 'textarea')
-            ->add('save', 'submit')
-            ->add('Motif', 'entity', array('class' => 'PPEGSBBundle:Motif',
-                                           'property' => 'libelle_motif'))
-            ->getForm();
-
-
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            // fait quelque chose comme sauvegarder la tâche dans la bdd
-
+        if ($formHandler->process()) {
             return $this->redirect($this->generateUrl('ppegsb_homepage'));
         }
-
-
-
 
         return $this->render('PPEGSBBundle:Default:fiche_rp.html.twig', array('new' => $new, 'form' => $form->createView() ));
     }   
@@ -117,7 +104,7 @@ class DefaultController extends Controller
     //     $url = "http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($adresse)."&sensor=false";
     //     $req = file_get_contents($url);
     //     $gps = json_decode($req, true);
-         
+
 
     //     if ($gps['status'] !=  'ZERO_RESULTS') {
     //         $lat = $gps['results'][0]['geometry']['location']['lat'];
