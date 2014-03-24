@@ -66,7 +66,7 @@
 		<div class="col-md-6"id = "fichePraticien">
 			<div class="panel panel-primary" id="panel_info">
 				<div class="panel-heading">
-					<h3 class="panel-title"><b>Fiche du praticien : {{praticien.nomPraticien}} - {{praticien.prenomPraticien}}</b></h3>
+					<h3 class="panel-title"><b>Fiche du praticien : {{praticien.nomPraticien}} {{praticien.prenomPraticien}}</b></h3>
 				</div>
 					<table class = 'table'>
 						<thead></thead>
@@ -132,17 +132,47 @@
         <script>
         	var canvasHeight = $('.gmap').closest('div').height();
         	$('#panel_info').height(canvasHeight*1.04);
-            $(function() {
-                new Maplace({
-                    show_markers: true,
-                    locations: [{
-                        lat: {{gps['lat']}} ,
-                        lon: {{gps['lng']}} ,
-                        title: 'Title A1',
-                        zoom: 15
-                    }]
-                }).Load();
-              });
+
+        	if (navigator.geolocation) navigator.geolocation.getCurrentPosition(function(pos) {
+	            var me = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+	            MyLoc = [
+	                {
+	                    lat: pos.coords.latitude,
+	                    lon: pos.coords.longitude,
+	                    title: 'Ma position',
+	                    html : 'Ma position',
+	                    zoom: 15
+	                }
+	            ]
+	            LocPrat= [{
+	                        lat: {{gps['lat']}} ,
+	                        lon: {{gps['lng']}} ,
+	                        title: '{{praticien.nomPraticien}} {{praticien.prenomPraticien}}',
+	                        html: '{{praticien.nomPraticien}} {{praticien.prenomPraticien}} <br> Tel : {{praticien.numtel}} <br> Adresse : {{praticien.adressePraticien}}, {{praticien.cpPraticien}}, {{praticien.villePraticien}}',
+	                        zoom: 15
+	            }]
+
+	            Locs = MyLoc.concat(LocPrat);
+        	
+	                new Maplace({
+	                    show_markers: true,
+	                    locations: Locs,
+	                    controls_title: 'Liste des praticiens',
+                		view_all_text: 'Voir tous'
+	                }).Load();
+        	}), //else
+        	function() {
+	                new Maplace({
+	                    show_markers: true,
+	                    locations: [{
+	                        lat: {{gps['lat']}} ,
+	                        lon: {{gps['lng']}} ,
+	                        title: '{{praticien.nomPraticien}} {{praticien.prenomPraticien}}',
+	                        html: '{{praticien.nomPraticien}} {{praticien.prenomPraticien}} <br> Tel : {{praticien.numtel}} <br> Adresse : {{praticien.adressePraticien}}, {{praticien.cpPraticien}}, {{praticien.villePraticien}}',
+	                        zoom: 15
+	                    }]
+	                }).Load();
+	            };
 
 
             // $(".panel-body").height($("#fichePraticien table").height());
