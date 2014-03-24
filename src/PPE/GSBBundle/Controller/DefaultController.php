@@ -113,30 +113,30 @@ class DefaultController extends Controller
         return $this->render('PPEGSBBundle:Default:fiche_prat.html.twig', array("gps" => $tab, 'praticien' => $praticien ));
     }
 
-//     public function mapPraAction()
-//     {
-//         $em = $this->getDoctrine()->getEntityManager();
-//         $praticien = $em->getRepository('PPEGSBBundle:praticien')->FindAll();
+/*    public function mapPraAction()
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $praticien = $em->getRepository('PPEGSBBundle:praticien')->FindAll();
 
-//         if (empty($praticien))
-//         {
-//             throw $this->createNotFoundException("Pas de praticien à localiser :(");
-//         }
+        if (empty($praticien))
+        {
+            throw $this->createNotFoundException("Pas de praticien à localiser :(");
+        }
 
-//         $adresses = '';
-//         foreach ($praticien as $data)
-//         {
-//             $adresses .= $data->getAdressePraticien()." ".$data->getCpPraticien()." ".$data->getVillePraticien()."/";
-//         }
+        $adresses = '';
+        foreach ($praticien as $data)
+        {
+            $adresses .= $data->getAdressePraticien()." ".$data->getCpPraticien()." ".$data->getVillePraticien()."/";
+        }
         
-// //        print_r($adresses);
+//        print_r($adresses);
 
-// //        $adresses = json_encode($adresses);
+//        $adresses = json_encode($adresses);
 
-// //        print_r($adresses);
+//        print_r($adresses);
 
-//         return $this->render('PPEGSBBundle:Default:map.html.twig', array('adresses' => $adresses, 'praticiens' => $praticien));
-//     }
+        return $this->render('PPEGSBBundle:Default:map.html.twig', array('adresses' => $adresses, 'praticiens' => $praticien));
+    }*/
 
     public function mapPraAction()
     {
