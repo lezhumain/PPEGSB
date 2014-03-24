@@ -101,36 +101,37 @@ class DefaultController extends Controller
 
         $i = 0;
         foreach ($praticien as $data) {
-            $coo = $this->getMapFromAdress($data->getAdressePraticien()." ".$data->getCpPraticien()." ".$data->getVillePraticien());
-            if ($coo == 0) {
-                $i++;
-            } else {
-                $gpsCoo[] = $coo;
-            }
+            $adresses[] = $data->getAdressePraticien()." ".$data->getCpPraticien()." ".$data->getVillePraticien();
         }
+        print_r($adresses);
+
+        $adresses = json_encode($adresses);
+
+
+        print_r($adresses);
         echo $i;
-        return $this->render('PPEGSBBundle:Default:map.html.twig', array('gpsCoo' => $gpsCoo, 'praticiens' => $praticien));
+        return $this->render('PPEGSBBundle:Default:map.html.twig', array('adresses' => $adresses, 'praticiens' => $praticien));
     }
 
-    public function getMapFromAdress($adresse) {
-        $url = "http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($adresse)."&sensor=false";
-        $req = file_get_contents($url);
-        $gps = json_decode($req, true);
+    // public function getMapFromAdress($adresse) {
+    //     $url = "http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($adresse)."&sensor=false";
+    //     $req = file_get_contents($url);
+    //     $gps = json_decode($req, true);
          
 
-        if ($gps['status'] !=  'ZERO_RESULTS') {
-            $lat = $gps['results'][0]['geometry']['location']['lat'];
-            $lng = $gps['results'][0]['geometry']['location']['lng'];
-            $tab["lat"] = $lat;
-            $tab["lng"] = $lng;
-            return $tab;
-         }
-         else{
-            return 0;
-         }
+    //     if ($gps['status'] !=  'ZERO_RESULTS') {
+    //         $lat = $gps['results'][0]['geometry']['location']['lat'];
+    //         $lng = $gps['results'][0]['geometry']['location']['lng'];
+    //         $tab["lat"] = $lat;
+    //         $tab["lng"] = $lng;
+    //         return $tab;
+    //      }
+    //      else{
+    //         return 0;
+    //      }
          
 
-    }
+    // }
 /******************************/
 
 
@@ -161,3 +162,5 @@ class DefaultController extends Controller
     }
 /******************************/
 }
+
+
