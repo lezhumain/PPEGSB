@@ -63,32 +63,32 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-md-6 col-md-offset-3"id = "fichePraticien">
-			<div class="panel panel-primary">
+		<div class="col-md-6"id = "fichePraticien">
+			<div class="panel panel-primary" id="panel_info">
 				<div class="panel-heading">
 					<h3 class="panel-title"><b>Fiche du praticien : {{praticien.nomPraticien}} - {{praticien.prenomPraticien}}</b></h3>
 				</div>
-				<div class="panel-body">
-					<div class="col-md-10 col-md-offset-1">
-						<table class = 'table'>
+					<table class = 'table'>
+						<thead></thead>
+						<tbody>
 							<tr>
-								<td>Adresse :</td>
+								<td><label for="">Adresse :</label></td>
 								<td>{{praticien.adressePraticien}}<br>{{praticien.villePraticien}} - {{praticien.cpPraticien}}</td>
 							</tr>
 							<tr>
-								<td>Numero de telephone</td>
+								<td><label for="">Numero de telephone :</label></td>
 								<td>{{praticien.numtel}}</td>
 							</tr>
 							<tr>
-								<td>Coef notoriété</td>
+								<td><label for="">Coef notoriété :</label></td>
 								<td>{{praticien.coefnotorietePraticien}}</td>
 							</tr>
 							<tr>
-								<td>Travail dans</td>
+								<td><label for="">Travail dans :</label></td>
 								<td>{{praticien.codeType.typeLieu}}<br/>{{praticien.codeType.libelleType}}</td>
 							</tr>
 							<tr>
-								<td>Titulaire</td>
+								<td><label for="">Titulaire :</label></td>
 								<td>
 									{%if praticien.titulairePraticien == 1%}
 									Ce praticien est titulaire
@@ -97,17 +97,17 @@
 									{% endif %}
 								</td>
 							</tr>
-						</table>
-					</div>
+						</tbody>
+					</table>
 				</div>
-			</div>
+		</div>
+		<div class="col-md-6">
+			<div id="gmap" class="gmap"></div>
 		</div>
 	</div>
 </div>
 
 
-<script src="http://maps.google.com/maps/api/js?sensor=false&libraries=geometry&v=3.7"></script>
-<div id="gmap" class="gmap"></div>
 
 
 
@@ -117,19 +117,21 @@
 		}
 
 		#fichePraticien table tr td{
-			padding: 4px;
-			padding: 0px;
 		}
 
 		#fichePraticien .panel-body{
-			height: 100%;
+			/*height: 100%;*/
 		}
 	</style>
+<script src="http://maps.google.com/maps/api/js?sensor=false&libraries=geometry&v=3.7"></script>
 
 {% endblock %}
 
 {% block inlinejs %}
+		
         <script>
+        	var canvasHeight = $('.gmap').closest('div').height();
+        	$('#panel_info').height(canvasHeight*1.04);
             $(function() {
                 new Maplace({
                     show_markers: true,
@@ -143,6 +145,6 @@
               });
 
 
-            $(".panel-body").height($("#fichePraticien table").height());
+            // $(".panel-body").height($("#fichePraticien table").height());
         </script>
 {% endblock %}
