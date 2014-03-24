@@ -11,7 +11,13 @@ PPE\GSBBundle\Entity\Remplace:
         IDX_92BF0EDE94E879DC:
             columns:
                 - JJMMAAAA
-    id: {  }
+    id:
+        matriculePraticienRemplace:
+            associationKey: true
+        matriculePraticienRemplacant:
+            associationKey: true
+        jjmmaaaa:
+            associationKey: true
     oneToOne:
         matriculePraticienRemplace:
             targetEntity: Praticien

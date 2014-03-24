@@ -109,7 +109,7 @@ class Medicament
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="PPE\GSBBundle\Entity\Medicament", inversedBy="depotLegalPerturbant")
+     * @ORM\ManyToMany(targetEntity="PPE\GSBBundle\Entity\Medicament", inversedBy="depotLegalPerturbe")
      * @ORM\JoinTable(name="perturbe",
      *   joinColumns={
      *     @ORM\JoinColumn(name="depot_legal_perturbant", referencedColumnName="depot_legal")

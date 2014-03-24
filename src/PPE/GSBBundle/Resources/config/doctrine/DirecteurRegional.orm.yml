@@ -1,7 +1,9 @@
 PPE\GSBBundle\Entity\DirecteurRegional:
     type: entity
     table: DIRECTEUR_REGIONAL
-    id: {  }
+    id:
+        matriculeColDir:
+            associationKey: true
     oneToOne:
         matriculeColDir:
             targetEntity: Collaborateur

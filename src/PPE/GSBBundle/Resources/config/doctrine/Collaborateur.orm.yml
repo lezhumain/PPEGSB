@@ -1,5 +1,6 @@
 PPE\GSBBundle\Entity\Collaborateur:
     type: entity
+    repositoryClass: PPE\GSBBundle\Entity\CollaborateurRepository
     table: COLLABORATEUR
     id:
         matriculeCol:
@@ -35,6 +36,12 @@ PPE\GSBBundle\Entity\Collaborateur:
             length: 5
             fixed: false
             column: cp_col
+        villeCol:
+            type: string
+            nullable: false
+            length: 50
+            fixed: false
+            column: ville_col
         mdpCol:
             type: string
             nullable: false

@@ -1,7 +1,9 @@
 PPE\GSBBundle\Entity\ResponsableDeSecteur:
     type: entity
     table: RESPONSABLE_DE_SECTEUR
-    id: {  }
+    id:
+        matriculeColRes:
+            associationKey: true
     oneToOne:
         matriculeColRes:
             targetEntity: Collaborateur

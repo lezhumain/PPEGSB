@@ -11,7 +11,13 @@ PPE\GSBBundle\Entity\EtreResponsable:
         IDX_2087271EB8E26183:
             columns:
                 - code_secteur
-    id: {  }
+    id:
+        matriculeColEtr:
+            associationKey: true
+        jjmmaaaaDeb:
+            associationKey: true
+        codeSecteur:
+            associationKey: true
     fields:
         jjmmaaaaFin:
             type: datetime

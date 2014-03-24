@@ -102,7 +102,7 @@ PPE\GSBBundle\Entity\Medicament:
             targetEntity: Medicament
             cascade: {  }
             mappedBy: null
-            inversedBy: depotLegalPerturbant
+            inversedBy: depotLegalPerturbe
             joinTable:
                 name: perturbe
                 joinColumns:

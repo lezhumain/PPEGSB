@@ -1,11 +1,14 @@
 PPE\GSBBundle\Entity\Visiteur:
     type: entity
+    repositoryClass: PPE\GSBBundle\Entity\VisiteurRepository
     table: VISITEUR
     indexes:
         IDX_88961BF470E4A9D4:
             columns:
                 - code_region
-    id: {  }
+    id:
+        matriculeColVis:
+            associationKey: true
     oneToOne:
         matriculeColVis:
             targetEntity: Collaborateur

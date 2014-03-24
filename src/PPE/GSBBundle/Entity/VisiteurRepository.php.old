@@ -9,20 +9,20 @@ use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NoResultException;
 
-class VisiteurRepository extends EntityRepository implements UserProviderInterface
+class VisiteurRepository extends EntityRepository
 {
 	/**
 	 * \brief
-	 * 		Retourne un utilisateur (Visiteur) d'apres son nom d'utilisateur
+	 * 		Retourne un Visiteur d'apres son nom d'utilisateur
 	 * 		(Prenom.Nom)
 	 * \param 
 	 * 		string $username
 	 * \throws 
-	 * 		UsernameNotFoundException
+	 * 		NotFoundException
 	 * \return 
 	 * 		PPE\GSBBundle\Entity\Visiteur
 	 */
-    public function loadUserByUsername($username)
+    public function findOneByUsername($username)
     {
     	$nompren = preg_split("/\./", $username);
     	$prenom = $nompren[0];
@@ -42,33 +42,29 @@ class VisiteurRepository extends EntityRepository implements UserProviderInterfa
         }
         catch (NoResultException $e)
         {
-            throw new UsernameNotFoundException(sprintf('Unable to find an active admin AcmeUserBundle:User object identified by "%s".', $username), 0, $e);
+            throw new NoResultException(sprintf('Unable to find an active admin Visiteur object identified by "%s".', $username), 0, $e);
         }
 
         return $user;
     }
-
-    public function refreshUser(UserInterface $user)
+    
+    public function findOneByMatricule($matricule)
     {
-        $class = get_class($user);
-        if (!$this->supportsClass($class))
-        {
-            throw new UnsupportedUserException(
-                sprintf(
-                    'Instances of "%s" are not supported.',
-                    $class
-                )
-            );
-        }
-        
-		//var_dump($user->getUsername());
-        return $this->loadUserByUsername($user->getUsername());
-    }
-
-    public function supportsClass($class)
-    {
-        //return $this->getEntityName() === $class || is_subclass_of($class, $this->getEntityName());
-    	return $class === 'PPE\GSBBundle\Entity\Visiteur';
+    	$q = $this
+            ->createQueryBuilder('u')
+            ->where('u.matriculeColVis = :matricule')
+            ->setParameter('matricule', $matricule)
+            ->getQuery();
+    	try
+    	{
+    		$user = $q->getSingleResult();
+    	}
+    	catch (NoResultException $e)
+    	{
+    		throw new NoResultException(sprintf('Unable to find an active admin Visiteur object identified by "%s".', $username), 0, $e);
+    	}
+    
+    	return $user;
     }
 }
 ?>

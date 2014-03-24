@@ -15,6 +15,7 @@ class ResponsableDeSecteur
     /**
      * @var \PPE\GSBBundle\Entity\Collaborateur
      *
+     * @ORM\Id
      * @ORM\OneToOne(targetEntity="PPE\GSBBundle\Entity\Collaborateur")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="matricule_col_res", referencedColumnName="matricule_col", unique=true)

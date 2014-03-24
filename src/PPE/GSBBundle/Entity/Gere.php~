@@ -22,6 +22,7 @@ class Gere
     /**
      * @var \PPE\GSBBundle\Entity\Collaborateur
      *
+     * @ORM\Id
      * @ORM\OneToOne(targetEntity="PPE\GSBBundle\Entity\Collaborateur")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="matricule_col_ger", referencedColumnName="matricule_col", unique=true)
@@ -32,6 +33,7 @@ class Gere
     /**
      * @var \PPE\GSBBundle\Entity\Region
      *
+     * @ORM\Id
      * @ORM\OneToOne(targetEntity="PPE\GSBBundle\Entity\Region")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="code_region", referencedColumnName="code_region", unique=true)
@@ -42,6 +44,7 @@ class Gere
     /**
      * @var \PPE\GSBBundle\Entity\Calendrier
      *
+     * @ORM\Id
      * @ORM\OneToOne(targetEntity="PPE\GSBBundle\Entity\Calendrier")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="JJMMAAAA_DEB", referencedColumnName="JJMMAAAA_DEB", unique=true)

@@ -17,7 +17,6 @@ class Region
      *
      * @ORM\Column(name="code_region", type="string", length=5)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $codeRegion;
 

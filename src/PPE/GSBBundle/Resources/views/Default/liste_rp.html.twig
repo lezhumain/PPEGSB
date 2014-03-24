@@ -3,7 +3,6 @@
 {% block title %}GSB - Liste des rapports{% endblock %}
 
 {% block body %}
-
  <div class="table-responsive">
 	 <table class="table table-hover">
 	 	<!-- Entête du tableau -->
@@ -16,17 +15,28 @@
 	 		</tr>
 	 	</thead>
 	 	<tbody>
+ 		<tr>
+	 		<td>plop</td>
+ 			<td>plop</td>
+ 			<td>plop</td>
+ 			<td>plop</td>
+ 		</tr>
+	 	{# a changer 
+	 		{% for v in vis %}
 	 		<tr>
-	 			<td>plop</td>
-	 			<td>plop</td>
-	 			<td>plop</td>
-	 			<td>plop</td>
+		 		<td>{{ v.matriculeColVis.matriculeCol }}</td>
+	 			<td>{{ v.matriculeColVis.prenomCol }}</td>
+	 			<td>{{ v.matriculeColVis.nomCol }}</td>
 	 		</tr>
+ 			{% endfor %}
+	 	#############}
 	 	</tbody>
 	 	<!-- fin de l'entête -->
 	 </table>
 </div>
-<div style="border: thin solid black;">
-{{ msg }}
+{#
+<div style="border: thin solid black; background-color: green; color: white">
+	{{ msg }}<br>
 </div>
+#}
 {% endblock %}

@@ -11,7 +11,13 @@ PPE\GSBBundle\Entity\Prescrire:
         IDX_905658D2A76557E5:
             columns:
                 - code_individu
-    id: {  }
+    id:
+        depotLegalPrescr:
+            associationKey: true
+        codeDosage:
+            associationKey: true
+        codeIndividu:
+            associationKey: true
     fields:
         posologie:
             type: string

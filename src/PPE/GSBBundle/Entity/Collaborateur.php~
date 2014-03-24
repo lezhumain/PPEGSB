@@ -52,9 +52,23 @@ class Collaborateur
     /**
      * @var string
      *
+     * @ORM\Column(name="ville_col", type="string", length=50, nullable=false)
+     */
+    private $villeCol;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="mdp_col", type="string", length=350, nullable=false)
      */
     private $mdpCol;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="salt_col", type="string", length=350, nullable=false)
+     */
+    private $saltCol;
 
     /**
      * @var \DateTime
@@ -174,7 +188,7 @@ class Collaborateur
         return $this->adresseCol;
     }
 
-    /**
+   /**
      * Set cpCol
      *
      * @param string $cpCol
@@ -198,6 +212,29 @@ class Collaborateur
     }
 
     /**
+     * Set villeCol
+     *
+     * @param string $villeCol
+     * @return Collaborateur
+     */
+    public function setVilleCol($villeCol)
+    {
+        $this->villeCol = $villeCol;
+
+        return $this;
+    }
+
+    /**
+     * Get villeCol
+     *
+     * @return string 
+     */
+    public function getVilleCol()
+    {
+        return $this->villeCol;
+    }
+
+    /**
      * Set mdpCol
      *
      * @param string $mdpCol
@@ -218,6 +255,16 @@ class Collaborateur
     public function getMdpCol()
     {
         return $this->mdpCol;
+    }
+    
+    /**
+     * Get saltCol
+     *
+     * @return string
+     */
+    public function getSaltCol()
+    {
+    	return $this->saltCol;
     }
 
     /**

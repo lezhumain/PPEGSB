@@ -36,7 +36,7 @@ class Departement
      *   @ORM\JoinColumn(name="code_region", referencedColumnName="code_region")
      * })
      */
-    private $codeRegion;
+    protected $codeRegion;
 
 
 

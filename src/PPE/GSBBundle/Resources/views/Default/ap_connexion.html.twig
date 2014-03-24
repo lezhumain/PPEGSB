@@ -9,6 +9,11 @@
 		<div class="col-md-6 col-md-offset-3 well" id = "formConnexion">
 			<form action="{{ path('ppegsb_logincheck') }}" method="post">
 				<h2>Connectez-vous</h2>
+				
+  				{% if error != "" %}
+					<div style="background-color: #FFEBE8; margin: 10px 0px; padding: 10px; border: 1px solid #DD3C10;">Erreur : {{ error.message }}</div>
+			    {% endif %}
+				
 				<input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" placeholder="Matricule" required autofocus>
 				<input type="password" id="password" name="_password" class="form-control" placeholder="Mot de passe" required>
 				<button class="btn btn-primary col-md-6 col-md-offset-3" type="submit">Connexion</button>

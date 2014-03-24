@@ -11,7 +11,13 @@ PPE\GSBBundle\Entity\Gere:
         IDX_DFED7A7A8602054F:
             columns:
                 - JJMMAAAA_DEB
-    id: {  }
+    id:
+        matriculeColGer:
+            associationKey: true
+        codeRegion:
+            associationKey: true
+        jjmmaaaaDeb:
+            associationKey: true
     fields:
         jjmmaaaaFin:
             type: datetime

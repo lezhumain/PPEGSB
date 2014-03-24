@@ -17,16 +17,15 @@ class Region
      *
      * @ORM\Column(name="code_region", type="string", length=5)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $codeRegion;
+    protected $codeRegion;
 
     /**
      * @var string
      *
      * @ORM\Column(name="nom_region", type="string", length=50, nullable=false)
      */
-    private $nomRegion;
+    protected $nomRegion;
 
     /**
      * @var \PPE\GSBBundle\Entity\Secteur
@@ -36,7 +35,7 @@ class Region
      *   @ORM\JoinColumn(name="code_secteur", referencedColumnName="code_secteur")
      * })
      */
-    private $codeSecteur;
+    protected $codeSecteur;
 
 
 

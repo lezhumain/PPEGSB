@@ -19,56 +19,70 @@ class Collaborateur
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $matriculeCol;
+    protected $matriculeCol;
 
     /**
      * @var string
      *
      * @ORM\Column(name="nom_col", type="string", length=25, nullable=false)
      */
-    private $nomCol;
+    protected $nomCol;
 
     /**
      * @var string
      *
      * @ORM\Column(name="prenom_col", type="string", length=25, nullable=false)
      */
-    private $prenomCol;
+    protected $prenomCol;
 
     /**
      * @var string
      *
      * @ORM\Column(name="adresse_col", type="string", length=50, nullable=false)
      */
-    private $adresseCol;
+    protected $adresseCol;
 
     /**
      * @var string
      *
      * @ORM\Column(name="cp_col", type="string", length=5, nullable=false)
      */
-    private $cpCol;
+    protected $cpCol;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ville_col", type="string", length=50, nullable=false)
+     */
+    protected $villeCol;
 
     /**
      * @var string
      *
      * @ORM\Column(name="mdp_col", type="string", length=350, nullable=false)
      */
-    private $mdpCol;
+    protected $mdpCol;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="salt_col", type="string", length=350, nullable=false)
+     */
+    protected $saltCol;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="date_embauche", type="datetime", nullable=false)
      */
-    private $dateEmbauche;
+    protected $dateEmbauche;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="PPE\GSBBundle\Entity\Medicament", mappedBy="matriculeColAvo")
      */
-    private $depotLegalAvoir;
+    protected $depotLegalAvoir;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -83,7 +97,7 @@ class Collaborateur
      *   }
      * )
      */
-    private $numAct;
+    protected $numAct;
 
     /**
      * Constructor
@@ -92,6 +106,7 @@ class Collaborateur
     {
         $this->depotLegalAvoir = new \Doctrine\Common\Collections\ArrayCollection();
         $this->numAct = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->salt = 1;///////////
     }
 
 
@@ -174,7 +189,7 @@ class Collaborateur
         return $this->adresseCol;
     }
 
-    /**
+   /**
      * Set cpCol
      *
      * @param string $cpCol
@@ -198,6 +213,29 @@ class Collaborateur
     }
 
     /**
+     * Set villeCol
+     *
+     * @param string $villeCol
+     * @return Collaborateur
+     */
+    public function setVilleCol($villeCol)
+    {
+        $this->villeCol = $villeCol;
+
+        return $this;
+    }
+
+    /**
+     * Get villeCol
+     *
+     * @return string 
+     */
+    public function getVilleCol()
+    {
+        return $this->villeCol;
+    }
+
+    /**
      * Set mdpCol
      *
      * @param string $mdpCol
@@ -218,6 +256,16 @@ class Collaborateur
     public function getMdpCol()
     {
         return $this->mdpCol;
+    }
+    
+    /**
+     * Get saltCol
+     *
+     * @return string
+     */
+    public function getSaltCol()
+    {
+    	return $this->saltCol;
     }
 
     /**

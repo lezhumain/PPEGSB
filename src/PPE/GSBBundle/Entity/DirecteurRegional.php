@@ -15,11 +15,11 @@ class DirecteurRegional
     /**
      * @var \PPE\GSBBundle\Entity\Collaborateur
      *
+     * @ORM\Id
      * @ORM\OneToOne(targetEntity="PPE\GSBBundle\Entity\Collaborateur")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="matricule_col_dir", referencedColumnName="matricule_col", unique=true)
      * })
-     * @ORM\Id
      */
     private $matriculeColDir;
 

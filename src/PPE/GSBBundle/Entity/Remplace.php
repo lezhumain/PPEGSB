@@ -15,6 +15,7 @@ class Remplace
     /**
      * @var \PPE\GSBBundle\Entity\Praticien
      *
+     * @ORM\Id
      * @ORM\OneToOne(targetEntity="PPE\GSBBundle\Entity\Praticien")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="matricule_praticien_remplace", referencedColumnName="matricule_praticien", unique=true)
@@ -25,6 +26,7 @@ class Remplace
     /**
      * @var \PPE\GSBBundle\Entity\Praticien
      *
+     * @ORM\Id
      * @ORM\OneToOne(targetEntity="PPE\GSBBundle\Entity\Praticien")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="matricule_praticien_remplacant", referencedColumnName="matricule_praticien", unique=true)
@@ -35,6 +37,7 @@ class Remplace
     /**
      * @var \PPE\GSBBundle\Entity\Date
      *
+     * @ORM\Id
      * @ORM\OneToOne(targetEntity="PPE\GSBBundle\Entity\Date")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="JJMMAAAA", referencedColumnName="JJMMAAAA", unique=true)

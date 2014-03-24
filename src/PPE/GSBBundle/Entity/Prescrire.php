@@ -22,6 +22,7 @@ class Prescrire
     /**
      * @var \PPE\GSBBundle\Entity\Medicament
      *
+     * @ORM\Id
      * @ORM\OneToOne(targetEntity="PPE\GSBBundle\Entity\Medicament")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="depot_legal_prescr", referencedColumnName="depot_legal", unique=true)
@@ -32,6 +33,7 @@ class Prescrire
     /**
      * @var \PPE\GSBBundle\Entity\Dosage
      *
+     * @ORM\Id
      * @ORM\OneToOne(targetEntity="PPE\GSBBundle\Entity\Dosage")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="code_dosage", referencedColumnName="code_dosage", unique=true)
@@ -42,6 +44,7 @@ class Prescrire
     /**
      * @var \PPE\GSBBundle\Entity\TypeIndividu
      *
+     * @ORM\Id
      * @ORM\OneToOne(targetEntity="PPE\GSBBundle\Entity\TypeIndividu")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="code_individu", referencedColumnName="code_individu", unique=true)
