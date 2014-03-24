@@ -20,12 +20,8 @@ ppegsb_listePra:
 
 ppegsb_fichePra:
     pattern:  /Praticien/Fiche-{id}
-    defaults: { _controller: PPEGSBBundle:Default:fichePra, new: 0}
+    defaults: { _controller: PPEGSBBundle:Default:fichePra }
     requirements: {id: \d+}
-
-ppegsb_newFichePra:
-    pattern:  /Praticien/new
-    defaults: { _controller: PPEGSBBundle:Default:fichePra, new: 1 }
 
 ppegsb_mapPra:
     pattern: /Praticien/map
@@ -42,17 +38,14 @@ ppegsb_listeMed:
 
 ppegsb_ficheMed:
     pattern:  /Medicament/Fiche
-    defaults: { _controller: PPEGSBBundle:Default:ficheMed, new: 0 }
+    defaults: { _controller: PPEGSBBundle:Default:ficheMed }
 
-ppegsb_newFicheMed:
-    pattern:  /Medicament/new
-    defaults: { _controller: PPEGSBBundle:Default:ficheMed, new: 1 }
 
 
 ppegsb_connexion:
     pattern:  /Connexion
     defaults: { _controller: PPEGSBBundle:Default:connexion }
-    
+
 
 ppegsb_login:
     pattern:  /login
@@ -63,8 +56,7 @@ ppegsb_logincheck:
 
 ppegsb_logout:
     pattern:  /logout
-    
+
 ppegsb_admin:
     pattern:  /admin
     defaults: { _controller: PPEGSBBundle:Default:admin }
-    

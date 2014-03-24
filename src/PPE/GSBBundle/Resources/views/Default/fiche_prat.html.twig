@@ -4,7 +4,7 @@
 
 {% block body %}
 
-<div class="container">
+<!-- <div class="container">
 	<div class="row">
 		<form action="../maps/geolocalisation.php" method="POST">
 
@@ -50,16 +50,84 @@
 			    	<label for="lieu_exe">Lieu d'Exercice</label>
 			    	<input class="form-control" id="lieu_exe">
 			  	</div>
-			  	<!-- <div class="form-group">
+			  	<div class="form-group">
 			    	<label for="localiser">Localiser</label>
 			    	<input type="submit" class="form-control btn btn-primary">
-			  	</div> -->
+			  	</div>
 			</div>
 		</form>
 	<script src="http://maps.google.com/maps/api/js?sensor=false&libraries=geometry&v=3.7"></script>
 	<div id="gmap" class="gmap"></div>
 	</div>
+</div> -->
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3"id = "fichePraticien">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title"><b>Fiche du praticien : {{praticien.nomPraticien}} - {{praticien.prenomPraticien}}</b></h3>
+				</div>
+				<div class="panel-body">
+					<div class="col-md-10 col-md-offset-1">
+						<table class = 'table'>
+							<tr>
+								<td>Adresse :</td>
+								<td>{{praticien.adressePraticien}}<br>{{praticien.villePraticien}} - {{praticien.cpPraticien}}</td>
+							</tr>
+							<tr>
+								<td>Numero de telephone</td>
+								<td>{{praticien.numtel}}</td>
+							</tr>
+							<tr>
+								<td>Coef notoriété</td>
+								<td>{{praticien.coefnotorietePraticien}}</td>
+							</tr>
+							<tr>
+								<td>Travail dans</td>
+								<td>{{praticien.codeType.typeLieu}}<br/>{{praticien.codeType.libelleType}}</td>
+							</tr>
+							<tr>
+								<td>Titulaire</td>
+								<td>
+									{%if praticien.titulairePraticien == 1%}
+									Ce praticien est titulaire
+									{% else %}
+									Ce praticien est remplacant
+									{% endif %}
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
+
+
+<script src="http://maps.google.com/maps/api/js?sensor=false&libraries=geometry&v=3.7"></script>
+<div id="gmap" class="gmap"></div>
+
+
+
+	<style>
+		#fichePraticien .panel-heading{
+			text-align: center;
+		}
+
+		#fichePraticien table tr td{
+			padding: 4px;
+			padding: 0px;
+		}
+
+		#fichePraticien .panel-body{
+			height: 100%;
+		}
+	</style>
+
+{% endblock %}
+
 {% block inlinejs %}
         <script>
             $(function() {
@@ -73,11 +141,8 @@
                     }]
                 }).Load();
               });
+
+
+            $(".panel-body").height($("#fichePraticien table").height());
         </script>
-{% endblock %}
-{% if new  == 1 %}
-formulaire dajout
-{% else %}
-affichage du prat
-{% endif %}
 {% endblock %}

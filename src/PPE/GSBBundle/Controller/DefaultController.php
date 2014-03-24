@@ -64,7 +64,7 @@ class DefaultController extends Controller
      *                      =>  0 affichage read only
      *                      =>  1 praticien 
      */
-    public function fichePraAction($new, $id){
+    public function fichePraAction($id){
 
         $em = $this->getDoctrine()->getEntityManager();
         $praticien = $em->getRepository('PPEGSBBundle:praticien')->FindOneBy(array("matriculePraticien" => $id));
@@ -75,7 +75,7 @@ class DefaultController extends Controller
 
         $tab = $this->getMapFromAdress($praticien->getAdressePraticien()." ".$praticien->getCpPraticien()." ".$praticien->getVillePraticien());
 
-        return $this->render('PPEGSBBundle:Default:fiche_prat.html.twig', array('new' => $new, "gps" => $tab, 'praticien' => $praticien ));
+        return $this->render('PPEGSBBundle:Default:fiche_prat.html.twig', array("gps" => $tab, 'praticien' => $praticien ));
     }
 
     public function mapPraAction() {
@@ -86,39 +86,39 @@ class DefaultController extends Controller
             throw $this->createNotFoundException("Pas de praticien à localiser :(");
         }
 
+        $adresses = '';
         foreach ($praticien as $data) {
-            $adresses[] = utf8_encode($data->getAdressePraticien()." ".$data->getCpPraticien()." ".$data->getVillePraticien());
+            $adresses .= $data->getAdressePraticien()." ".$data->getCpPraticien()." ".$data->getVillePraticien()."/";
         }
         
+//        print_r($adresses);
 
-        //print_r($adresses);
+//        $adresses = json_encode($adresses);
 
-        $adresses = json_encode($adresses);
+//        print_r($adresses);
 
-
-        //print_r($adresses);
         return $this->render('PPEGSBBundle:Default:map.html.twig', array('adresses' => $adresses, 'praticiens' => $praticien));
     }
 
-    // public function getMapFromAdress($adresse) {
-    //     $url = "http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($adresse)."&sensor=false";
-    //     $req = file_get_contents($url);
-    //     $gps = json_decode($req, true);
+    public function getMapFromAdress($adresse) {
+        $url = "http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($adresse)."&sensor=false";
+        $req = file_get_contents($url);
+        $gps = json_decode($req, true);
 
 
-    //     if ($gps['status'] !=  'ZERO_RESULTS') {
-    //         $lat = $gps['results'][0]['geometry']['location']['lat'];
-    //         $lng = $gps['results'][0]['geometry']['location']['lng'];
-    //         $tab["lat"] = $lat;
-    //         $tab["lng"] = $lng;
-    //         return $tab;
-    //      }
-    //      else{
-    //         return 0;
-    //      }
+        if ($gps['status'] !=  'ZERO_RESULTS') {
+            $lat = $gps['results'][0]['geometry']['location']['lat'];
+            $lng = $gps['results'][0]['geometry']['location']['lng'];
+            $tab["lat"] = $lat;
+            $tab["lng"] = $lng;
+            return $tab;
+         }
+         else{
+            return 0;
+         }
          
 
-    // }
+    }
 /******************************/
 
 
@@ -133,8 +133,8 @@ class DefaultController extends Controller
      *                      =>  0 affichage read only
      *                      =>  1 praticien 
      */
-    public function ficheMedAction($new){
-        return $this->render('PPEGSBBundle:Default:fiche_medicament.html.twig', array('new' => $new ));
+    public function ficheMedAction(){
+        return $this->render('PPEGSBBundle:Default:fiche_medicament.html.twig');
     }
 /******************************/
 

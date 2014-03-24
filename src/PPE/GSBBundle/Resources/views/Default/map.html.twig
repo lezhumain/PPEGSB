@@ -16,23 +16,20 @@
         <script>
 
         {% autoescape false %}
-            var adresses = {{ adresses }};
+            var adresses = '{{ adresses }}';
         {% endautoescape %}
 
-        var parsed = JSON.parse(adresses);
+        adresses = adresses.split("/");
 
-        var array = [];
 
-        for(var x in parsed){
-          array.push(parsed[x]);
-        }
         function someFunction(addresses, callback) {
             var coords = [];
-            for(var i = 0; i < addresses.length; i++) {
+            for(var i = 0; i < addresses.length - 1 ; i++) {
                 currAddress = addresses[i];
                 var geocoder = new google.maps.Geocoder();
                 if (geocoder) {
                     geocoder.geocode({'address':currAddress}, function (results, status) {
+                        console.log(google.maps.GeocoderStatus.OK+'  '+status);
                         if (status == google.maps.GeocoderStatus.OK) {
                             coords.push(results[0].geometry.location);
                             if(coords.length == addresses.length) {
@@ -41,9 +38,6 @@
                                 }
                             }
                         } 
-                        else {
-                            throw('No results found: ' + status);
-                        }
                     });
                 }
              }
