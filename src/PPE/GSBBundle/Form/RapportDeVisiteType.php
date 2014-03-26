@@ -17,16 +17,16 @@ class RapportDeVisiteType extends AbstractType {
 
             $builder->add('date_rapport', 'date', array(
                 'widget' => 'single_text',
-			    'format' => 'ddMMyyyy'
+			    'format' => 'd/M/y',
 			));
 
 			$builder->add('date_visite', 'date', array(
                 'widget' => 'single_text',
-			    'format' => 'ddMMyyyy'
+			    'format' => 'd/M/y',
 			));
 
-            $builder->add('bilan_visite', 'textarea');
-            $builder->add('AJOUTER', 'submit');
+            $builder->add('bilan_visite', 'textarea', array('attr' => array('rows' => 5) ));
+            $builder->add('AJOUTER', 'submit', array('attr' => array('class' => 'btn btn-primary col-md-12')));
 
 	}
 
