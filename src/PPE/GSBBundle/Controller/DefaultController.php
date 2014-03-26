@@ -18,40 +18,12 @@ class DefaultController extends Controller
         return $this->render('PPEGSBBundle:Default:admin.html.twig');
     }
 
-	/**
-	 * \brief Index renvoi a la liste des rapports
-	 */
-    public function indexActionTest()
-    {
-    	// Code pour recup un user
-    	$repo = $this->get('doctrine')->getManager()->getRepository("PPEGSBBundle:Visiteur");
-    	//$msg = get_class( $repo );
-/*	 	$vi = $repo->findOneByUsername("Louis.Villechalane");
-   	
-    	$msg = get_class( $vi );    	
-    	$msg1 = $this->hachUserMdp($vi);
-    	$msg2 = $this->hachUserMdp1($vi);
-    	
-    	$salt = $vi->getSalt();
-    	if($salt == "")
-    		$msg .= " - vide";
-    	else if($salt == null)
-    		$msg .= " - null";
-    	else
-    		$msg .= " - autre...";
-  	
-    	$msg = $vi->getUsername();
-*/    	//return $this->render('PPEGSBBundle:Default:liste_rp.html.twig', array("msg" => $msg));
-        
-        return $this->render('PPEGSBBundle:Default:liste_rp.html.twig');
-    }
-        
     /**
      * Index renvoi a la liste des rapports
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $rapports = $em->getRepository('PPEGSBBundle:RapportDeVisite')->FindAll();
 
         return $this->render('PPEGSBBundle:Default:liste_rp.html.twig', array('rapports' => $rapports));
@@ -70,7 +42,7 @@ class DefaultController extends Controller
         $rp = new RapportDeVisite();
         $form = $this->createForm(new RapportDeVisiteType, $rp);
 
-        $formHandler = new RapportDeVisiteHandler($form, $this->get('request'), $this->getDoctrine()->getEntityManager());
+        $formHandler = new RapportDeVisiteHandler($form, $this->get('request'), $this->getDoctrine()->getManager());
 
         if ($formHandler->process()) {
             return $this->redirect($this->generateUrl('ppegsb_homepage'));
@@ -85,7 +57,7 @@ class DefaultController extends Controller
 /*BLOC GESTION DES PRATICIEN*/
     public function listePraAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $praticien = $em->getRepository('PPEGSBBundle:praticien')->FindAll();
         return $this->render('PPEGSBBundle:Default:liste_prat.html.twig', array('praticiens' => $praticien));
     }
@@ -101,7 +73,7 @@ class DefaultController extends Controller
      */
     public function fichePraAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $praticien = $em->getRepository('PPEGSBBundle:praticien')->FindOneBy(array("matriculePraticien" => $id));
 
         if (empty($praticien)) {
@@ -115,7 +87,7 @@ class DefaultController extends Controller
 
 /*    public function mapPraAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $praticien = $em->getRepository('PPEGSBBundle:praticien')->FindAll();
 
         if (empty($praticien))
@@ -140,7 +112,7 @@ class DefaultController extends Controller
 
     public function mapPraAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $praticien = $em->getRepository('PPEGSBBundle:praticien')->FindAll();
 
         if (empty($praticien))
@@ -217,6 +189,14 @@ class DefaultController extends Controller
         return $this->render('PPEGSBBundle:Default:ap_connexion.html.twig');
     }
     
+    private function hachMdp($mdp, $salt, $user)
+    {
+    	$factory = $this->get('security.encoder_factory');
+    	$encoder = $factory->getEncoder($user);
+    	
+    	return $encoder->encodePassword($mdp, $salt);
+    }
+    
     /**
      * \brief
      * 		Le mot de passe d'un user avec 
@@ -227,28 +207,28 @@ class DefaultController extends Controller
      * \return
      * 		NULL | PPE\GSBBundle\Entity\Visiteur $user
      */
-/*    private function hachUserMdp($user)
+    private function hachUserMdp($user)
     {
-    	if( get_class($user) != "PPE\GSBBundle\Entity\Visiteur" )
-    		//return null;// throw exception...
-			return "no";
+    	if( get_class($user) != "PPE\GSBBundle\Entity\Collaborateur" )
+    		return null;// throw exception...
+			//return "no";
     	else
     	{
     		$factory = $this->get('security.encoder_factory');
     		
     		$encoder = $factory->getEncoder($user);
     		
-    		$oldpass = $user->getPassword();
+    		$oldpass = $user->getMdpCol();
     		
-    		$password = $encoder->encodePassword($oldpass, $user->getSalt());
+    		$password = $encoder->encodePassword($oldpass, $user->getSaltCol());
     		
-    		//$user->setPassword($password);
+    		$user->setMdpCol($password);
     		
-    		//return $user;
-    		return $oldpass . " | " . $password . " <-> " . $user->getSalt();
+    		return $user;
+    		//return $oldpass . " | " . $password . " <-> " . $user->getSalt();
     	}
     }
-*/    
+
     /**
      * \brief
      * 		Hash le mot de passe d'un user
@@ -259,7 +239,7 @@ class DefaultController extends Controller
      * \return
      * 		NULL | PPE\GSBBundle\Entity\Visiteur $user
      */
- /*   private function hachUserMdp1($user)
+/*    private function hachUserMdp1($user)
     {
     	if( get_class($user) != "PPE\GSBBundle\Entity\Visiteur" )
     		//return null;// throw exception...
@@ -273,14 +253,52 @@ class DefaultController extends Controller
     		return $oldpass . " | " . $password . " <-> " . $user->getSalt();
     	}
     }
-    
-    // dans constructeur de collaborateur
+*/    
+	/**
+	 * \brief
+	 * 		Genere un salt aleatoire
+	 * \return string
+	 */
     private function genSalt()
     {
-    	
+    	return md5(time() + rand());
     }
-*/
+    
+    private function cryptCollabs()
+    {
+    	$log = "<DEB>\n";
+    	$ret = "ok";
+    	
+    	$em = $this->getDoctrine()->getManager();
+    	$collabs = $em->getRepository("PPEGSBBundle:Collaborateur")->findall();
+    	
+    	foreach( $collabs as $col )
+    	{
+    		/* Si pas de salt on le genere */
+	   		//if($col->getSaltCol() == null or $col->getSaltCol() == "")
+    		//	$col->setSaltCol( $this->genSalt() );
+
+	   		//$col = $this->hachUserMdp($col);
+			if( $col == null ) // erreur
+			{
+				$log .= "Erreur at " . $col->toString() . "\n";
+				$ret = "erreur";
+				break;
+			}
+			else
+				//$em->persist($col);
+				$log .= $col->toString() . "\n\t" . $this->hachMdp('123Soleil', $col->getSaltCol(), $col) . "\n";
+				//$log .= $col->toString() . "\n";
+    	}
+    	//$em->flush(); // On declenche l'enregistrement
+    	
+    	$log .= "fin\n";
+    	
+    	$monfichier = fopen('log8.txt', 'w');
+    	fputs($monfichier, $log);
+    	fclose($monfichier);
+    	
+    	return $ret;
+    }
 /******************************/
 }
-
-

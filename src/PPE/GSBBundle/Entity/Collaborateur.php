@@ -106,7 +106,7 @@ class Collaborateur
     {
         $this->depotLegalAvoir = new \Doctrine\Common\Collections\ArrayCollection();
         $this->numAct = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->salt = 1;///////////
+        $this->salt = md5(time());
     }
 
 
@@ -259,6 +259,19 @@ class Collaborateur
     }
     
     /**
+     * Set saltCol
+     *
+     * @return Collaborateur
+     */
+    public function setSaltCol($salt)
+    {
+    	$this->saltCol = $salt;
+    	
+    	return $this;
+    }
+    
+    
+    /**
      * Get saltCol
      *
      * @return string
@@ -355,5 +368,15 @@ class Collaborateur
     public function getNumAct()
     {
         return $this->numAct;
+    }
+    
+    public function toString()
+    {
+    	return 	"[COLLABORATEUR]" .
+    			$this->prenomCol . " " .
+    			$this->nomCol . ", n°" .
+    			$this->matriculeCol . " " .
+    			$this->mdpCol . " >" .
+    			$this->saltCol;
     }
 }

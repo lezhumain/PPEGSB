@@ -24,14 +24,14 @@ class Presentation
     /**
      * @var string
      *
-     * @ORM\Column(name="libelle_present", type="string", length=25, nullable=false)
+     * @ORM\Column(name="libelle_present", type="varchar", length=25, nullable=false)
      */
     private $libellePresent;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="depot_legal_present", type="string", length=25, nullable=false)
+     * @ORM\Column(name="depot_legal_present", type="text", length=1000, nullable=false)
      */
     private $depotLegalPresent;
 

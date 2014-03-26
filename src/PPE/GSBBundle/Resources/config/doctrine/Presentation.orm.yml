@@ -18,9 +18,9 @@ PPE\GSBBundle\Entity\Presentation:
             fixed: false
             column: libelle_present
         depotLegalPresent:
-            type: string
+            type: text
             nullable: false
-            length: 25
+            length: 1000
             fixed: false
             column: depot_legal_present
     lifecycleCallbacks: {  }

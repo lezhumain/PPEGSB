@@ -48,6 +48,12 @@ PPE\GSBBundle\Entity\Collaborateur:
             length: 350
             fixed: false
             column: mdp_col
+        saltCol:
+            type: string
+            nullable: true
+            length: 350
+            fixed: false
+            column: salt_col
         dateEmbauche:
             type: datetime
             nullable: false
