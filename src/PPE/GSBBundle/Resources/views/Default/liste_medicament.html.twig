@@ -1,6 +1,6 @@
 {% extends 'PPEGSBBundle::layout.html.twig' %}
 
-{% block title %}GSB - Liste des rapports{% endblock %}
+{% block title %}GSB - Liste des médicaments{% endblock %}
 
 {% block body %}
 		 <div class="table-responsive">
@@ -8,10 +8,22 @@
 			 	<!-- Entête du tableau -->
 			 	<thead> 
 			 		<tr>
-			 			<th>Numero</th>
+			 			<th>Depot legal</th>
 			 			<th>Nom commerciale</th>
+			 			<th>Prix échantillon</th>
+			 			<th>Famille</th>
 			 		</tr>
 			 	</thead>
+	 			<tbody>
+				{% for medicament in medicaments %}
+					<tr>
+						<td>{{medicament.depotLegal}}</td>
+						<td>{{medicament.nom}}</td>
+						<td>{{medicament.codeFamille.libelleFamille}}</td>
+						<td>{{medicament.prixechantillon}}</td>
+					</tr>
+				{% endfor %}
+				</tbody>
 			 	<!-- fin de l'entête -->
 			 </table>
 		</div>

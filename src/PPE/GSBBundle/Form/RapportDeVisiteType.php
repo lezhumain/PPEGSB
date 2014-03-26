@@ -12,21 +12,27 @@ class RapportDeVisiteType extends AbstractType {
             $builder->add('codeMotif', 'entity', array('class' => 'PPEGSBBundle:Motif',
                                            'property' => 'libelle_motif'));
 
-            $builder->add('matriculePraticien', 'entity', array('class' => 'PPEGSBBundle:Praticien',
-                                           'property' => 'nomPraticien'));
+            $builder->add('matriculePraticien', 'entity', array('class' 	=> 'PPEGSBBundle:Praticien',
+                                           						'property' 	=> 'nomPraticien'));
 
             $builder->add('date_rapport', 'date', array(
                 'widget' => 'single_text',
-			    'format' => 'ddMMyyyy'
+			    'format' => 'd/M/y',
 			));
 
 			$builder->add('date_visite', 'date', array(
                 'widget' => 'single_text',
-			    'format' => 'ddMMyyyy'
+			    'format' => 'd/M/y',
 			));
 
-            $builder->add('bilan_visite', 'textarea');
-            $builder->add('AJOUTER', 'submit');
+
+			$builder->add('depotLegalPres', 'entity', array('class' 	=>	'PPEGSBBundle:Medicament',
+									                        'property'	=>	'depotLegal',
+                                           					'multiple'	=>	false));
+
+            $builder->add('bilan_visite', 'textarea', array('attr' => array('rows' => 5) ));
+            $builder->add('AJOUTER', 'submit', array('attr' => array('class' => 'btn btn-primary col-md-12')));
+
 
 	}
 

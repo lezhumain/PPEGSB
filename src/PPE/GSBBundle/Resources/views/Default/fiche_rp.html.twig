@@ -5,16 +5,17 @@
 {% block body %}
 
 <div class="container">
-    <form class="form">
+    <form class="form" method = 'post'>
     	<div class="row">
+    		<legend>Nouveau Rapport</legend>
     		<div class="col-md-6">
     			<div class="row">
-    				{# Code motif #}
-    				<div class="col-md-4" style="margin-top: 10px;">
-    					{{ form_label(form.codeMotif, 'Motif', {'label_attr': {'class': 'control-label'}}) }}
-    					{{ form_widget(form.codeMotif, {'attr': {'class': 'form-control input-sm'}} )}}
-    					{{ form_errors(form.codeMotif) }}
-    				</div>
+                    {# Code motif #}
+                    <div class="col-md-4" style="margin-top: 10px;">
+                        {{ form_label(form.codeMotif, 'Motif', {'label_attr': {'class': 'control-label'}}) }}
+                        {{ form_widget(form.codeMotif, {'attr': {'class': 'form-control input-sm'}} )}}
+                        {{ form_errors(form.codeMotif) }}
+                    </div>
     				
     				{# Nom des praticiens #}
     				<div class="col-md-4" style="margin-top: 10px;">
@@ -22,6 +23,13 @@
     					{{ form_widget(form.matriculePraticien, {'attr': {'class': 'form-control input-sm'}} )}}
     					{{ form_errors(form.matriculePraticien) }}
     				</div>
+
+                    {# Code motif #}
+                    <div class="col-md-4" style="margin-top: 10px;">
+                        {{ form_label(form.depotLegalPres, 'Médicaments', {'label_attr': {'class': 'control-label'}}) }}
+                        {{ form_widget(form.depotLegalPres, {'attr': {'class': 'form-control input-sm'}} )}}
+                        {{ form_errors(form.depotLegalPres) }}
+                    </div>
     			</div>
     	
     			<div class="row">
@@ -49,16 +57,16 @@
     				</div>
     			</div>
     	
-    			<div class="row">
-    				{# Bilan du rapport #}
-    				<div class="col-md-4" style="margin-top: 10px;">
-    					{{ form_widget(form.AJOUTER, {'attr': {'class': 'form-control btn btn-primary'}} )}}
+    			<div class="row" style='margin-top: 10px;'>
+    				<div class="col-md-12">{# Submit #}
+    					{{form(form)}}
     				</div>
     			</div>
     		</div>
     	</div>
     </form>
 </div>
+
 
 {% endblock %}
 
@@ -67,12 +75,12 @@
 	  	$('#ppe_gsb_rapportdevisitetype_date_rapport').datetimepicker({
 		    lang:'fr',
 		    timepicker:false,
-		    format:'m/d/Y'
+		    format:'d/m/Y'
 		});
 		$('#ppe_gsb_rapportdevisitetype_date_visite').datetimepicker({
 		    lang:'fr',
 		    timepicker:false,
-		    format:'m/d/Y'
+		    format:'d/m/Y'
 		});
 	</script>
 {% endblock %}

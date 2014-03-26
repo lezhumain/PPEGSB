@@ -38,6 +38,13 @@ class Medicament
     /**
      * @var string
      *
+     * @ORM\Column(name="effet", type="text", length=100, nullable=false)
+     */
+    private $nom;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="effet", type="text", length=16, nullable=false)
      */
     private $effet;
@@ -181,6 +188,28 @@ class Medicament
         return $this->composition;
     }
 
+    /**
+     * Set nom
+     *
+     * @param string $nom
+     * @return Medicament
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * Get nom
+     *
+     * @return string 
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
     /**
      * Set effet
      *

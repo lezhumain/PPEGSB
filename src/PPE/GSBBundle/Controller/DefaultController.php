@@ -7,6 +7,7 @@ use PPE\GSBBundle\Entity;
 use PPE\GSBBundle\Entity\Visiteur;
 use Symfony\Component\Form\FormBuilder;
 use PPE\GSBBundle\Entity\RapportDeVisite;
+use PPE\GSBBundle\Entity\Medicament;
 use Symfony\Component\HttpFoundation\Request;
 use PPE\GSBBundle\Form\RapportDeVisiteType;
 use PPE\GSBBundle\Form\RapportDeVisiteHandler;
@@ -27,15 +28,14 @@ class DefaultController extends Controller
         $rapports = $em->getRepository('PPEGSBBundle:RapportDeVisite')->FindAll();
 
         return $this->render('PPEGSBBundle:Default:liste_rp.html.twig', array('rapports' => $rapports));
-	}
-
+    }
 
     /**
      * \brief 
-     * 		Fonction d'affichage du formulaire dun rapport de visite
+     *      Fonction d'affichage du formulaire dun rapport de visite
      * \param new
-     *   	0 affichage read only
-     * 		1 nouveau rapport	
+     *      0 affichage read only
+     *      1 nouveau rapport   
      */
     public function ficheRpAction($new, Request $request)
     {
@@ -63,13 +63,13 @@ class DefaultController extends Controller
     }
 
     /**
-	 * \brief Fonction d'affichage du formulaire dun praticien
+     * \brief Fonction d'affichage du formulaire dun praticien
      * \param 
-     * 		new
-     *   		0 affichage read only
-     * 			1 praticien
-     * 		id
-     * 			l'id du praticien
+     *      new
+     *          0 affichage read only
+     *          1 praticien
+     *      id
+     *          l'id du praticien
      */
     public function fichePraAction($id)
     {
@@ -128,13 +128,13 @@ class DefaultController extends Controller
 
     /**
      * \brief 
-     * 		Retourne les coordonnees gps d'une adresse
+     *      Retourne les coordonnees gps d'une adresse
      * \param 
-     * 		string $adresse
+     *      string $adresse
      * \return 
-     * 		array("lat/lng"=>valeur) $tab
-     * 			lat : la latitude
-     * 			lng : la longitude
+     *      array("lat/lng"=>valeur) $tab
+     *          lat : la latitude
+     *          lng : la longitude
      */
     public function getMapFromAdress($adresse)
     {
@@ -164,17 +164,20 @@ class DefaultController extends Controller
 /*BLOC GESTION DES MEDICAMENT*/
     public function listeMedAction()
     {
-        return $this->render('PPEGSBBundle:Default:liste_medicament.html.twig');
+        $em = $this->getDoctrine()->getEntityManager();
+        $medicaments = $em->getRepository('PPEGSBBundle:Medicament')->FindAll();
+        return $this->render('PPEGSBBundle:Default:liste_medicament.html.twig', array('medicaments' =>  $medicaments));
     }
 
     /**
-     * Fonction d'affichage du formulaire dun medicamentz
+     * Fonction d'affichage du formulaire dun medicaments
      *      Paramettre : new
      *                      =>  0 affichage read only
      *                      =>  1 praticien 
      */
     public function ficheMedAction()
     {
+
         return $this->render('PPEGSBBundle:Default:fiche_medicament.html.twig');
     }
 /******************************/
@@ -199,13 +202,13 @@ class DefaultController extends Controller
     
     /**
      * \brief
-     * 		Le mot de passe d'un user avec 
-     * 		l'algo defini dans security.yml 
-     * 		via les methodes de Symfony
+     *      Le mot de passe d'un user avec 
+     *      l'algo defini dans security.yml 
+     *      via les methodes de Symfony
      * \param 
-     * 		PPE\GSBBundle\Entity\Visiteur $user
+     *      PPE\GSBBundle\Entity\Visiteur $user
      * \return
-     * 		NULL | PPE\GSBBundle\Entity\Visiteur $user
+     *      NULL | PPE\GSBBundle\Entity\Visiteur $user
      */
     private function hachUserMdp($user)
     {
@@ -227,31 +230,31 @@ class DefaultController extends Controller
     		return $user;
     		//return $oldpass . " | " . $password . " <-> " . $user->getSalt();
     	}
-    }
+	}
 
     /**
      * \brief
-     * 		Hash le mot de passe d'un user
-     * 		avec l'algo SHA512 via la fonction
-     * 		hash('SHA512', motDePasse.salt)
+     *      Hash le mot de passe d'un user
+     *      avec l'algo SHA512 via la fonction
+     *      hash('SHA512', motDePasse.salt)
      * \param 
-     * 		PPE\GSBBundle\Entity\Visiteur $user
+     *      PPE\GSBBundle\Entity\Visiteur $user
      * \return
-     * 		NULL | PPE\GSBBundle\Entity\Visiteur $user
+     *      NULL | PPE\GSBBundle\Entity\Visiteur $user
      */
 /*    private function hachUserMdp1($user)
     {
-    	if( get_class($user) != "PPE\GSBBundle\Entity\Visiteur" )
-    		//return null;// throw exception...
-    		return "no";
-    	else
-    	{
-    		$oldpass = $user->getPassword();
-    		$password = hash('sha512', $oldpass.$user->getSalt());
+        if( get_class($user) != "PPE\GSBBundle\Entity\Visiteur" )
+            //return null;// throw exception...
+            return "no";
+        else
+        {
+            $oldpass = $user->getPassword();
+            $password = hash('sha512', $oldpass.$user->getSalt());
     
-    		//return $user->setPassword($password);
-    		return $oldpass . " | " . $password . " <-> " . $user->getSalt();
-    	}
+            //return $user->setPassword($password);
+            return $oldpass . " | " . $password . " <-> " . $user->getSalt();
+        }
     }
 */    
 	/**

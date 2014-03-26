@@ -18,8 +18,8 @@
  		{% for rp in rapports %}
 	 		<tr>
 				<td>{{rp.numRapport}}</td>
-				<td>{{rp.dateVisite|date("m/d/Y")}}</td>
-				<td>{{rp.dateRapport|date("m/d/Y")}}</td>
+				<td>{{rp.dateVisite|date("d/m/Y")}}</td>
+				<td>{{rp.dateRapport|date("d/m/Y")}}</td>
 				<td>{{rp.matriculePraticien.nomPraticien}} - {{rp.matriculePraticien.prenomPraticien}}</td>
 	 		</tr>
  		{% endfor %}
