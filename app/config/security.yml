@@ -1,8 +1,8 @@
 security:
     encoders:
         Symfony\Component\Security\Core\User\User: plaintext
-        PPE\GSBBundle\Entity\Visiteur: plaintext
-        # PPE\GSBBundle\Entity\Visiteur: sha512
+        PPE\GSBBundle\Entity\Visiteur: sha512
+        PPE\GSBBundle\Entity\Collaborateur: sha512
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER

@@ -5,16 +5,16 @@
 {% block body %}
 
 <div class="container">
-    <form class="form">
+    <form class="form" method = 'post'>
     	<div class="row">
     		<div class="col-md-6">
     			<div class="row">
-    				{# Code motif #}
-    				<div class="col-md-4" style="margin-top: 10px;">
-    					{{ form_label(form.codeMotif, 'Motif', {'label_attr': {'class': 'control-label'}}) }}
-    					{{ form_widget(form.codeMotif, {'attr': {'class': 'form-control input-sm'}} )}}
-    					{{ form_errors(form.codeMotif) }}
-    				</div>
+                    {# Code motif #}
+                    <div class="col-md-4" style="margin-top: 10px;">
+                        {{ form_label(form.codeMotif, 'Motif', {'label_attr': {'class': 'control-label'}}) }}
+                        {{ form_widget(form.codeMotif, {'attr': {'class': 'form-control input-sm'}} )}}
+                        {{ form_errors(form.codeMotif) }}
+                    </div>
     				
     				{# Nom des praticiens #}
     				<div class="col-md-4" style="margin-top: 10px;">
@@ -22,6 +22,13 @@
     					{{ form_widget(form.matriculePraticien, {'attr': {'class': 'form-control input-sm'}} )}}
     					{{ form_errors(form.matriculePraticien) }}
     				</div>
+
+                    {# Code motif #}
+                    <div class="col-md-4" style="margin-top: 10px;">
+                        {{ form_label(form.depotLegalPres, 'Médicaments', {'label_attr': {'class': 'control-label'}}) }}
+                        {{ form_widget(form.depotLegalPres, {'attr': {'class': 'form-control input-sm'}} )}}
+                        {{ form_errors(form.depotLegalPres) }}
+                    </div>
     			</div>
     	
     			<div class="row">

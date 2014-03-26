@@ -24,6 +24,11 @@ PPE\GSBBundle\Entity\Medicament:
             nullable: false
             length: 16
             fixed: false
+        nom:
+            type: text
+            nullable: false
+            length: 100
+            fixed: false
         effet:
             type: text
             nullable: false

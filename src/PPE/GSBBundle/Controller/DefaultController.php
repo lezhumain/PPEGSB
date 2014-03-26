@@ -7,6 +7,7 @@ use PPE\GSBBundle\Entity;
 use PPE\GSBBundle\Entity\Visiteur;
 use Symfony\Component\Form\FormBuilder;
 use PPE\GSBBundle\Entity\RapportDeVisite;
+use PPE\GSBBundle\Entity\Medicament;
 use Symfony\Component\HttpFoundation\Request;
 use PPE\GSBBundle\Form\RapportDeVisiteType;
 use PPE\GSBBundle\Form\RapportDeVisiteHandler;
@@ -192,17 +193,20 @@ class DefaultController extends Controller
 /*BLOC GESTION DES MEDICAMENT*/
     public function listeMedAction()
     {
-        return $this->render('PPEGSBBundle:Default:liste_medicament.html.twig');
+        $em = $this->getDoctrine()->getEntityManager();
+        $medicaments = $em->getRepository('PPEGSBBundle:Medicament')->FindAll();
+        return $this->render('PPEGSBBundle:Default:liste_medicament.html.twig', array('medicaments' =>  $medicaments));
     }
 
     /**
-     * Fonction d'affichage du formulaire dun medicamentz
+     * Fonction d'affichage du formulaire dun medicaments
      *      Paramettre : new
      *                      =>  0 affichage read only
      *                      =>  1 praticien 
      */
     public function ficheMedAction()
     {
+
         return $this->render('PPEGSBBundle:Default:fiche_medicament.html.twig');
     }
 /******************************/
