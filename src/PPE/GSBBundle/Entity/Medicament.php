@@ -7,7 +7,12 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Medicament
  *
- * @ORM\Table(name="MEDICAMENT", indexes={@ORM\Index(name="IDX_91036F051CD4B68F", columns={"code_famille"}), @ORM\Index(name="IDX_91036F05C51BEA8B", columns={"code_present"})})
+ * @ORM\Table(name="MEDICAMENT", indexes=
+ * {
+ * 		@ORM\Index(name="FK_MEDICAMENT_code_famille", columns={"code_famille"}),
+ * 		@ORM\Index(name="FK_MEDICAMENT_code_present", columns={"code_present"})
+ * })
+ *
  * @ORM\Entity
  */
 class Medicament
@@ -17,7 +22,7 @@ class Medicament
      *
      * @ORM\Column(name="depot_legal", type="string", length=25)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+	 * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     protected $depotLegal;
 
@@ -32,13 +37,6 @@ class Medicament
      * @var string
      *
      * @ORM\Column(name="nom", type="text", length=50, nullable=false)
-     */
-    private $nom;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="effet", type="text", length=100, nullable=false)
      */
     private $nom;
 
@@ -122,18 +120,17 @@ class Medicament
 
     /**
      * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="PPE\GSBBundle\Entity\Medicament", inversedBy="depot_legal")
-     * @ORM\JoinTable(name="perturbe",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="depot_legal_perturbant", referencedColumnName="depot_legal")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="depot_legal_perturbe", referencedColumnName="depot_legal")
-     *   }
+     * 
+     * @ORM\ManyToMany(targetEntity="PPE\GSBBundle\Entity\Medicament")
+     * @ORM\JoinTable
+     * (
+     * 		name="perturbe",
+     *      joinColumns={@ORM\JoinColumn(name="depot_legal_perturbant", referencedColumnName="depot_legal")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="depot_legal_perturbant", referencedColumnName="depot_legal")}
      * )
      */
     protected $depotLegalPerturbe;
+     
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -442,7 +439,7 @@ class Medicament
      *
      * @param \PPE\GSBBundle\Entity\Medicament $depotLegal
      */
-    public function removeDepotLegal(\PPE\GSBBundle\Entity\Medicament $depotLegal)
+    public function removeDepotLegalPerturbe(\PPE\GSBBundle\Entity\Medicament $depotLegal)
     {
         $this->depotLegalPerturbe->removeElement($depotLegal);
     }
