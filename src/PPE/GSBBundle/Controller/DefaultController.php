@@ -27,7 +27,9 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $rapports = $em->getRepository('PPEGSBBundle:RapportDeVisite')->FindAll();
 
-        return $this->render('PPEGSBBundle:Default:liste_rp.html.twig', array('rapports' => $rapports));
+        $msg = "";//$this->cryptCollabs();
+        
+        return $this->render('PPEGSBBundle:Default:liste_rp.html.twig', array('rapports' => $rapports, 'msg' => $msg));
     }
 
     /**
@@ -297,7 +299,7 @@ class DefaultController extends Controller
     	
     	$log .= "fin\n";
     	
-    	$monfichier = fopen('log8.txt', 'w');
+    	$monfichier = fopen('log.txt', 'w');
     	fputs($monfichier, $log);
     	fclose($monfichier);
     	
