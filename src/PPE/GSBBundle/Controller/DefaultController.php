@@ -3,12 +3,12 @@
 namespace PPE\GSBBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\HttpFoundation\Request;
 use PPE\GSBBundle\Entity;
 use PPE\GSBBundle\Entity\Visiteur;
-use Symfony\Component\Form\FormBuilder;
 use PPE\GSBBundle\Entity\RapportDeVisite;
 use PPE\GSBBundle\Entity\Medicament;
-use Symfony\Component\HttpFoundation\Request;
 use PPE\GSBBundle\Form\RapportDeVisiteType;
 use PPE\GSBBundle\Form\RapportDeVisiteHandler;
 

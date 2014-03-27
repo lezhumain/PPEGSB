@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Praticien
  *
  * @ORM\Table(name="PRATICIEN", indexes={@ORM\Index(name="IDX_4958393CBA353DE8", columns={"code_type"})})
- * @ORM\Entity(repositoryClass="PPE\GSBBundle\Repository\PraticienRepository")
+ * @ORM\Entity
  */
 class Praticien
 {

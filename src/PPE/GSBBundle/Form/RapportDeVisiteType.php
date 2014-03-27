@@ -4,6 +4,8 @@ namespace PPE\GSBBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use PPE\GSBBundle\Entity\RapportDeVisite;
 
 
 
@@ -29,6 +31,12 @@ class RapportDeVisiteType extends AbstractType {
 			$builder->add('depotLegalPres', 'entity', array('class' 	=>	'PPEGSBBundle:Medicament',
 									                        'property'	=>	'depotLegal',
                                            					'multiple'	=>	true));
+
+			$builder->add('matriculeColAvo', 'entity', array('class' 	=>	'PPEGSBBundle:Collaborateur',
+									                        'property'	=>	'matriculeColAvo',
+                                           					'multiple'	=>	true));
+
+
 
             $builder->add('bilan_visite', 'textarea', array('attr' => array('rows' => 5) ));
             $builder->add('AJOUTER', 'submit', array('attr' => array('class' => 'btn btn-primary col-md-12')));
