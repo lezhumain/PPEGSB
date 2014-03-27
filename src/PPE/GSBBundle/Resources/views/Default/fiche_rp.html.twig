@@ -24,8 +24,8 @@
     					{{ form_errors(form.matriculePraticien) }}
     				</div>
 
-                    {# Code motif #}
-                    <div class="col-md-4" style="margin-top: 10px;">
+                    {# Code medicament #}
+                    <div class="col-md-4" style="margin-top: 10px;" id = "med">
                         {{ form_label(form.depotLegalPres, 'Médicaments', {'label_attr': {'class': 'control-label'}}) }}
                         {{ form_widget(form.depotLegalPres, {'attr': {'class': 'form-control input-sm'}} )}}
                         {{ form_errors(form.depotLegalPres) }}
