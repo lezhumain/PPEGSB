@@ -37,9 +37,8 @@ ppegsb_listeMed:
     defaults: { _controller: PPEGSBBundle:Default:listeMed }
 
 ppegsb_ficheMed:
-    pattern:  /Medicament/Fiche
+    pattern:  /Medicament/Fiche-{id}
     defaults: { _controller: PPEGSBBundle:Default:ficheMed }
-
 
 
 ppegsb_connexion:

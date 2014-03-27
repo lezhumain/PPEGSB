@@ -10,6 +10,13 @@ use PPE\GSBBundle\Entity\RapportDeVisite;
 
 
 class RapportDeVisiteType extends AbstractType {
+
+	protected $em;
+    public function __construct($em) {
+        $this->em=$em;
+    }
+
+
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 
 
@@ -33,6 +40,29 @@ class RapportDeVisiteType extends AbstractType {
 			$builder->add('depotLegalPres', 'entity', array('class' 	=>	'PPEGSBBundle:Medicament',
 									                        'property'	=>	'depotLegal',
                                            					'multiple'	=>	true));
+
+			//$civilites=array();
+	        $query = $this->em->getRepository('PPEGSBBundle:Medicament')->FindAll();
+
+	        foreach ($query as $med) 
+	        {
+	        	foreach ($med->getMatriculeColAvo() as $echantillon) {
+	        			$builder->add('date_visite', 'date', array(
+			                'widget' => 'single_text',
+						    'format' => 'd/M/y',
+						));
+	        	}
+	        }
+
+
+/*	        foreach ($query as $ref) {
+	            $civilites[$ref->geCode()]=$ref->getLibelle();
+	        }
+	 
+	        $builder
+	        ->add('civilite','choice',array( 'label' => 'Civilité',
+	                                         'choices' => $civilites*/
+
 
 
 

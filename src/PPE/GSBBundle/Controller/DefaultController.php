@@ -39,8 +39,9 @@ class DefaultController extends Controller
      */
     public function ficheRpAction($new, Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
         $rp = new RapportDeVisite();
-        $form = $this->createForm(new RapportDeVisiteType, $rp);
+        $form = $this->createForm(new RapportDeVisiteType($em), $rp);
 
         $formHandler = new RapportDeVisiteHandler($form, $this->get('request'), $this->getDoctrine()->getManager());
 
@@ -175,10 +176,11 @@ class DefaultController extends Controller
      *                      =>  0 affichage read only
      *                      =>  1 praticien 
      */
-    public function ficheMedAction()
+    public function ficheMedAction($id)
     {
-
-        return $this->render('PPEGSBBundle:Default:fiche_medicament.html.twig');
+        $em = $this->getDoctrine()->getEntityManager();
+        $medicament = $em->getRepository('PPEGSBBundle:Medicament')->FindOneBy( array('depotLegal' => $id) );
+        return $this->render('PPEGSBBundle:Default:fiche_medicament.html.twig', array('medicament' => $medicament) );
     }
 /******************************/
 

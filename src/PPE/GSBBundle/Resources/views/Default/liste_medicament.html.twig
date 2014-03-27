@@ -8,6 +8,7 @@
 			 	<!-- Entête du tableau -->
 			 	<thead> 
 			 		<tr>
+			 			<th>INFOSISI</th>
 			 			<th>Depot legal</th>
 			 			<th>Nom commerciale</th>
 			 			<th>Famille</th>
@@ -17,6 +18,7 @@
 	 			<tbody>
 				{% for medicament in medicaments %}
 					<tr>
+						<th><a href="{{ path('ppegsb_ficheMed', {'id':medicament.depotLegal})}}">INFOSISI</a></th>
 						<td>{{medicament.depotLegal}}</td>
 						<td>{{medicament.nom}}</td>
 						<td>{{medicament.codeFamille.libelleFamille}}</td>
