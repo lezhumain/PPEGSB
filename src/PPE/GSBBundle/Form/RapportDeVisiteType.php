@@ -11,6 +11,8 @@ use PPE\GSBBundle\Entity\RapportDeVisite;
 
 class RapportDeVisiteType extends AbstractType {
 	public function buildForm(FormBuilderInterface $builder, array $options) {
+
+
             $builder->add('codeMotif', 'entity', array('class' => 'PPEGSBBundle:Motif',
                                            'property' => 'libelle_motif'));
 
@@ -30,10 +32,6 @@ class RapportDeVisiteType extends AbstractType {
 
 			$builder->add('depotLegalPres', 'entity', array('class' 	=>	'PPEGSBBundle:Medicament',
 									                        'property'	=>	'depotLegal',
-                                           					'multiple'	=>	true));
-
-			$builder->add('matriculeColAvo', 'entity', array('class' 	=>	'PPEGSBBundle:Collaborateur',
-									                        'property'	=>	'matriculeColAvo',
                                            					'multiple'	=>	true));
 
 
