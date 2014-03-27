@@ -1,0 +1,26 @@
+PPE\GSBBundle\Entity\Dosage:
+    type: entity
+    table: DOSAGE
+    id:
+        codeDosage:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            column: code_dosage
+            generator:
+                strategy: IDENTITY
+    fields:
+        uniteDosage:
+            type: string
+            nullable: false
+            length: 25
+            fixed: false
+            column: unite_dosage
+        quantiteDosage:
+            type: float
+            nullable: false
+            precision: 53
+            scale: 0
+            column: quantite_dosage
+    lifecycleCallbacks: {  }

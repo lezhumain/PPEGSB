@@ -1,0 +1,63 @@
+{% extends 'PPEGSBBundle::layout.html.twig' %}
+
+{% block title %}GSB - Liste des rapports{% endblock %}
+
+{% block body %}
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-5 col-md-offset-3 well">
+			<legend>Rapport n°{{rp.numRapport}}</legend>
+			<div class="col-md-6">
+				<h5><b>Date de la visite :</b> {{ rp.dateVisite|date("m/d/Y") }}</h5>
+			</div>
+			<div class="col-md-6">
+				<h5><b>Date du rapport :</b> {{ rp.dateRapport|date("m/d/Y") }}</h5>
+			</div>
+			<br>
+			<br>
+			<br>
+			<h5><b>Praticien concerné :</b> {{rp.matriculePraticien.nomPraticien}} {{rp.matriculePraticien.prenomPraticien}}</h5>
+			<h5><b>Motif de la visite :</b> {{rp.codeMotif.libelleMotif}}</h5>
+			<br><br>
+			<h5>
+				<b>Bilan de la visite :</b> 
+				<br><br>
+				<div style="background-color: #FFFFFF;color: #777;padding: 5px;border-radius: 4px;">
+					{{rp.bilanVisite}}
+				</div>
+			</h5>
+			
+			<div class="col-md-6">
+				{% if rp.depotLegalPres is empty %}
+					Aucun médicament n'a été présenté lors de cette visite <br>
+				{% else %}
+					<b>Médicament(s) présenté(s):</b>
+					<br>
+					{% for presentes in rp.depotLegalPres %}
+						<li>{{presentes.nom}}</li>
+					{% endfor %}
+				{% endif %}
+			</div>
+			
+			<div class="col-md-6">
+				{% if rp.depotLegalOffre is empty %}
+					Aucun médicament n'a été offert lors de cette visite
+				{% else %}
+					<b>Médicament(s) offert(s) :</b>
+					{% for offert in rp.depotLegalOffre %}
+						<li>{{offert.nom}}</li>
+					{% endfor %}
+				{% endif %}
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-5 col-md-offset-3">
+			<a href="{{ path('ppegsb_homepage' ) }}"><button class="col-md-12 btn btn-primary">Retour</button></a>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
