@@ -37,7 +37,7 @@ class DefaultController extends Controller
      *      0 affichage read only
      *      1 nouveau rapport   
      */
-    public function ficheRpAction($new, Request $request)
+    public function ficheRpAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $rp = new RapportDeVisite();
@@ -49,8 +49,22 @@ class DefaultController extends Controller
             return $this->redirect($this->generateUrl('ppegsb_homepage'));
         }
 
-        return $this->render('PPEGSBBundle:Default:fiche_rp.html.twig', array('new' => $new, 'form' => $form->createView() ));
-    }   
+        return $this->render('PPEGSBBundle:Default:fiche_rp.html.twig', array('form' => $form->createView() ));
+    }
+
+    public function getRpAction($id)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $rp = $em->find('PPEGSBBundle:RapportDeVisite', $id);
+
+        if (empty($rp)) {
+            throw $this->createNotFoundException("Identifiant inconnu");
+        }
+
+        return $this->render('PPEGSBBundle:Default:get_rp.html.twig', array('rp' => $rp));
+    }
+
+
 /******************************/
 
 

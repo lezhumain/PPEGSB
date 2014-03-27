@@ -17,7 +17,7 @@
 	 	<tbody>
  		{% for rp in rapports %}
 	 		<tr>
-				<td>{{rp.numRapport}}</td>
+				<td><a href="RP/get-{{rp.numRapport}}">{{rp.numRapport}}</a></td>
 				<td>{{rp.dateVisite|date("d/m/Y")}}</td>
 				<td>{{rp.dateRapport|date("d/m/Y")}}</td>
 				<td>{{rp.matriculePraticien.nomPraticien}} - {{rp.matriculePraticien.prenomPraticien}}</td>
