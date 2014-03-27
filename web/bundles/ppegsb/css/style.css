@@ -35,6 +35,26 @@
 #panelMenu {
 	background-color: #f8f8f8;
 }
+
 @media screen and (max-width: 532px) {
   #largeButton { width: 120px;}
+}
+
+
+#med .input-sm{
+	height: 80px;
+}
+
+
+/* Menu mobile style */
+.panel-body .btn:not(.btn-block) { width:120px;margin-bottom:10px;padding-left: 5px;padding-right: 5px; }
+.panel { height: '' !important;}
+#largeButton { width: 245px;}
+
+
+
+/* Design striped table */
+.table-striped > tbody > tr:nth-child(odd) > td,
+.table-striped > tbody > tr:nth-child(odd) > th {
+  background-color: rgba(236, 249, 255, 0.88);
 }

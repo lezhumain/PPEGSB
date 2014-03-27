@@ -28,7 +28,7 @@ class RapportDeVisiteType extends AbstractType {
 
 			$builder->add('depotLegalPres', 'entity', array('class' 	=>	'PPEGSBBundle:Medicament',
 									                        'property'	=>	'depotLegal',
-                                           					'multiple'	=>	false));
+                                           					'multiple'	=>	true));
 
             $builder->add('bilan_visite', 'textarea', array('attr' => array('rows' => 5) ));
             $builder->add('AJOUTER', 'submit', array('attr' => array('class' => 'btn btn-primary col-md-12')));
