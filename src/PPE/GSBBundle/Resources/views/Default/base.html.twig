@@ -44,7 +44,7 @@
             </div>  
         {% endblock %}
         {% block navigationMobile %}
-            <div class="navbar navbar-default navbar-static-top" role="navigation" id="onMobile">
+            <div class="navbar navbar-default navbar-static-top" role="navigation" id="onMobile" style="visibility:hidden;">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="sr-only">Toggle navigation</span>
@@ -57,31 +57,27 @@
                  <div class="navbar-collapse collapse" id="miniMenu">   
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="panel">
-                                    <div class="panel-heading">
-                                    </div>
-                                    <div class="panel-body">
+                                <div class="row" id="miniMenu">
+                                    <center>
                                         <div class="row">
-                                            <div class="row">
-                                                <div class="col-xs-6 col-md-6">
-                                                  <a href="{{ path('ppegsb_homepage' ) }}" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-list"></span> <br/>Mes rapports</a>
-                                                  <a href="{{ path('ppegsb_listeMed') }}" class="btn btn-info btn-lg" role="button"><span class="glyphicon glyphicon-list-alt"></span> <br/>Médicaments</a>
-                                                </div>
-                                                <div class="col-xs-6 col-md-6">
-                                                  <a href="{{ path('ppegsb_listePra') }}" class="btn btn-success btn-lg" role="button"><span class="glyphicon glyphicon-user"></span> <br/>Praticiens</a>
-                                                  <a href="{{ path('ppegsb_logout') }}" class="btn btn-danger btn-lg" role="button"><span class="glyphicon glyphicon-off"></span> <br/>Deconnexion</a>
-                                                </div>
+                                            <div class="col-xs-6 col-md-6">
+                                              <a href="{{ path('ppegsb_homepage' ) }}" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-list"></span> <br/>Mes rapports</a>
+                                              <a href="{{ path('ppegsb_listeMed') }}" class="btn btn-info btn-lg" role="button"><span class="glyphicon glyphicon-list-alt"></span> <br/>Médicaments</a>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-xs-6 col-md-6">
-                                                    <a href="{{ path('ppegsb_newFicheRp') }}" class="btn btn-warning btn-lg btn-block" id="largeButton" role="button"><span class="glyphicon glyphicon-file"></span> Nouveau rapport</a>
-                                                </div>
-                                                <div class="col-xs-6 col-md-6">
-                                                    <a href="{{ path('ppegsb_mapPra') }}" class="btn btn-primary btn-lg btn-block" id="largeButton" role="button"><span class="glyphicon glyphicon-map-marker"></span> Carte</a>
-                                                </div>
+                                            <div class="col-xs-6 col-md-6">
+                                              <a href="{{ path('ppegsb_listePra') }}" class="btn btn-success btn-lg" role="button"><span class="glyphicon glyphicon-user"></span> <br/>Praticiens</a>
+                                              <a href="{{ path('ppegsb_logout') }}" class="btn btn-danger btn-lg" role="button"><span class="glyphicon glyphicon-off"></span> <br/>Deconnexion</a>
                                             </div>
                                         </div>
-                                    </div>
+                                        <div class="row">
+                                            <div class="col-xs-6 col-md-6">
+                                                <a href="{{ path('ppegsb_newFicheRp') }}" class="btn btn-warning btn-lg btn-block" id="largeButton" role="button"><span class="glyphicon glyphicon-file"></span> Nouveau </a>
+                                            </div>
+                                            <div class="col-xs-6 col-md-6">
+                                                <a href="{{ path('ppegsb_mapPra') }}" class="btn btn-primary btn-lg btn-block" id="largeButton" role="button"><span class="glyphicon glyphicon-map-marker"></span> Carte</a>
+                                            </div>
+                                        </div>
+                                    </center>
                                 </div>
                             </div>
                     </div>
@@ -122,8 +118,9 @@
 
                 function checkWidth() {
                     var windowsize = $window.width();
-                    if (windowsize < 820) {
+                    if (windowsize < 767 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
                         $menuMobile.show();
+                        $menuMobile.css('visibility', 'visible');
                         $menuDesktop.hide();
                         // $miniMenu.show();
                     }

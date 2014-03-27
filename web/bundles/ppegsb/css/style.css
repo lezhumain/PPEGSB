@@ -11,6 +11,30 @@
 	margin-top: 30px;
 }
 
-    .panel-body .btn:not(.btn-block) { width:120px;margin-bottom:10px;padding-left: 5px;padding-right: 5px; }
-    .panel { height: '' !important;}
-    #largeButton { width: 245px;}
+#miniMenu {
+	margin-top: 10px;
+	overflow-x: hidden;
+}
+
+#miniMenu .btn:not(.btn-block) {
+	width:120px;
+	margin-bottom:10px;
+	padding-left: 5px;
+	padding-right: 5px; 
+}
+
+.panel {
+	height: '' !important; 
+	padding-left: 20px;
+}
+
+#largeButton {
+     width: 245px;
+ }
+
+#panelMenu {
+	background-color: #f8f8f8;
+}
+@media screen and (max-width: 532px) {
+  #largeButton { width: 120px;}
+}
