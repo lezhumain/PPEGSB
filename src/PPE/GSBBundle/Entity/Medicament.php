@@ -19,14 +19,21 @@ class Medicament
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $depotLegal;
+    protected $depotLegal;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="composition", type="text", length=16, nullable=false)
+     * @ORM\Column(name="composition", type="text", length=20, nullable=false)
      */
     private $composition;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="text", length=50, nullable=false)
+     */
+    private $nom;
 
     /**
      * @var string
@@ -100,7 +107,7 @@ class Medicament
      *     @ORM\JoinColumn(name="depot_legal_constituer", referencedColumnName="depot_legal")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="code_comp", referencedColumnName="code_comp")
+     *     @ORM\JoinColumn(name="code_comp_constituer", referencedColumnName="code_comp")
      *   }
      * )
      */
@@ -116,7 +123,7 @@ class Medicament
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="PPE\GSBBundle\Entity\Medicament", inversedBy="depotLegalPerturbe")
+     * @ORM\ManyToMany(targetEntity="PPE\GSBBundle\Entity\Medicament", inversedBy="depot_legal")
      * @ORM\JoinTable(name="perturbe",
      *   joinColumns={
      *     @ORM\JoinColumn(name="depot_legal_perturbant", referencedColumnName="depot_legal")
@@ -126,7 +133,7 @@ class Medicament
      *   }
      * )
      */
-    private $depotLegalPerturbe;
+    protected $depotLegalPerturbe;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -420,12 +427,12 @@ class Medicament
     /**
      * Add depotLegalPerturbe
      *
-     * @param \PPE\GSBBundle\Entity\Medicament $depotLegalPerturbe
+     * @param \PPE\GSBBundle\Entity\Medicament $depotLegal
      * @return Medicament
      */
-    public function addDepotLegalPerturbe(\PPE\GSBBundle\Entity\Medicament $depotLegalPerturbe)
+    public function addDepotLegalPerturbe(\PPE\GSBBundle\Entity\Medicament $depotLegal)
     {
-        $this->depotLegalPerturbe[] = $depotLegalPerturbe;
+        $this->depotLegalPerturbe[] = $depotLegal;
 
         return $this;
     }
@@ -433,11 +440,11 @@ class Medicament
     /**
      * Remove depotLegalPerturbe
      *
-     * @param \PPE\GSBBundle\Entity\Medicament $depotLegalPerturbe
+     * @param \PPE\GSBBundle\Entity\Medicament $depotLegal
      */
-    public function removeDepotLegalPerturbe(\PPE\GSBBundle\Entity\Medicament $depotLegalPerturbe)
+    public function removeDepotLegal(\PPE\GSBBundle\Entity\Medicament $depotLegal)
     {
-        $this->depotLegalPerturbe->removeElement($depotLegalPerturbe);
+        $this->depotLegalPerturbe->removeElement($depotLegal);
     }
 
     /**

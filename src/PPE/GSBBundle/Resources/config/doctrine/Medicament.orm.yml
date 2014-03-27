@@ -22,7 +22,12 @@ PPE\GSBBundle\Entity\Medicament:
         composition:
             type: text
             nullable: false
-            length: 16
+            length: 100
+            fixed: false
+        nom:
+            type: text
+            nullable: false
+            length: 1000
             fixed: false
         nom:
             type: text
@@ -68,7 +73,7 @@ PPE\GSBBundle\Entity\Medicament:
             targetEntity: Collaborateur
             cascade: {  }
             mappedBy: null
-            inversedBy: depotLegalAvoir
+            inversedBy: depotLegal
             joinTable:
                 name: avoir
                 joinColumns:
@@ -77,7 +82,7 @@ PPE\GSBBundle\Entity\Medicament:
                         referencedColumnName: depot_legal
                 inverseJoinColumns:
                     -
-                        name: matricule_col_avo
+                        name: matricule_col_avoir
                         referencedColumnName: matricule_col
             orderBy: null
         codeComp:
@@ -93,7 +98,7 @@ PPE\GSBBundle\Entity\Medicament:
                         referencedColumnName: depot_legal
                 inverseJoinColumns:
                     -
-                        name: code_comp
+                        name: code_comp_constituer
                         referencedColumnName: code_comp
             orderBy: null
         numRapportOffre:
@@ -103,11 +108,11 @@ PPE\GSBBundle\Entity\Medicament:
             inversedBy: null
             joinTable: null
             orderBy: null
-        depotLegalPerturbe:
+        depotLegal:
             targetEntity: Medicament
             cascade: {  }
             mappedBy: null
-            inversedBy: depotLegalPerturbe
+            inversedBy: depotLegal
             joinTable:
                 name: perturbe
                 joinColumns:
