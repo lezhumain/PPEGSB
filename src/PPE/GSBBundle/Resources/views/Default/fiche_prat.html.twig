@@ -47,6 +47,13 @@
 			<div id="gmap" class="gmap"></div>
 		</div>
 	</div>
+	<div class="row">
+		<div class="col-md-6 col-md-offset-6">
+			<button id="centerPosition">Ma position</button>
+			<button id="centerPraticien">Praticien</button>
+			<button id="dezoom">Vue d'ensemble</button>
+		</div>
+	</div>
 </div>
 
 
@@ -96,12 +103,13 @@
 
 	            Locs = MyLoc.concat(LocPrat);
         	
-	                new Maplace({
+	                var maplace = new Maplace({
 	                    show_markers: true,
 	                    locations: Locs,
 	                    controls_title: 'Liste des praticiens',
                 		view_all_text: 'Voir tous'
-	                }).Load();
+	                });
+	                maplace.load();
         	}), //else
         	function() {
 	                new Maplace({
@@ -115,7 +123,9 @@
 	                    }]
 	                }).Load();
 	            };
-
+	        $('#centerPosition').click(function() {
+	        	Maplace.ViewOnMap(1);
+	        });
 
             // $(".panel-body").height($("#fichePraticien table").height());
         </script>
