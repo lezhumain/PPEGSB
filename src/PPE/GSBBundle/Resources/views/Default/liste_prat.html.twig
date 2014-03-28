@@ -1,6 +1,6 @@
 {% extends 'PPEGSBBundle::layout.html.twig' %}
 
-{% block title %}GSB - Liste des rapports{% endblock %}
+{% block title %}GSB - Liste des praticiens{% endblock %}
 
 {% block body %}
 
@@ -23,7 +23,7 @@
 		<tbody>
 		{% for praticien in praticiens %}
 			<tr>
-				<td><a href="Fiche-{{praticien.matriculePraticien}}"><button class="btn btn-primary"><span class="glyphicon glyphicon-user"></span></button></a></td>
+				<td><a href="{{ path ("ppegsb_fichePra", {"id": praticien.matriculePraticien} ) }}"><button class="btn btn-primary"><span class="glyphicon glyphicon-user"></span></button></a></td>
 				<td>{{praticien.nomPraticien}}</td>
 				<td>{{praticien.prenomPraticien}}</td>
 				<td>{{praticien.adressePraticien}}</td>

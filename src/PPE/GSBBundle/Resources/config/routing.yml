@@ -1,13 +1,13 @@
 ppegsb_homepage:
-    pattern:  /Index
+    pattern:  /GSB/Index
     defaults: { _controller: PPEGSBBundle:Default:index }
 
 ppegsb_newFicheRp:
-    pattern:  /RP/new
+    pattern:  /GSB/RP/new
     defaults: { _controller: PPEGSBBundle:Default:ficheRp}
 
 ppegsb_getFicheRp:
-    pattern:  /RP/get-{id}
+    pattern:  /GSB/RP/get-{id}
     defaults: { _controller: PPEGSBBundle:Default:getRp}
 
 
@@ -15,29 +15,29 @@ ppegsb_getFicheRp:
 
 
 ppegsb_listePra:
-    pattern: /Praticien/Liste
+    pattern: /GSB/Praticien/Liste
     defaults: { _controller: PPEGSBBundle:Default:listePra }
 
 ppegsb_fichePra:
-    pattern:  /Praticien/Fiche-{id}
+    pattern:  /GSB/Praticien/Fiche-{id}
     defaults: { _controller: PPEGSBBundle:Default:fichePra }
     requirements: {id: \d+}
 
 ppegsb_mapPra:
-    pattern: /Praticien/map
+    pattern: /GSB/Praticien/map
     defaults: { _controller: PPEGSBBundle:Default:mapPra}
 
 ppegsb_mapPra:
-    pattern: /Praticien/map
+    pattern: /GSB/Praticien/map
     defaults: { _controller: PPEGSBBundle:Default:mapPra}
 
 
 ppegsb_listeMed:
-    pattern: /Medicament/Liste
+    pattern: /GSB/Medicament/Liste
     defaults: { _controller: PPEGSBBundle:Default:listeMed }
 
 ppegsb_ficheMed:
-    pattern:  /Medicament/Fiche-{id}
+    pattern:  /GSB/Medicament/Fiche-{id}
     defaults: { _controller: PPEGSBBundle:Default:ficheMed }
 
 
