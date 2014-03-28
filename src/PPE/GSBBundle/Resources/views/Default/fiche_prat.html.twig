@@ -109,7 +109,16 @@
 	                    controls_title: 'Liste des praticiens',
                 		view_all_text: 'Voir tous'
 	                });
-	                maplace.load();
+	                maplace.Load();
+			        $('#centerPosition').click(function() {
+			        	maplace.ViewOnMap(1);
+			        });
+			        $('#centerPraticien').click(function() {
+			        	maplace.ViewOnMap(2);
+			        });
+			        $('#dezoom').click(function() {
+			        	maplace.ViewOnMap('all');
+			        });
         	}), //else
         	function() {
 	                new Maplace({
@@ -123,9 +132,6 @@
 	                    }]
 	                }).Load();
 	            };
-	        $('#centerPosition').click(function() {
-	        	Maplace.ViewOnMap(1);
-	        });
 
             // $(".panel-body").height($("#fichePraticien table").height());
         </script>
