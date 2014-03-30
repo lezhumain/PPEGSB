@@ -4,7 +4,7 @@
 
 {% block body %}
  <div class="table-responsive">
-	 <table class="table table-hover sortable table-striped">
+	 <table class="table table-hover sortable table-striped" id = "tableRp">
 	 	<!-- Entête du tableau -->
 	 	<thead> 
 	 		<tr>
@@ -17,7 +17,7 @@
 	 	<tbody>
  		{% for rp in rapports %}
 	 		<tr>
-				<td>{{rp.numRapport}}</td>
+				<td><a href="{{ path ("ppegsb_getFicheRp", {"id": rp.numRapport} ) }}">{{rp.numRapport}}</a></td>
 				<td>{{rp.dateVisite|date("d/m/Y")}}</td>
 				<td>{{rp.dateRapport|date("d/m/Y")}}</td>
 				<td>{{rp.matriculePraticien.nomPraticien}} - {{rp.matriculePraticien.prenomPraticien}}</td>

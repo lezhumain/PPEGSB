@@ -36,7 +36,7 @@ class Medicament
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="text", length=50, nullable=false)
+     * @ORM\Column(name="nom", type="text", length=100, nullable=false)
      */
     private $nom;
 

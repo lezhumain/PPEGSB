@@ -3,12 +3,12 @@
 namespace PPE\GSBBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\HttpFoundation\Request;
 use PPE\GSBBundle\Entity;
 use PPE\GSBBundle\Entity\Visiteur;
-use Symfony\Component\Form\FormBuilder;
 use PPE\GSBBundle\Entity\RapportDeVisite;
 use PPE\GSBBundle\Entity\Medicament;
-use Symfony\Component\HttpFoundation\Request;
 use PPE\GSBBundle\Form\RapportDeVisiteType;
 use PPE\GSBBundle\Form\RapportDeVisiteHandler;
 
@@ -39,10 +39,11 @@ class DefaultController extends Controller
      *      0 affichage read only
      *      1 nouveau rapport   
      */
-    public function ficheRpAction($new, Request $request)
+    public function ficheRpAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
         $rp = new RapportDeVisite();
-        $form = $this->createForm(new RapportDeVisiteType, $rp);
+        $form = $this->createForm(new RapportDeVisiteType($em), $rp);
 
         $formHandler = new RapportDeVisiteHandler($form, $this->get('request'), $this->getDoctrine()->getManager());
 
@@ -50,8 +51,22 @@ class DefaultController extends Controller
             return $this->redirect($this->generateUrl('ppegsb_homepage'));
         }
 
-        return $this->render('PPEGSBBundle:Default:fiche_rp.html.twig', array('new' => $new, 'form' => $form->createView() ));
-    }   
+        return $this->render('PPEGSBBundle:Default:fiche_rp.html.twig', array('form' => $form->createView() ));
+    }
+
+    public function getRpAction($id)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $rp = $em->find('PPEGSBBundle:RapportDeVisite', $id);
+
+        if (empty($rp)) {
+            throw $this->createNotFoundException("Identifiant inconnu");
+        }
+
+        return $this->render('PPEGSBBundle:Default:get_rp.html.twig', array('rp' => $rp));
+    }
+
+
 /******************************/
 
 
@@ -177,10 +192,11 @@ class DefaultController extends Controller
      *                      =>  0 affichage read only
      *                      =>  1 praticien 
      */
-    public function ficheMedAction()
+    public function ficheMedAction($id)
     {
-
-        return $this->render('PPEGSBBundle:Default:fiche_medicament.html.twig');
+        $em = $this->getDoctrine()->getEntityManager();
+        $medicament = $em->getRepository('PPEGSBBundle:Medicament')->FindOneBy( array('depotLegal' => $id) );
+        return $this->render('PPEGSBBundle:Default:fiche_medicament.html.twig', array('medicament' => $medicament) );
     }
 /******************************/
 

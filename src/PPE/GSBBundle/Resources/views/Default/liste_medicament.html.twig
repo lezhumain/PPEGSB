@@ -4,22 +4,24 @@
 
 {% block body %}
 		 <div class="table-responsive">
-			 <table class="table table-hover sortable table-striped">
+			 <table class="table table-hover sortable table-striped" id = "tableMed">
 			 	<!-- Entête du tableau -->
 			 	<thead> 
 			 		<tr>
+			 			<th>INFOSISI</th>
 			 			<th>Depot legal</th>
 			 			<th>Nom commerciale</th>
-			 			<th>Famille</th>
+			 			<th class = "familleMed">Famille</th>
 			 			<th>Prix échantillon</th>
 			 		</tr>
 			 	</thead>
 	 			<tbody>
 				{% for medicament in medicaments %}
 					<tr>
+						<th><a href="{{ path('ppegsb_ficheMed', {'id':medicament.depotLegal})}}">INFOSISI</a></th>
 						<td>{{medicament.depotLegal}}</td>
 						<td>{{medicament.nom}}</td>
-						<td>{{medicament.codeFamille.libelleFamille}}</td>
+						<td class = "familleMed">{{medicament.codeFamille.libelleFamille}}</td>
 						<td>{{medicament.prixechantillon}}</td>
 					</tr>
 				{% endfor %}

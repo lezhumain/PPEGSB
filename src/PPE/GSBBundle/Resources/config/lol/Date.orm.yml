@@ -1,0 +1,12 @@
+PPE\GSBBundle\Entity\Date:
+    type: entity
+    table: DATE
+    id:
+        jjmmaaaa:
+            type: datetime
+            nullable: false
+            id: true
+            column: JJMMAAAA
+            generator:
+                strategy: IDENTITY
+    lifecycleCallbacks: {  }

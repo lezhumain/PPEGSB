@@ -1,0 +1,17 @@
+PPE\GSBBundle\Entity\DirecteurRegional:
+    type: entity
+    table: DIRECTEUR_REGIONAL
+    id:
+        matriculeColDir:
+            associationKey: true
+    oneToOne:
+        matriculeColDir:
+            targetEntity: Collaborateur
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                matricule_col_dir:
+                    referencedColumnName: matricule_col
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

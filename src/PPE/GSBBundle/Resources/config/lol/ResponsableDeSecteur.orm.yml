@@ -1,0 +1,17 @@
+PPE\GSBBundle\Entity\ResponsableDeSecteur:
+    type: entity
+    table: RESPONSABLE_DE_SECTEUR
+    id:
+        matriculeColRes:
+            associationKey: true
+    oneToOne:
+        matriculeColRes:
+            targetEntity: Collaborateur
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                matricule_col_res:
+                    referencedColumnName: matricule_col
+            orphanRemoval: false
+    lifecycleCallbacks: {  }
