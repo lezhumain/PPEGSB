@@ -10,26 +10,26 @@
 		<thead> 
 			<tr>
 				<th class = "toFiche">Numero</th>
-				<th>Nom</th>
+				<th class = "nom" >Nom</th>
 				<th class = "adresse">Adresse</th>
 				<th class = "adresse">CP</th>
 				<th class = "adresse">Ville</th>
 				<th class = "fullAdresss">Adresse</th>
-				<th>Notoriété</th>
+				<th class = "notoriete">Notoriété</th>
 				<th>Lieu d'exercice</th>
 			</tr>
 		</thead>
 		<!-- fin de l'entête -->
 		<tbody>
 		{% for praticien in praticiens %}
-			<tr onclick="document.localtion.href ='{{ path ("ppegsb_fichePra", {"id": praticien.matriculePraticien} ) }}'">
+			<tr class="linkFiche" onclick="if ($(window).width() < 767) {document.location = '{{ path ("ppegsb_fichePra", {"id": praticien.matriculePraticien} ) }} '};">
 				<td class = "toFiche"><a href="{{ path ("ppegsb_fichePra", {"id": praticien.matriculePraticien} ) }}"><button class="btn btn-primary"><span class="glyphicon glyphicon-user"></span></button></a></td>
-				<td>{{praticien.nomPraticien}} - {{praticien.prenomPraticien}}</td>
+				<td>{{praticien.nomPraticien}} - <span class="prenom">{{praticien.prenomPraticien}}</span></td>
 				<td class = "adresse">{{praticien.adressePraticien}}</td>
 				<td class = "adresse">{{praticien.cpPraticien}}</td>
 				<td class = "adresse">{{praticien.villePraticien}}</td>
 				<td class = "fullAdresss">{{praticien.adressePraticien}}<br/>{{praticien.villePraticien}} - {{praticien.cpPraticien}}</td>
-				<td>{{praticien.coefnotorietePraticien}}</td>
+				<td class = "notoriete">{{praticien.coefnotorietePraticien}}</td>
 				<td>{{praticien.codeType.typeLieu}}</td>
 			</tr>
 		</a>
@@ -37,4 +37,10 @@
 		</tbody>
 	</table>
 </div>
+{% endblock %}
+
+{% block inlinejs %}
+	<script>
+
+	</script>
 {% endblock %}

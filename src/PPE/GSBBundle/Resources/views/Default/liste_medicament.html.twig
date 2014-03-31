@@ -8,7 +8,7 @@
 			 	<!-- Entête du tableau -->
 			 	<thead> 
 			 		<tr>
-			 			<th>INFOSISI</th>
+			 			<th class="ficheMed">INFOSISI</th>
 			 			<th>Depot legal</th>
 			 			<th>Nom commerciale</th>
 			 			<th class = "familleMed">Famille</th>
@@ -17,8 +17,8 @@
 			 	</thead>
 	 			<tbody>
 				{% for medicament in medicaments %}
-					<tr>
-						<th><a href="{{ path('ppegsb_ficheMed', {'id':medicament.depotLegal})}}">INFOSISI</a></th>
+					<tr onclick="if ($(window).width() < 767) {document.location = '{{ path('ppegsb_ficheMed', {'id':medicament.depotLegal})}}' };">
+						<td class="ficheMed"><a href="{{ path('ppegsb_ficheMed', {'id':medicament.depotLegal})}}">INFOSISI</a></td>
 						<td>{{medicament.depotLegal}}</td>
 						<td>{{medicament.nom}}</td>
 						<td class = "familleMed">{{medicament.codeFamille.libelleFamille}}</td>
