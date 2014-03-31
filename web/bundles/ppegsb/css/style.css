@@ -97,6 +97,10 @@
   		display: none;
   	}
 
+  	.ficheMed {
+  		display: none;
+  	}
+
 	#tablePrat .adresse{
 		display: none;
 	}
