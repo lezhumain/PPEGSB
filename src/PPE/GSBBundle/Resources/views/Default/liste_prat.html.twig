@@ -5,33 +5,34 @@
 {% block body %}
 
 <div class="table-responsive">
-	<table class="table table-hover sortable table-striped">
+	<table class="table table-hover sortable table-striped" id = "tablePrat">
 		<!-- Entête du tableau -->
 		<thead> 
 			<tr>
-				<th>Numero</th>
+				<th class = "toFiche">Numero</th>
 				<th>Nom</th>
-				<th>Prenom</th>
-				<th>Adresse</th>
-				<th>CP</th>
-				<th>Ville</th>
-				<th>Coeff. Notoriété</th>
+				<th class = "adresse">Adresse</th>
+				<th class = "adresse">CP</th>
+				<th class = "adresse">Ville</th>
+				<th class = "fullAdresss">Adresse</th>
+				<th>Notoriété</th>
 				<th>Lieu d'exercice</th>
 			</tr>
 		</thead>
 		<!-- fin de l'entête -->
 		<tbody>
 		{% for praticien in praticiens %}
-			<tr>
-				<td><a href="{{ path ("ppegsb_fichePra", {"id": praticien.matriculePraticien} ) }}"><button class="btn btn-primary"><span class="glyphicon glyphicon-user"></span></button></a></td>
-				<td>{{praticien.nomPraticien}}</td>
-				<td>{{praticien.prenomPraticien}}</td>
-				<td>{{praticien.adressePraticien}}</td>
-				<td>{{praticien.cpPraticien}}</td>
-				<td>{{praticien.villePraticien}}</td>
+			<tr onclick="document.localtion.href ='{{ path ("ppegsb_fichePra", {"id": praticien.matriculePraticien} ) }}'">
+				<td class = "toFiche"><a href="{{ path ("ppegsb_fichePra", {"id": praticien.matriculePraticien} ) }}"><button class="btn btn-primary"><span class="glyphicon glyphicon-user"></span></button></a></td>
+				<td>{{praticien.nomPraticien}} - {{praticien.prenomPraticien}}</td>
+				<td class = "adresse">{{praticien.adressePraticien}}</td>
+				<td class = "adresse">{{praticien.cpPraticien}}</td>
+				<td class = "adresse">{{praticien.villePraticien}}</td>
+				<td class = "fullAdresss">{{praticien.adressePraticien}}<br/>{{praticien.villePraticien}} - {{praticien.cpPraticien}}</td>
 				<td>{{praticien.coefnotorietePraticien}}</td>
 				<td>{{praticien.codeType.typeLieu}}</td>
 			</tr>
+		</a>
 		{% endfor %}
 		</tbody>
 	</table>

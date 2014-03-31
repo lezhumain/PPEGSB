@@ -44,11 +44,43 @@
 }
 
 
-/* Menu mobile style */
+#tablePrat .fullAdresss{
+	display: none;
+}
+
+/* DESIGN mobile  */
 .panel-body .btn:not(.btn-block) { width:120px;margin-bottom:10px;padding-left: 5px;padding-right: 5px; }
 .panel { height: '' !important;}
 #largeButton { width: 245px;}
 
+@media (max-width: 767px) {
+  	.familleMed{
+  		display: none;
+  	}
+
+	#tablePrat .adresse{
+		display: none;
+	}
+	#tablePrat .fullAdresss{
+		display: table-cell;
+	}
+
+	#tablePrat .toFiche{
+		display: none;
+	}
+
+	#head{
+		margin-bottom: 0px;
+		padding-bottom: 0px;
+	}
+}
+
+
+
+
+#onMobile{
+	margin-bottom: 0px;
+}
 
 
 /* Design striped table */

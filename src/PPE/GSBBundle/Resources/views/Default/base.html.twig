@@ -124,11 +124,15 @@
                         $menuMobile.css('visibility', 'visible');
                         $menuDesktop.hide();
                         // $miniMenu.show();
+
                     }
                     else {
                         // $miniMenu.hide();
                         $menuMobile.hide();
                         $menuDesktop.show();
+                        $(".linkToFiche").click(function(e){
+                            e.preventDefault();
+                        });
                     }
                 }
                 // Execute on load
