@@ -133,12 +133,18 @@ class DefaultController extends Controller
         if (empty($praticien))
             throw $this->createNotFoundException("Pas de praticien à localiser :(");
 
-        foreach ($praticien as $data)
-        {
-            $gpsCoo[] = $this->getMapFromAdress($data->getAdressePraticien()." ".$data->getCpPraticien()." ".$data->getVillePraticien());
-        }
+        $i = 0;
+
+        // foreach ($praticien as $data)
+        // {
+        //     $tab[] = $this->getMapFromAdress($data->getAdressePraticien()." ".$data->getCpPraticien()." ".$data->getVillePraticien());
+        //     echo "{ <br>";
+        //     echo "lat: ". $tab[$i]['lat'] .", <br> lon: ". $tab[$i]['lng']. ", <br> title: '". $data->getNomPraticien()." ". $data->getPrenomPraticien()."', html: '".$data->getNomPraticien()." ". $data->getPrenomPraticien() ."  Tel: ". $data->getNumtel() ."  Adresse: ". $data->getAdressePraticien() .", ". $data->getCpPraticien() .", ". $data->getVillePraticien() ."'<br>";
+        //     echo "}, <br>";
+        // $i++;
+        // }
         
-        return $this->render('PPEGSBBundle:Default:map.html.twig', array('gpsCoo' => $gpsCoo, 'praticiens' => $praticien));
+        return $this->render('PPEGSBBundle:Default:map.html.twig');
     }
 
     /**
@@ -168,7 +174,7 @@ class DefaultController extends Controller
          }
          else
          {
-            return 0;
+            
          }
          
 

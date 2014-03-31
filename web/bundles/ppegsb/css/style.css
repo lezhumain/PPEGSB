@@ -34,6 +34,9 @@
 @media (max-width: 532px) {
   #largeButton { width: 120px !important;}
 }
+@media (max-width: 766px) {
+  #head { padding-bottom: 0 !important;}
+}
 
 
 #med .input-sm{
