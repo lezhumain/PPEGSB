@@ -11,21 +11,21 @@
     		<div class="col-md-6">
     			<div class="row">
                     {# Code motif #}
-                    <div class="col-md-4" style="margin-top: 10px;">
+                    <div class="col-md-4 col-xs-6" style="margin-top: 10px;">
                         {{ form_label(form.codeMotif, 'Motif', {'label_attr': {'class': 'control-label'}}) }}
                         {{ form_widget(form.codeMotif, {'attr': {'class': 'form-control input-sm'}} )}}
                         {{ form_errors(form.codeMotif) }}
                     </div>
     				
     				{# Nom des praticiens #}
-    				<div class="col-md-4" style="margin-top: 10px;">
+    				<div class="col-md-4 col-xs-6" style="margin-top: 10px;">
     					{{ form_label(form.matriculePraticien, 'Praticien', {'label_attr': {'class': 'control-label'}}) }}
     					{{ form_widget(form.matriculePraticien, {'attr': {'class': 'form-control input-sm'}} )}}
     					{{ form_errors(form.matriculePraticien) }}
     				</div>
 
                     {# Code medicament #}
-                    <div class="col-md-4" style="margin-top: 10px;" id = "med">
+                    <div class="col-md-4 col-xs-6" style="margin-top: 10px;" id = "med">
                         {{ form_label(form.depotLegalPres, 'Médicaments présentés', {'label_attr': {'class': 'control-label'}}) }}
                         {{ form_widget(form.depotLegalPres, {'attr': {'class': 'form-control input-sm'}} )}}
                         {{ form_errors(form.depotLegalPres) }}
@@ -34,14 +34,14 @@
     	
     			<div class="row">
     				{# Nom des praticiens #}
-    				<div class="col-md-4" style="margin-top: 10px;">
+    				<div class="col-md-4 col-xs-6" style="margin-top: 10px;">
     					{{ form_label(form.date_rapport, 'Date du rapport', {'label_attr': {'class': 'control-label'}}) }}
     					{{ form_widget(form.date_rapport, {'attr': {'class': 'form-control input-sm'}} )}}
     					{{ form_errors(form.date_rapport) }}
     				</div>
     				
     				{# Nom des praticiens #}
-    				<div class="col-md-4" style="margin-top: 10px;">
+    				<div class="col-md-4 col-xs-6" style="margin-top: 10px;">
     					{{ form_label(form.date_visite, 'Date de la visite', {'label_attr': {'class': 'control-label'}}) }}
     					{{ form_widget(form.date_visite, {'attr': {'class': 'form-control input-sm'}} )}}
     					{{ form_errors(form.date_visite) }}
@@ -50,7 +50,7 @@
     	
     			<div class="row">
     				{# Bilan du rapport #}
-    				<div class="col-md-12" style="margin-top: 10px;">
+    				<div class="col-md-12 col-xs-12" style="margin-top: 10px;">
     					{{ form_label(form.bilan_visite, 'Bilan de la visite', {'label_attr': {'class': 'control-label'}}) }}
     					{{ form_widget(form.bilan_visite, {'attr': {'class': 'form-control'}} )}}
     					{{ form_errors(form.bilan_visite) }}
@@ -58,7 +58,7 @@
     			</div>
     	
     			<div class="row" style='margin-top: 10px;'>
-    				<div class="col-md-12">{# Submit #}
+    				<div class="col-md-12 col-xs-12">{# Submit #}
     					{{form(form)}}
     				</div>
     			</div>

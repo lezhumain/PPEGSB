@@ -17,7 +17,7 @@
 	 	<tbody>
  		{% for rp in rapports %}
 	 		<tr onclick="if ($(window).width() < 767) {document.location = '{{ path ("ppegsb_getFicheRp", {"id": rp.numRapport} ) }}' };">
-				<td class="numRapport"><a href="{{ path ("ppegsb_getFicheRp", {"id": rp.numRapport} ) }}">{{rp.numRapport}}</a></td>
+				<td class="numRapport"><a href="{{ path ("ppegsb_getFicheRp", {"id": rp.numRapport} ) }}"><button class="btn btn-primary">{{rp.numRapport}}</button></a></td>
 				<td>{{rp.dateVisite|date("d/m/Y")}}</td>
 				<td>{{rp.dateRapport|date("d/m/Y")}}</td>
 				<td>{{rp.matriculePraticien.nomPraticien}} - {{rp.matriculePraticien.prenomPraticien}}</td>
