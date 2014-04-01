@@ -135,3 +135,16 @@
 .table-striped > tbody > tr:nth-child(odd) > th {
   background-color: rgba(236, 249, 255, 0.88);
 }
+
+#listeRP {
+}
+
+#rapport {
+	padding: 10px;
+	height: 181px;
+}
+
+#rpContent {
+	height: 100%;
+	cursor: pointer;
+}
