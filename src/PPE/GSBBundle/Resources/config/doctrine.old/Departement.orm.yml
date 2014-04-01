@@ -1,0 +1,35 @@
+PPE\GSBBundle\Entity\Departement:
+    type: entity
+    table: DEPARTEMENT
+    indexes:
+        IDX_4C75C98B70E4A9D4:
+            columns:
+                - code_region
+    id:
+        codeDep:
+            type: string
+            nullable: false
+            length: 4
+            fixed: false
+            id: true
+            column: code_dep
+            generator:
+                strategy: IDENTITY
+    fields:
+        libelleDep:
+            type: string
+            nullable: false
+            length: 25
+            fixed: false
+            column: libelle_dep
+    manyToOne:
+        codeRegion:
+            targetEntity: Region
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                code_region:
+                    referencedColumnName: code_region
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

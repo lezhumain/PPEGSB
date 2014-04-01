@@ -1,0 +1,74 @@
+PPE\GSBBundle\Entity\ActiviteComplementaire:
+    type: entity
+    table: ACTIVITE_COMPLEMENTAIRE
+    indexes:
+        IDX_A6C0FC196CB7C209:
+            columns:
+                - matricule_col_act
+    id:
+        numAct:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            column: num_act
+            generator:
+                strategy: IDENTITY
+    fields:
+        themeAct:
+            type: string
+            nullable: false
+            length: 150
+            fixed: false
+            column: theme_act
+        montantAct:
+            type: string
+            nullable: false
+            length: 25
+            fixed: false
+            column: montant_act
+        dateAct:
+            type: datetime
+            nullable: false
+            column: date_act
+        lieuAct:
+            type: string
+            nullable: false
+            length: 300
+            fixed: false
+            column: lieu_act
+    manyToOne:
+        matriculeColAct:
+            targetEntity: Collaborateur
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                matricule_col_act:
+                    referencedColumnName: matricule_col
+            orphanRemoval: false
+    manyToMany:
+        matriculeColOrg:
+            targetEntity: Collaborateur
+            cascade: {  }
+            mappedBy: numAct
+            inversedBy: null
+            joinTable: null
+            orderBy: null
+        matriculePraticien:
+            targetEntity: Praticien
+            cascade: {  }
+            mappedBy: null
+            inversedBy: numAct
+            joinTable:
+                name: participe
+                joinColumns:
+                    -
+                        name: num_act
+                        referencedColumnName: num_act
+                inverseJoinColumns:
+                    -
+                        name: matricule_praticien
+                        referencedColumnName: matricule_praticien
+            orderBy: null
+    lifecycleCallbacks: {  }

@@ -52,23 +52,9 @@ class Collaborateur
     /**
      * @var string
      *
-     * @ORM\Column(name="ville_col", type="string", length=50, nullable=false)
-     */
-    protected $villeCol;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="mdp_col", type="string", length=350, nullable=false)
      */
     protected $mdpCol;
-    
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="salt_col", type="string", length=350, nullable=false)
-     */
-    protected $saltCol;
 
     /**
      * @var \DateTime
@@ -78,11 +64,18 @@ class Collaborateur
     protected $dateEmbauche;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var string
      *
-     * @ORM\ManyToMany(targetEntity="PPE\GSBBundle\Entity\Medicament", mappedBy="matriculeColAvo")
+     * @ORM\Column(name="ville_col", type="string", length=50, nullable=false)
      */
-    protected $depotLegalAvoir;
+    protected $villeCol;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="salt_col", type="string", length=350, nullable=false)
+     */
+    protected $saltCol;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -99,12 +92,18 @@ class Collaborateur
      */
     protected $numAct;
 
+
+    /**
+    * @ORM\OneToMany(targetEntity="Avoir", mappedBy="matriculeColAvo")
+    */
+    protected $matriculeColAvo;
+
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->depotLegalAvoir = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->matriculeColAvo = new \Doctrine\Common\Collections\ArrayCollection();
         $this->numAct = new \Doctrine\Common\Collections\ArrayCollection();
         $this->salt = md5(time());
     }
@@ -129,7 +128,7 @@ class Collaborateur
     public function setNomCol($nomCol)
     {
         $this->nomCol = $nomCol;
-
+    
         return $this;
     }
 
@@ -152,7 +151,7 @@ class Collaborateur
     public function setPrenomCol($prenomCol)
     {
         $this->prenomCol = $prenomCol;
-
+    
         return $this;
     }
 
@@ -175,7 +174,7 @@ class Collaborateur
     public function setAdresseCol($adresseCol)
     {
         $this->adresseCol = $adresseCol;
-
+    
         return $this;
     }
 
@@ -189,7 +188,7 @@ class Collaborateur
         return $this->adresseCol;
     }
 
-   /**
+    /**
      * Set cpCol
      *
      * @param string $cpCol
@@ -198,7 +197,7 @@ class Collaborateur
     public function setCpCol($cpCol)
     {
         $this->cpCol = $cpCol;
-
+    
         return $this;
     }
 
@@ -213,29 +212,6 @@ class Collaborateur
     }
 
     /**
-     * Set villeCol
-     *
-     * @param string $villeCol
-     * @return Collaborateur
-     */
-    public function setVilleCol($villeCol)
-    {
-        $this->villeCol = $villeCol;
-
-        return $this;
-    }
-
-    /**
-     * Get villeCol
-     *
-     * @return string 
-     */
-    public function getVilleCol()
-    {
-        return $this->villeCol;
-    }
-
-    /**
      * Set mdpCol
      *
      * @param string $mdpCol
@@ -244,7 +220,7 @@ class Collaborateur
     public function setMdpCol($mdpCol)
     {
         $this->mdpCol = $mdpCol;
-
+    
         return $this;
     }
 
@@ -257,29 +233,6 @@ class Collaborateur
     {
         return $this->mdpCol;
     }
-    
-    /**
-     * Set saltCol
-     *
-     * @return Collaborateur
-     */
-    public function setSaltCol($salt)
-    {
-    	$this->saltCol = $salt;
-    	
-    	return $this;
-    }
-    
-    
-    /**
-     * Get saltCol
-     *
-     * @return string
-     */
-    public function getSaltCol()
-    {
-    	return $this->saltCol;
-    }
 
     /**
      * Set dateEmbauche
@@ -290,7 +243,7 @@ class Collaborateur
     public function setDateEmbauche($dateEmbauche)
     {
         $this->dateEmbauche = $dateEmbauche;
-
+    
         return $this;
     }
 
@@ -305,36 +258,49 @@ class Collaborateur
     }
 
     /**
-     * Add depotLegalAvoir
+     * Set villeCol
      *
-     * @param \PPE\GSBBundle\Entity\Medicament $depotLegalAvoir
+     * @param string $villeCol
      * @return Collaborateur
      */
-    public function addDepotLegalAvoir(\PPE\GSBBundle\Entity\Medicament $depotLegalAvoir)
+    public function setVilleCol($villeCol)
     {
-        $this->depotLegalAvoir[] = $depotLegalAvoir;
-
+        $this->villeCol = $villeCol;
+    
         return $this;
     }
 
     /**
-     * Remove depotLegalAvoir
+     * Get villeCol
      *
-     * @param \PPE\GSBBundle\Entity\Medicament $depotLegalAvoir
+     * @return string 
      */
-    public function removeDepotLegalAvoir(\PPE\GSBBundle\Entity\Medicament $depotLegalAvoir)
+    public function getVilleCol()
     {
-        $this->depotLegalAvoir->removeElement($depotLegalAvoir);
+        return $this->villeCol;
     }
 
     /**
-     * Get depotLegalAvoir
+     * Set saltCol
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @param string $saltCol
+     * @return Collaborateur
      */
-    public function getDepotLegalAvoir()
+    public function setSaltCol($saltCol)
     {
-        return $this->depotLegalAvoir;
+        $this->saltCol = $saltCol;
+    
+        return $this;
+    }
+
+    /**
+     * Get saltCol
+     *
+     * @return string 
+     */
+    public function getSaltCol()
+    {
+        return $this->saltCol;
     }
 
     /**
@@ -346,7 +312,7 @@ class Collaborateur
     public function addNumAct(\PPE\GSBBundle\Entity\ActiviteComplementaire $numAct)
     {
         $this->numAct[] = $numAct;
-
+    
         return $this;
     }
 
@@ -369,14 +335,36 @@ class Collaborateur
     {
         return $this->numAct;
     }
-    
-    public function toString()
+    /**
+     * Add numAct
+     *
+     * @param \PPE\GSBBundle\Entity\ActiviteComplementaire $numAct
+     * @return Collaborateur
+     */
+    public function addMatriculeColAvo(\PPE\GSBBundle\Entity\Avoir $col)
     {
-    	return 	"[COLLABORATEUR]" .
-    			$this->prenomCol . " " .
-    			$this->nomCol . ", n°" .
-    			$this->matriculeCol . " " .
-    			$this->mdpCol . " >" .
-    			$this->saltCol;
+        $this->matriculeColAvo[] = $col;
+    
+        return $this;
+    }
+
+    /**
+     * Remove numAct
+     *
+     * @param \PPE\GSBBundle\Entity\ActiviteComplementaire $numAct
+     */
+    public function removeMatriculeColAvo(\PPE\GSBBundle\Entity\Avoir $col)
+    {
+        $this->matriculeColAvo->removeElement($col);
+    }
+
+    /**
+     * Get numAct
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMatriculeColAvo()
+    {
+        return $this->matriculeColAvo;
     }
 }

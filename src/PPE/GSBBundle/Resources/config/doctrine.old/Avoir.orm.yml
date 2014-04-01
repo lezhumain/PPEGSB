@@ -1,0 +1,31 @@
+PPE\GSBBundle\Entity\Avoir:
+    type: entity
+    table: avoir
+    indexes:
+        IDX_659B1A433999159F:
+            columns:
+                - depot_legal_avoir
+        IDX_659B1A43D167EDF1:
+            columns:
+                - matricule_col_avo
+    id:
+        depotLegalAvoir:
+            type: string
+            nullable: false
+            length: 25
+            fixed: false
+            id: true
+            column: depot_legal_avoir
+        matriculeColAvo:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            column: matricule_col_avo
+    fields:
+        qteAvoir:
+            type: integer
+            nullable: false
+            unsigned: false
+            column: qte_avoir
+    lifecycleCallbacks: {  }

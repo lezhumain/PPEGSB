@@ -16,6 +16,7 @@ class DefaultController extends Controller
 {
     public function adminAction()
     {
+        //$this->cryptCollabs();
         return $this->render('PPEGSBBundle:Default:admin.html.twig');
     }
 
@@ -27,6 +28,8 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $rapports = $em->getRepository('PPEGSBBundle:RapportDeVisite')->FindAll();
 
+
+    
         return $this->render('PPEGSBBundle:Default:liste_rp.html.twig', array('rapports' => $rapports));
     }
 
@@ -300,8 +303,8 @@ class DefaultController extends Controller
     	foreach( $collabs as $col )
     	{
     		/* Si pas de salt on le genere */
-	   		//if($col->getSaltCol() == null or $col->getSaltCol() == "")
-    		//	$col->setSaltCol( $this->genSalt() );
+	   		if($col->getSaltCol() == 1)
+    			$col->setSaltCol( $this->genSalt() );
 
 	   		//$col = $this->hachUserMdp($col);
 			if( $col == null ) // erreur
@@ -311,11 +314,12 @@ class DefaultController extends Controller
 				break;
 			}
 			else
-				//$em->persist($col);
-				$log .= $col->toString() . "\n\t" . $this->hachMdp('123Soleil', $col->getSaltCol(), $col) . "\n";
+				$em->persist($col);
+				//$log .= $col->toString() . "\n\t" . $this->hachMdp($col->getMdpCol(), $col->getSaltCol(), $col) . "\n";
 				//$log .= $col->toString() . "\n";
+                $col->setMdpCol($this->hachMdp('123Soleil', $col->getSaltCol(), $col));
     	}
-    	//$em->flush(); // On declenche l'enregistrement
+    	$em->flush(); // On declenche l'enregistrement
     	
     	$log .= "fin\n";
     	
@@ -326,4 +330,13 @@ class DefaultController extends Controller
     	return $ret;
     }
 /******************************/
+/*        $medAvoir = $em->getRepository('PPEGSBBundle:Collaborateur')->FindAll();
+            {% for pp in medAvoir %}
+                {% for ppp in pp.matriculeColAvo %}
+                    {{pp.nomCol}} - {{pp.prenomCol}}
+                    {{ ppp.depotLegalAvoir.depotLegal }}
+                {% endfor %}
+
+            {% endfor %}
+    */
 }

@@ -1,0 +1,89 @@
+PPE\GSBBundle\Entity\Praticien:
+    type: entity
+    table: PRATICIEN
+    indexes:
+        IDX_4958393CBA353DE8:
+            columns:
+                - code_type
+    id:
+        matriculePraticien:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            column: matricule_praticien
+            generator:
+                strategy: IDENTITY
+    fields:
+        prenomPraticien:
+            type: string
+            nullable: false
+            length: 50
+            fixed: false
+            column: prenom_praticien
+        nomPraticien:
+            type: string
+            nullable: false
+            length: 50
+            fixed: false
+            column: nom_praticien
+        adressePraticien:
+            type: string
+            nullable: false
+            length: 50
+            fixed: false
+            column: adresse_praticien
+        cpPraticien:
+            type: string
+            nullable: false
+            length: 5
+            fixed: false
+            column: cp_praticien
+        villePraticien:
+            type: string
+            nullable: false
+            length: 50
+            fixed: false
+            column: ville_praticien
+        coefnotorietePraticien:
+            type: float
+            nullable: false
+            precision: 53
+            scale: 0
+            column: coefnotoriete_praticien
+        titulairePraticien:
+            type: boolean
+            nullable: false
+            column: titulaire_praticien
+        numtel:
+            type: string
+            nullable: false
+            length: 15
+            fixed: false
+            column: numTel
+    manyToOne:
+        codeType:
+            targetEntity: TypePraticien
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                code_type:
+                    referencedColumnName: code_type
+            orphanRemoval: false
+    manyToMany:
+        numAct:
+            targetEntity: ActiviteComplementaire
+            cascade: {  }
+            mappedBy: matriculePraticien
+            inversedBy: null
+            joinTable: null
+            orderBy: null
+        codeSpec:
+            targetEntity: Specialite
+            cascade: {  }
+            mappedBy: matriculePraticien
+            inversedBy: null
+            joinTable: null
+            orderBy: null
+    lifecycleCallbacks: {  }
