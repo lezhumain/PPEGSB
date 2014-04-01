@@ -19,63 +19,63 @@ class Praticien
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $matriculePraticien;
+    protected $matriculePraticien;
 
     /**
      * @var string
      *
      * @ORM\Column(name="prenom_praticien", type="string", length=50, nullable=false)
      */
-    private $prenomPraticien;
+    protected $prenomPraticien;
 
     /**
      * @var string
      *
      * @ORM\Column(name="nom_praticien", type="string", length=50, nullable=false)
      */
-    private $nomPraticien;
+    protected $nomPraticien;
 
     /**
      * @var string
      *
      * @ORM\Column(name="adresse_praticien", type="string", length=50, nullable=false)
      */
-    private $adressePraticien;
+    protected $adressePraticien;
 
     /**
      * @var string
      *
      * @ORM\Column(name="cp_praticien", type="string", length=5, nullable=false)
      */
-    private $cpPraticien;
+    protected $cpPraticien;
 
     /**
      * @var string
      *
      * @ORM\Column(name="ville_praticien", type="string", length=50, nullable=false)
      */
-    private $villePraticien;
+    protected $villePraticien;
 
     /**
      * @var float
      *
      * @ORM\Column(name="coefnotoriete_praticien", type="float", precision=24, scale=0, nullable=false)
      */
-    private $coefnotorietePraticien;
+    protected $coefnotorietePraticien;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="titulaire_praticien", type="boolean", nullable=false)
      */
-    private $titulairePraticien;
+    protected $titulairePraticien;
 
     /**
      * @var string
      *
      * @ORM\Column(name="numTel", type="string", length=15, nullable=false)
      */
-    private $numtel;
+    protected $numtel;
 
     /**
      * @var \PPE\GSBBundle\Entity\TypePraticien
@@ -85,21 +85,21 @@ class Praticien
      *   @ORM\JoinColumn(name="code_type", referencedColumnName="code_type")
      * })
      */
-    private $codeType;
+    protected $codeType;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="PPE\GSBBundle\Entity\ActiviteComplementaire", mappedBy="matriculePraticien")
      */
-    private $numAct;
+    protected $numAct;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="PPE\GSBBundle\Entity\Specialite", mappedBy="matriculePraticien")
      */
-    private $codeSpec;
+    protected $codeSpec;
 
     /**
      * Constructor

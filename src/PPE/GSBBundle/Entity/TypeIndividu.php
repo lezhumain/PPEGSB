@@ -19,14 +19,14 @@ class TypeIndividu
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $codeIndividu;
+    protected $codeIndividu;
 
     /**
      * @var string
      *
      * @ORM\Column(name="libelle_individu", type="string", length=250, nullable=false)
      */
-    private $libelleIndividu;
+    protected $libelleIndividu;
 
 
 

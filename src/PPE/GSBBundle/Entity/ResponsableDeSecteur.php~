@@ -21,7 +21,7 @@ class ResponsableDeSecteur
      *   @ORM\JoinColumn(name="matricule_col_res", referencedColumnName="matricule_col", unique=true)
      * })
      */
-    private $matriculeColRes;
+    protected $matriculeColRes;
 
 
 

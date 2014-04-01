@@ -17,7 +17,7 @@ class Gere
      *
      * @ORM\Column(name="JJMMAAAA_FIN", type="datetime", nullable=false)
      */
-    private $jjmmaaaaFin;
+    protected $jjmmaaaaFin;
 
     /**
      * @var \PPE\GSBBundle\Entity\Collaborateur
@@ -28,7 +28,7 @@ class Gere
      *   @ORM\JoinColumn(name="matricule_col_ger", referencedColumnName="matricule_col", unique=true)
      * })
      */
-    private $matriculeColGer;
+    protected $matriculeColGer;
 
     /**
      * @var \PPE\GSBBundle\Entity\Region
@@ -39,7 +39,7 @@ class Gere
      *   @ORM\JoinColumn(name="code_region", referencedColumnName="code_region", unique=true)
      * })
      */
-    private $codeRegion;
+    protected $codeRegion;
 
     /**
      * @var \PPE\GSBBundle\Entity\Calendrier
@@ -50,7 +50,7 @@ class Gere
      *   @ORM\JoinColumn(name="JJMMAAAA_DEB", referencedColumnName="JJMMAAAA_DEB", unique=true)
      * })
      */
-    private $jjmmaaaaDeb;
+    protected $jjmmaaaaDeb;
 
 
 

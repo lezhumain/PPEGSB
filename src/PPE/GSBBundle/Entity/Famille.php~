@@ -19,14 +19,14 @@ class Famille
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $codeFamille;
+    protected $codeFamille;
 
     /**
      * @var string
      *
      * @ORM\Column(name="libelle_famille", type="string", length=250, nullable=false)
      */
-    private $libelleFamille;
+    protected $libelleFamille;
 
 
 

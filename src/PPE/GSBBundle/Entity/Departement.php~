@@ -19,14 +19,14 @@ class Departement
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $codeDep;
+    protected $codeDep;
 
     /**
      * @var string
      *
      * @ORM\Column(name="libelle_dep", type="string", length=25, nullable=false)
      */
-    private $libelleDep;
+    protected $libelleDep;
 
     /**
      * @var \PPE\GSBBundle\Entity\Region
@@ -36,7 +36,7 @@ class Departement
      *   @ORM\JoinColumn(name="code_region", referencedColumnName="code_region")
      * })
      */
-    private $codeRegion;
+    protected $codeRegion;
 
 
 

@@ -19,35 +19,35 @@ class ActiviteComplementaire
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $numAct;
+    protected $numAct;
 
     /**
      * @var string
      *
      * @ORM\Column(name="theme_act", type="string", length=150, nullable=false)
      */
-    private $themeAct;
+    protected $themeAct;
 
     /**
      * @var string
      *
      * @ORM\Column(name="montant_act", type="string", length=25, nullable=false)
      */
-    private $montantAct;
+    protected $montantAct;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="date_act", type="datetime", nullable=false)
      */
-    private $dateAct;
+    protected $dateAct;
 
     /**
      * @var string
      *
      * @ORM\Column(name="lieu_act", type="string", length=300, nullable=false)
      */
-    private $lieuAct;
+    protected $lieuAct;
 
     /**
      * @var \PPE\GSBBundle\Entity\Collaborateur
@@ -57,14 +57,14 @@ class ActiviteComplementaire
      *   @ORM\JoinColumn(name="matricule_col_act", referencedColumnName="matricule_col")
      * })
      */
-    private $matriculeColAct;
+    protected $matriculeColAct;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="PPE\GSBBundle\Entity\Collaborateur", mappedBy="numAct")
      */
-    private $matriculeColOrg;
+    protected $matriculeColOrg;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -79,7 +79,7 @@ class ActiviteComplementaire
      *   }
      * )
      */
-    private $matriculePraticien;
+    protected $matriculePraticien;
 
     /**
      * Constructor

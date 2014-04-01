@@ -19,14 +19,14 @@ class Motif
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $codeMotif;
+    protected $codeMotif;
 
     /**
      * @var string
      *
      * @ORM\Column(name="libelle_motif", type="string", length=250, nullable=false)
      */
-    private $libelleMotif;
+    protected $libelleMotif;
 
 
 

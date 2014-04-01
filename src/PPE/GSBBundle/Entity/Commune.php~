@@ -19,14 +19,14 @@ class Commune
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $codeCommune;
+    protected $codeCommune;
 
     /**
      * @var string
      *
      * @ORM\Column(name="libelle_commun", type="string", length=25, nullable=false)
      */
-    private $libelleCommun;
+    protected $libelleCommun;
 
     /**
      * @var \PPE\GSBBundle\Entity\Departement
@@ -36,7 +36,7 @@ class Commune
      *   @ORM\JoinColumn(name="code_dep", referencedColumnName="code_dep")
      * })
      */
-    private $codeDep;
+    protected $codeDep;
 
 
 

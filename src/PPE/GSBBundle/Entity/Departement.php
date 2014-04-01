@@ -19,14 +19,14 @@ class Departement
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $codeDep;
+    protected $codeDep;
 
     /**
      * @var string
      *
      * @ORM\Column(name="libelle_dep", type="string", length=25, nullable=false)
      */
-    private $libelleDep;
+    protected $libelleDep;
 
     /**
      * @var \PPE\GSBBundle\Entity\Region

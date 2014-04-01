@@ -19,7 +19,7 @@ class Date
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $jjmmaaaa;
+    protected $jjmmaaaa;
 
 
 

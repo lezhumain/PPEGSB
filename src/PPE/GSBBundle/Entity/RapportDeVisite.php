@@ -19,28 +19,28 @@ class RapportDeVisite
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $numRapport;
+    protected $numRapport;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="date_rapport", type="datetime", nullable=false)
      */
-    private $dateRapport;
+    protected $dateRapport;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="date_visite", type="datetime", nullable=false)
      */
-    private $dateVisite;
+    protected $dateVisite;
 
     /**
      * @var string
      *
      * @ORM\Column(name="bilan_visite", type="text", length=16, nullable=false)
      */
-    private $bilanVisite;
+    protected $bilanVisite;
 
     /**
      * @var \PPE\GSBBundle\Entity\Motif
@@ -50,7 +50,7 @@ class RapportDeVisite
      *   @ORM\JoinColumn(name="code_motif", referencedColumnName="code_motif")
      * })
      */
-    private $codeMotif;
+    protected $codeMotif;
 
     /**
      * @var \PPE\GSBBundle\Entity\Praticien
@@ -60,12 +60,12 @@ class RapportDeVisite
      *   @ORM\JoinColumn(name="matricule_praticien", referencedColumnName="matricule_praticien")
      * })
      */
-    private $matriculePraticien;
+    protected $matriculePraticien;
 
    /**
     * @ORM\OneToMany(targetEntity="Offre", mappedBy="numRapportOffre")
     */
-    private $numRapportOffre;
+    protected $numRapportOffre;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -80,7 +80,7 @@ class RapportDeVisite
      *   }
      * )
      */
-    private $depotLegalPres;
+    protected $depotLegalPres;
 
     /**
      * Constructor

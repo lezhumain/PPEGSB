@@ -19,21 +19,21 @@ class TypePraticien
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $codeType;
+    protected $codeType;
 
     /**
      * @var string
      *
      * @ORM\Column(name="type_lieu", type="string", length=250, nullable=false)
      */
-    private $typeLieu;
+    protected $typeLieu;
 
     /**
      * @var string
      *
      * @ORM\Column(name="libelle_type", type="string", length=250, nullable=false)
      */
-    private $libelleType;
+    protected $libelleType;
 
 
 

@@ -19,14 +19,14 @@ class Secteur
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $codeSecteur;
+    protected $codeSecteur;
 
     /**
      * @var string
      *
      * @ORM\Column(name="libelle_secteur", type="string", length=50, nullable=false)
      */
-    private $libelleSecteur;
+    protected $libelleSecteur;
 
 
 

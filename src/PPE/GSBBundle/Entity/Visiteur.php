@@ -24,7 +24,7 @@ class Visiteur implements AdvancedUserInterface //, \Serializable
      * })
 
      */
-    private $matriculeColVis;
+    protected $matriculeColVis;
 
     /**
      * @var \PPE\GSBBundle\Entity\Region
@@ -34,7 +34,7 @@ class Visiteur implements AdvancedUserInterface //, \Serializable
      *   @ORM\JoinColumn(name="code_region", referencedColumnName="code_region")
      * })
      */
-    private $codeRegion;
+    protected $codeRegion;
 
 
 

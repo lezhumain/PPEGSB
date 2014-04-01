@@ -19,14 +19,14 @@ class Specialite
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $codeSpec;
+    protected $codeSpec;
 
     /**
      * @var string
      *
      * @ORM\Column(name="libelle_spec", type="string", length=250, nullable=false)
      */
-    private $libelleSpec;
+    protected $libelleSpec;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -41,7 +41,7 @@ class Specialite
      *   }
      * )
      */
-    private $matriculePraticien;
+    protected $matriculePraticien;
 
     /**
      * Constructor

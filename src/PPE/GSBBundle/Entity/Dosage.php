@@ -19,21 +19,21 @@ class Dosage
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $codeDosage;
+    protected $codeDosage;
 
     /**
      * @var string
      *
      * @ORM\Column(name="unite_dosage", type="string", length=25, nullable=false)
      */
-    private $uniteDosage;
+    protected $uniteDosage;
 
     /**
      * @var float
      *
      * @ORM\Column(name="quantite_dosage", type="float", precision=53, scale=0, nullable=false)
      */
-    private $quantiteDosage;
+    protected $quantiteDosage;
 
 
 
