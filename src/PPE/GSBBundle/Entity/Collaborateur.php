@@ -335,4 +335,36 @@ class Collaborateur
     {
         return $this->numAct;
     }
+    /**
+     * Add numAct
+     *
+     * @param \PPE\GSBBundle\Entity\ActiviteComplementaire $numAct
+     * @return Collaborateur
+     */
+    public function addMatriculeColAvo(\PPE\GSBBundle\Entity\Avoir $col)
+    {
+        $this->matriculeColAvo[] = $col;
+    
+        return $this;
+    }
+
+    /**
+     * Remove numAct
+     *
+     * @param \PPE\GSBBundle\Entity\ActiviteComplementaire $numAct
+     */
+    public function removeMatriculeColAvo(\PPE\GSBBundle\Entity\Avoir $col)
+    {
+        $this->matriculeColAvo->removeElement($col);
+    }
+
+    /**
+     * Get numAct
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMatriculeColAvo()
+    {
+        return $this->matriculeColAvo;
+    }
 }

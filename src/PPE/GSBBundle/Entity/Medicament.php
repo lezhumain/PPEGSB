@@ -19,42 +19,42 @@ class Medicament
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $depotLegal;
+    protected $depotLegal;
 
     /**
      * @var string
      *
      * @ORM\Column(name="composition", type="text", length=-1, nullable=false)
      */
-    private $composition;
+    protected $composition;
 
     /**
      * @var string
      *
      * @ORM\Column(name="effet", type="text", length=-1, nullable=false)
      */
-    private $effet;
+    protected $effet;
 
     /**
      * @var string
      *
      * @ORM\Column(name="contreindic", type="text", length=-1, nullable=false)
      */
-    private $contreindic;
+    protected $contreindic;
 
     /**
      * @var float
      *
      * @ORM\Column(name="prixechantillon", type="float", precision=53, scale=0, nullable=false)
      */
-    private $prixechantillon;
+    protected $prixechantillon;
 
     /**
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=250, nullable=true)
      */
-    private $nom;
+    protected $nom;
 
     /**
      * @var \PPE\GSBBundle\Entity\Famille
@@ -64,7 +64,7 @@ class Medicament
      *   @ORM\JoinColumn(name="code_famille", referencedColumnName="code_famille")
      * })
      */
-    private $codeFamille;
+    protected $codeFamille;
 
     /**
      * @var \PPE\GSBBundle\Entity\Presentation
@@ -74,7 +74,7 @@ class Medicament
      *   @ORM\JoinColumn(name="code_present", referencedColumnName="code_present")
      * })
      */
-    private $codePresent;
+    protected $codePresent;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -89,14 +89,14 @@ class Medicament
      *   }
      * )
      */
-    private $codeComp;
+    protected $codeComp;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="PPE\GSBBundle\Entity\RapportDeVisite", mappedBy="depotLegalOffre")
      */
-    private $numRapportOffre;
+    protected $numRapportOffre;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -111,19 +111,19 @@ class Medicament
      *   }
      * )
      */
-    private $depotLegalPerturbe;
+    protected $depotLegalPerturbe;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="PPE\GSBBundle\Entity\RapportDeVisite", mappedBy="depotLegalPres")
      */
-    private $numRapportPresente;
+    protected $numRapportPresente;
 
     /**
     * @ORM\OneToMany(targetEntity="Avoir", mappedBy="depotLegalAvoir")
     */
-    private $depotLegalAvo;
+    protected $depotLegalAvo;
 
     /**
      * Constructor
@@ -438,5 +438,38 @@ class Medicament
     public function getNumRapportPresente()
     {
         return $this->numRapportPresente;
+    }
+
+    /**
+     * Add depotLegalAvo
+     *
+     * @param \PPE\GSBBundle\Entity\Avoir $depotLegalAvo
+     * @return Medicament
+     */
+    public function addDepotLegalAvo(\PPE\GSBBundle\Entity\Avoir $depotLegalAvo)
+    {
+        $this->depotLegalAvo[] = $depotLegalAvo;
+    
+        return $this;
+    }
+
+    /**
+     * Remove depotLegalAvo
+     *
+     * @param \PPE\GSBBundle\Entity\Avoir $depotLegalAvo
+     */
+    public function removeDepotLegalAvo(\PPE\GSBBundle\Entity\Avoir $depotLegalAvo)
+    {
+        $this->depotLegalAvo->removeElement($depotLegalAvo);
+    }
+
+    /**
+     * Get depotLegalAvo
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDepotLegalAvo()
+    {
+        return $this->depotLegalAvo;
     }
 }

@@ -26,6 +26,7 @@ class RapportDeVisiteType extends AbstractType {
             $builder->add('matriculePraticien', 'entity', array('class' 	=> 'PPEGSBBundle:Praticien',
                                            						'property' 	=> 'nomPraticien'));
 
+            
             $builder->add('date_rapport', 'date', array(
                 'widget' => 'single_text',
 			    'format' => 'd/M/y',

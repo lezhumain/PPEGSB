@@ -28,6 +28,8 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $rapports = $em->getRepository('PPEGSBBundle:RapportDeVisite')->FindAll();
 
+
+    
         return $this->render('PPEGSBBundle:Default:liste_rp.html.twig', array('rapports' => $rapports));
     }
 
@@ -328,4 +330,13 @@ class DefaultController extends Controller
     	return $ret;
     }
 /******************************/
+/*        $medAvoir = $em->getRepository('PPEGSBBundle:Collaborateur')->FindAll();
+            {% for pp in medAvoir %}
+                {% for ppp in pp.matriculeColAvo %}
+                    {{pp.nomCol}} - {{pp.prenomCol}}
+                    {{ ppp.depotLegalAvoir.depotLegal }}
+                {% endfor %}
+
+            {% endfor %}
+    */
 }

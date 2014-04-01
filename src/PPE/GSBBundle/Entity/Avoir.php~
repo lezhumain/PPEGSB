@@ -13,29 +13,94 @@ use Doctrine\ORM\Mapping as ORM;
 class Avoir
 {
     /**
-     * @var string
-     *
-     * @ORM\Column(name="depot_legal_avoir", type="string", length=25)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     */
-    private $depotLegalAvoir;
+    * @ORM\Id
+    * @ORM\ManyToOne(targetEntity="Medicament", inversedBy="depotLegalAvo")
+    * @ORM\JoinColumn(name="depot_legal_avoir", referencedColumnName="depot_legal")
+    */
+    protected $depotLegalAvoir;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="matricule_col_avo", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     */
-    private $matriculeColAvo;
+    * @ORM\Id
+    * @ORM\ManyToOne(targetEntity="Collaborateur", inversedBy="matriculeColAvo")
+    * @ORM\JoinColumn(name="matricule_col_avo", referencedColumnName="matricule_col")
+    */
+    protected $matriculeColAvo;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="qte_avoir", type="integer", nullable=false)
      */
-    private $qteAvoir;
+    protected $qteAvoir;
 
 
+
+    /**
+     * Set depotLegalAvoir
+     *
+     * @param string $depotLegalAvoir
+     * @return Avoir
+     */
+    public function setDepotLegalAvoir($depotLegalAvoir)
+    {
+        $this->depotLegalAvoir = $depotLegalAvoir;
+    
+        return $this;
+    }
+
+    /**
+     * Get depotLegalAvoir
+     *
+     * @return string 
+     */
+    public function getDepotLegalAvoir()
+    {
+        return $this->depotLegalAvoir;
+    }
+
+    /**
+     * Set matriculeColAvo
+     *
+     * @param integer $matriculeColAvo
+     * @return Avoir
+     */
+    public function setMatriculeColAvo($matriculeColAvo)
+    {
+        $this->matriculeColAvo = $matriculeColAvo;
+    
+        return $this;
+    }
+
+    /**
+     * Get matriculeColAvo
+     *
+     * @return integer 
+     */
+    public function getMatriculeColAvo()
+    {
+        return $this->matriculeColAvo;
+    }
+
+    /**
+     * Set qteAvoir
+     *
+     * @param integer $qteAvoir
+     * @return Avoir
+     */
+    public function setQteAvoir($qteAvoir)
+    {
+        $this->qteAvoir = $qteAvoir;
+    
+        return $this;
+    }
+
+    /**
+     * Get qteAvoir
+     *
+     * @return integer 
+     */
+    public function getQteAvoir()
+    {
+        return $this->qteAvoir;
+    }
 }

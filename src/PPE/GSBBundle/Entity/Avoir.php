@@ -17,21 +17,21 @@ class Avoir
     * @ORM\ManyToOne(targetEntity="Medicament", inversedBy="depotLegalAvo")
     * @ORM\JoinColumn(name="depot_legal_avoir", referencedColumnName="depot_legal")
     */
-    private $depotLegalAvoir;
+    protected $depotLegalAvoir;
 
     /**
     * @ORM\Id
     * @ORM\ManyToOne(targetEntity="Collaborateur", inversedBy="matriculeColAvo")
     * @ORM\JoinColumn(name="matricule_col_avo", referencedColumnName="matricule_col")
     */
-    private $matriculeColAvo;
+    protected $matriculeColAvo;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="qte_avoir", type="integer", nullable=false)
      */
-    private $qteAvoir;
+    protected $qteAvoir;
 
 
 
