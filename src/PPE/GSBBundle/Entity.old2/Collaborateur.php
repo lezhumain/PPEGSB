@@ -19,63 +19,63 @@ class Collaborateur
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    protected $matriculeCol;
+    private $matriculeCol;
 
     /**
      * @var string
      *
      * @ORM\Column(name="nom_col", type="string", length=25, nullable=false)
      */
-    protected $nomCol;
+    private $nomCol;
 
     /**
      * @var string
      *
      * @ORM\Column(name="prenom_col", type="string", length=25, nullable=false)
      */
-    protected $prenomCol;
+    private $prenomCol;
 
     /**
      * @var string
      *
      * @ORM\Column(name="adresse_col", type="string", length=50, nullable=false)
      */
-    protected $adresseCol;
+    private $adresseCol;
 
     /**
      * @var string
      *
      * @ORM\Column(name="cp_col", type="string", length=5, nullable=false)
      */
-    protected $cpCol;
+    private $cpCol;
 
     /**
      * @var string
      *
      * @ORM\Column(name="mdp_col", type="string", length=350, nullable=false)
      */
-    protected $mdpCol;
+    private $mdpCol;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="date_embauche", type="datetime", nullable=false)
      */
-    protected $dateEmbauche;
+    private $dateEmbauche;
 
     /**
      * @var string
      *
      * @ORM\Column(name="ville_col", type="string", length=50, nullable=false)
      */
-    protected $villeCol;
+    private $villeCol;
 
     /**
      * @var string
      *
      * @ORM\Column(name="salt_col", type="string", length=350, nullable=false)
      */
-    protected $saltCol;
+    private $saltCol;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -90,13 +90,13 @@ class Collaborateur
      *   }
      * )
      */
-    protected $numAct;
+    private $numAct;
 
 
     /**
     * @ORM\OneToMany(targetEntity="Avoir", mappedBy="matriculeColAvo")
     */
-    protected $matriculeColAvo;
+    private $matriculeColAvo;
 
     /**
      * Constructor
@@ -105,7 +105,6 @@ class Collaborateur
     {
         $this->matriculeColAvo = new \Doctrine\Common\Collections\ArrayCollection();
         $this->numAct = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->salt = md5(time());
     }
 
 

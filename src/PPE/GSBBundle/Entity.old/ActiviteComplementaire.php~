@@ -1,0 +1,93 @@
+<?php
+
+namespace PPE\GSBBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ActiviteComplementaire
+ *
+ * @ORM\Table(name="ACTIVITE_COMPLEMENTAIRE", indexes={@ORM\Index(name="IDX_A6C0FC196CB7C209", columns={"matricule_col_act"})})
+ * @ORM\Entity
+ */
+class ActiviteComplementaire
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="num_act", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $numAct;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="theme_act", type="string", length=150, nullable=false)
+     */
+    private $themeAct;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="montant_act", type="string", length=25, nullable=false)
+     */
+    private $montantAct;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_act", type="datetime", nullable=false)
+     */
+    private $dateAct;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lieu_act", type="string", length=300, nullable=false)
+     */
+    private $lieuAct;
+
+    /**
+     * @var \PPE\GSBBundle\Entity\Collaborateur
+     *
+     * @ORM\ManyToOne(targetEntity="PPE\GSBBundle\Entity\Collaborateur")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="matricule_col_act", referencedColumnName="matricule_col")
+     * })
+     */
+    private $matriculeColAct;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="PPE\GSBBundle\Entity\Collaborateur", mappedBy="numAct")
+     */
+    private $matriculeColOrg;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="PPE\GSBBundle\Entity\Praticien", inversedBy="numAct")
+     * @ORM\JoinTable(name="participe",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="num_act", referencedColumnName="num_act")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="matricule_praticien", referencedColumnName="matricule_praticien")
+     *   }
+     * )
+     */
+    private $matriculePraticien;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->matriculeColOrg = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->matriculePraticien = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}

@@ -1,0 +1,41 @@
+<?php
+
+namespace PPE\GSBBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Avoir
+ *
+ * @ORM\Table(name="avoir", indexes={@ORM\Index(name="IDX_659B1A433999159F", columns={"depot_legal_avoir"}), @ORM\Index(name="IDX_659B1A43D167EDF1", columns={"matricule_col_avo"})})
+ * @ORM\Entity
+ */
+class Avoir
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="depot_legal_avoir", type="string", length=25)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $depotLegalAvoir;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="matricule_col_avo", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $matriculeColAvo;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="qte_avoir", type="integer", nullable=false)
+     */
+    private $qteAvoir;
+
+
+}

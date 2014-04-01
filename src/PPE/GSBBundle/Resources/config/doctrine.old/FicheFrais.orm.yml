@@ -1,0 +1,58 @@
+PPE\GSBBundle\Entity\FicheFrais:
+    type: entity
+    table: FICHE_FRAIS
+    indexes:
+        IDX_D56F317910C4B9C1:
+            columns:
+                - matricule_col_fic
+    id:
+        ffMois:
+            type: string
+            nullable: false
+            length: 25
+            fixed: false
+            id: true
+            column: ff_mois
+            generator:
+                strategy: IDENTITY
+    fields:
+        ffNbhorsclassif:
+            type: string
+            nullable: true
+            length: 25
+            fixed: false
+            column: ff_NBHorsClassif
+        ffMontanthorsclassif:
+            type: string
+            nullable: true
+            length: 25
+            fixed: false
+            column: ff_MontantHorsClassif
+    manyToOne:
+        matriculeColFic:
+            targetEntity: Collaborateur
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                matricule_col_fic:
+                    referencedColumnName: matricule_col
+            orphanRemoval: false
+    manyToMany:
+        tfCode:
+            targetEntity: TypeFrais
+            cascade: {  }
+            mappedBy: null
+            inversedBy: ffMois
+            joinTable:
+                name: inclure
+                joinColumns:
+                    -
+                        name: ff_mois
+                        referencedColumnName: ff_mois
+                inverseJoinColumns:
+                    -
+                        name: tf_Code
+                        referencedColumnName: tf_Code
+            orderBy: null
+    lifecycleCallbacks: {  }

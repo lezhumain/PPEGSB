@@ -121,7 +121,7 @@ class Medicament
     private $numRapportPresente;
 
     /**
-    * @ORM\OneToMany(targetEntity="Avoir", mappedBy="depotLegalAvoir")
+    * @ORM\OneToMany(targetEntity="Avoir", mappedBy="depot_legal_avoir")
     */
     private $depotLegalAvo;
 

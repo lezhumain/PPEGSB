@@ -1,0 +1,53 @@
+<?php
+
+namespace PPE\GSBBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * TypeFrais
+ *
+ * @ORM\Table(name="TYPE_FRAIS")
+ * @ORM\Entity
+ */
+class TypeFrais
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tf_Code", type="string", length=25)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $tfCode;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tf_libelle", type="string", length=25, nullable=true)
+     */
+    private $tfLibelle;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tf_forfait", type="string", length=25, nullable=true)
+     */
+    private $tfForfait;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="PPE\GSBBundle\Entity\FicheFrais", mappedBy="tfCode")
+     */
+    private $ffMois;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->ffMois = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}

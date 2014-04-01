@@ -1,0 +1,71 @@
+<?php
+
+namespace PPE\GSBBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * FicheFrais
+ *
+ * @ORM\Table(name="FICHE_FRAIS", indexes={@ORM\Index(name="IDX_D56F317910C4B9C1", columns={"matricule_col_fic"})})
+ * @ORM\Entity
+ */
+class FicheFrais
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ff_mois", type="string", length=25)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $ffMois;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ff_NBHorsClassif", type="string", length=25, nullable=true)
+     */
+    private $ffNbhorsclassif;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ff_MontantHorsClassif", type="string", length=25, nullable=true)
+     */
+    private $ffMontanthorsclassif;
+
+    /**
+     * @var \PPE\GSBBundle\Entity\Collaborateur
+     *
+     * @ORM\ManyToOne(targetEntity="PPE\GSBBundle\Entity\Collaborateur")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="matricule_col_fic", referencedColumnName="matricule_col")
+     * })
+     */
+    private $matriculeColFic;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="PPE\GSBBundle\Entity\TypeFrais", inversedBy="ffMois")
+     * @ORM\JoinTable(name="inclure",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="ff_mois", referencedColumnName="ff_mois")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="tf_Code", referencedColumnName="tf_Code")
+     *   }
+     * )
+     */
+    private $tfCode;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tfCode = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}

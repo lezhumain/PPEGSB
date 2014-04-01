@@ -1,0 +1,103 @@
+<?php
+
+namespace PPE\GSBBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Collaborateur
+ *
+ * @ORM\Table(name="COLLABORATEUR")
+ * @ORM\Entity
+ */
+class Collaborateur
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="matricule_col", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $matriculeCol;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom_col", type="string", length=25, nullable=false)
+     */
+    private $nomCol;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prenom_col", type="string", length=25, nullable=false)
+     */
+    private $prenomCol;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="adresse_col", type="string", length=50, nullable=false)
+     */
+    private $adresseCol;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cp_col", type="string", length=5, nullable=false)
+     */
+    private $cpCol;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mdp_col", type="string", length=350, nullable=false)
+     */
+    private $mdpCol;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_embauche", type="datetime", nullable=false)
+     */
+    private $dateEmbauche;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ville_col", type="string", length=50, nullable=false)
+     */
+    private $villeCol;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="salt_col", type="string", length=350, nullable=false)
+     */
+    private $saltCol;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="PPE\GSBBundle\Entity\ActiviteComplementaire", inversedBy="matriculeColOrg")
+     * @ORM\JoinTable(name="organise",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="matricule_col_org", referencedColumnName="matricule_col")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="num_act", referencedColumnName="num_act")
+     *   }
+     * )
+     */
+    private $numAct;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->numAct = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}

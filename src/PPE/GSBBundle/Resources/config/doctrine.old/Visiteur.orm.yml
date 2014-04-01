@@ -1,0 +1,29 @@
+PPE\GSBBundle\Entity\Visiteur:
+    type: entity
+    table: VISITEUR
+    indexes:
+        IDX_88961BF470E4A9D4:
+            columns:
+                - code_region
+    id: {  }
+    oneToOne:
+        matriculeColVis:
+            targetEntity: Collaborateur
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                matricule_col_vis:
+                    referencedColumnName: matricule_col
+            orphanRemoval: false
+    manyToOne:
+        codeRegion:
+            targetEntity: Region
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                code_region:
+                    referencedColumnName: code_region
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

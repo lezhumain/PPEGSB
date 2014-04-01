@@ -1,0 +1,26 @@
+PPE\GSBBundle\Entity\TypePraticien:
+    type: entity
+    table: TYPE_PRATICIEN
+    id:
+        codeType:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            column: code_type
+            generator:
+                strategy: IDENTITY
+    fields:
+        typeLieu:
+            type: string
+            nullable: false
+            length: 250
+            fixed: false
+            column: type_lieu
+        libelleType:
+            type: string
+            nullable: false
+            length: 250
+            fixed: false
+            column: libelle_type
+    lifecycleCallbacks: {  }

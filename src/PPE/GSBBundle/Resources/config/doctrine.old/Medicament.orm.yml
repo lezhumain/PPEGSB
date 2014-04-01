@@ -1,0 +1,113 @@
+PPE\GSBBundle\Entity\Medicament:
+    type: entity
+    table: MEDICAMENT
+    indexes:
+        IDX_91036F051CD4B68F:
+            columns:
+                - code_famille
+        IDX_91036F05C51BEA8B:
+            columns:
+                - code_present
+    id:
+        depotLegal:
+            type: string
+            nullable: false
+            length: 25
+            fixed: false
+            id: true
+            column: depot_legal
+            generator:
+                strategy: IDENTITY
+    fields:
+        composition:
+            type: text
+            nullable: false
+            length: -1
+            fixed: false
+        effet:
+            type: text
+            nullable: false
+            length: -1
+            fixed: false
+        contreindic:
+            type: text
+            nullable: false
+            length: -1
+            fixed: false
+        prixechantillon:
+            type: float
+            nullable: false
+            precision: 53
+            scale: 0
+        nom:
+            type: string
+            nullable: true
+            length: 250
+            fixed: false
+    manyToOne:
+        codeFamille:
+            targetEntity: Famille
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                code_famille:
+                    referencedColumnName: code_famille
+            orphanRemoval: false
+        codePresent:
+            targetEntity: Presentation
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                code_present:
+                    referencedColumnName: code_present
+            orphanRemoval: false
+    manyToMany:
+        codeComp:
+            targetEntity: Composant
+            cascade: {  }
+            mappedBy: null
+            inversedBy: depotLegalConstituer
+            joinTable:
+                name: constituer
+                joinColumns:
+                    -
+                        name: depot_legal_constituer
+                        referencedColumnName: depot_legal
+                inverseJoinColumns:
+                    -
+                        name: code_comp
+                        referencedColumnName: code_comp
+            orderBy: null
+        numRapportOffre:
+            targetEntity: RapportDeVisite
+            cascade: {  }
+            mappedBy: depotLegalOffre
+            inversedBy: null
+            joinTable: null
+            orderBy: null
+        depotLegalPerturbe:
+            targetEntity: Medicament
+            cascade: {  }
+            mappedBy: null
+            inversedBy: depotLegalPerturbant
+            joinTable:
+                name: perturbe
+                joinColumns:
+                    -
+                        name: depot_legal_perturbant
+                        referencedColumnName: depot_legal
+                inverseJoinColumns:
+                    -
+                        name: depot_legal_perturbe
+                        referencedColumnName: depot_legal
+            orderBy: null
+        numRapportPresente:
+            targetEntity: RapportDeVisite
+            cascade: {  }
+            mappedBy: depotLegalPres
+            inversedBy: null
+            joinTable: null
+            orderBy: null
+    lifecycleCallbacks: {  }
