@@ -92,11 +92,9 @@ class Medicament
     protected $codeComp;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="PPE\GSBBundle\Entity\RapportDeVisite", mappedBy="depotLegalOffre")
-     */
-    protected $numRapportOffre;
+    * @ORM\OneToMany(targetEntity="Offre", mappedBy="depotLegalOffre")
+    */
+    protected $depotLegalOffre;
 
     /**
      * @var \Doctrine\Common\Collections\Collection

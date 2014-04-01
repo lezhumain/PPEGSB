@@ -43,7 +43,7 @@ class RapportDeVisiteType extends AbstractType {
                                            					'multiple'	=>	true));
 
 			//$civilites=array();
-	        $query = $this->em->getRepository('PPEGSBBundle:Medicament')->FindAll();
+/*	        $query = $this->em->getRepository('PPEGSBBundle:Medicament')->FindAll();
 
 	        foreach ($query as $med) 
 	        {
@@ -53,7 +53,7 @@ class RapportDeVisiteType extends AbstractType {
 						    'format' => 'd/M/y',
 						));
 	        	}
-	        }
+	        }*/
 
 
 /*	        foreach ($query as $ref) {
