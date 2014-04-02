@@ -3,6 +3,18 @@
 {% block title %}GSB - Liste des rapports{% endblock %}
 
 {% block body %}
+
+<div class="container listeRP">
+	{% for rp in rapports %}
+		<div onclick="document.location = '{{ path ("ppegsb_getFicheRp", {"id": rp.numRapport} ) }}'" class="col-md-2 col-sm-3 col-xs-6" id="rapport">
+				<div class="well" id="rpContent">
+					<legend>N°{{rp.numRapport}} <span style="float: right;font-size: 75%;margin-top: 5px;">{{rp.dateRapport|date("d/m/Y")}}</span></legend>
+					<p>Effectuée par <b>{{rp.matriculePraticien.nomPraticien}} {{rp.matriculePraticien.prenomPraticien}}</b> le <b>{{rp.dateVisite|date("d/m/Y")}}</b></p>
+				</div>
+		</div>
+	{% endfor %}
+</div>
+
  {# <div class="table-responsive">
 	 <table class="table table-hover sortable table-striped" id = "tableRp">
 	 	<!-- Entête du tableau -->
@@ -27,24 +39,6 @@
 	 	<!-- fin de l'entête -->
 	 </table>
 </div> #}
-
-<div class="container listeRP">
-	{% for rp in rapports %}
-		<div onclick="document.location = '{{ path ("ppegsb_getFicheRp", {"id": rp.numRapport} ) }}'" class="col-md-2 col-sm-3 col-xs-6" id="rapport">
-				<div class="well" id="rpContent">
-					<legend>N°{{rp.numRapport}} <span style="float: right;font-size: 75%;margin-top: 5px;">{{rp.dateRapport|date("d/m/Y")}}</span></legend>
-					<p>Effectuée par <b>{{rp.matriculePraticien.nomPraticien}} {{rp.matriculePraticien.prenomPraticien}}</b> le <b>{{rp.dateVisite|date("d/m/Y")}}</b></p>
-				</div>
-		</div>
-	{% endfor %}
-</div>
-
-{#
-<div style="border: thin solid black; background-color: green; color: white">
-	{{ msg }}<br>
-</div>
-#}
-
 
 
 
