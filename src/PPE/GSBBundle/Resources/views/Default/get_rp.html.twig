@@ -41,12 +41,12 @@
 			</div>
 			
 			<div class="col-md-6">
-				{% if rp.depotLegalOffre is empty %}
+				{% if rp.numRapportOffre is empty %}
 					Aucun médicament n'a été offert lors de cette visite
 				{% else %}
 					<b>Médicament(s) offert(s) :</b>
-					{% for offert in rp.depotLegalOffre %}
-						<li>{{offert.nom}}</li>
+					{% for offert in rp.numRapportOffre %}
+						<li>{{offert.depotLegalOffre.nom}} - {{offert.qteOffre}}</li>
 					{% endfor %}
 				{% endif %}
 			</div>
