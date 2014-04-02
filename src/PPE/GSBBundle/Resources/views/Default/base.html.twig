@@ -4,12 +4,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html"; charset=utf-8 />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}GSB{% endblock %}</title>
         {% block stylesheets %}
-                <link rel="stylesheet" href="{{ asset('bundles/ppegsb/css/bootstrap.css') }}" type="text/css" media="all" />
-                <link rel="stylesheet" href="{{ asset('bundles/ppegsb/css/jquery.datetimepicker.css') }}" type="text/css" media="all" />
-                <link rel="stylesheet" href="{{ asset('bundles/ppegsb/css/maplace.css') }}" type="text/css" media="all" />
-                <link rel="stylesheet" href="{{ asset('bundles/ppegsb/css/style.css') }}" type="text/css" media="all" />
+                <link rel="stylesheet" href="{{ asset('bundles/ppegsb/css/bootstrap.css') }}"/>
+                <link rel="stylesheet" href="{{ asset('bundles/ppegsb/css/jquery.datetimepicker.css') }}"/>
+                <link rel="stylesheet" href="{{ asset('bundles/ppegsb/css/maplace.css') }}"/>
+                <link rel="stylesheet" href="{{ asset('bundles/ppegsb/css/style.css') }}"/>
         {% endblock %}
     </head>
     <body>
@@ -118,8 +119,9 @@
                 var $miniMenu = $('#miniMenu');
 
                 function checkWidth() {
+
                     var windowsize = $window.width();
-                    if (windowsize < 767 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                    if (windowsize < 767) {
                         $menuMobile.show();
                         $menuMobile.css('visibility', 'visible');
                         $menuDesktop.hide();
