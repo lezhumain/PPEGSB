@@ -62,20 +62,10 @@ class RapportDeVisite
      */
     protected $matriculePraticien;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="PPE\GSBBundle\Entity\Medicament", inversedBy="numRapportOffre")
-     * @ORM\JoinTable(name="offre",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="num_rapport_offre", referencedColumnName="num_rapport")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="depot_legal_offre", referencedColumnName="depot_legal")
-     *   }
-     * )
-     */
-    protected $depotLegalOffre;
+   /**
+    * @ORM\OneToMany(targetEntity="Offre", mappedBy="numRapportOffre")
+    */
+    protected $numRapportOffre;
 
     /**
      * @var \Doctrine\Common\Collections\Collection

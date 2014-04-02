@@ -282,4 +282,37 @@ class RapportDeVisite
     {
         return $this->depotLegalPres;
     }
+
+    /**
+     * Add numRapportOffre
+     *
+     * @param \PPE\GSBBundle\Entity\Offre $numRapportOffre
+     * @return RapportDeVisite
+     */
+    public function addNumRapportOffre(\PPE\GSBBundle\Entity\Offre $numRapportOffre)
+    {
+        $this->numRapportOffre[] = $numRapportOffre;
+    
+        return $this;
+    }
+
+    /**
+     * Remove numRapportOffre
+     *
+     * @param \PPE\GSBBundle\Entity\Offre $numRapportOffre
+     */
+    public function removeNumRapportOffre(\PPE\GSBBundle\Entity\Offre $numRapportOffre)
+    {
+        $this->numRapportOffre->removeElement($numRapportOffre);
+    }
+
+    /**
+     * Get numRapportOffre
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getNumRapportOffre()
+    {
+        return $this->numRapportOffre;
+    }
 }
