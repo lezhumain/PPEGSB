@@ -67,6 +67,17 @@ class RapportDeVisite
     */
     protected $numRapportOffre;
 
+
+   /**
+    * @ORM\ManyToOne(targetEntity="Collaborateur", inversedBy="rapports")
+    * @ORM\JoinColumn(name="matricule_col", referencedColumnName="matricule_col")
+    */
+    protected $matriculeCol;
+
+
+
+
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
@@ -314,5 +325,28 @@ class RapportDeVisite
     public function getNumRapportOffre()
     {
         return $this->numRapportOffre;
+    }
+
+    /**
+     * Set matriculeCol
+     *
+     * @param \PPE\GSBBundle\Entity\Collaborateur $matriculeCol
+     * @return RapportDeVisite
+     */
+    public function setMatriculeCol(\PPE\GSBBundle\Entity\Collaborateur $matriculeCol = null)
+    {
+        $this->matriculeCol = $matriculeCol;
+    
+        return $this;
+    }
+
+    /**
+     * Get matriculeCol
+     *
+     * @return \PPE\GSBBundle\Entity\Collaborateur 
+     */
+    public function getMatriculeCol()
+    {
+        return $this->matriculeCol;
     }
 }

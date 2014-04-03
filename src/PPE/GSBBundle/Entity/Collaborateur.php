@@ -99,6 +99,11 @@ class Collaborateur
     protected $matriculeColAvo;
 
     /**
+    * @ORM\OneToMany(targetEntity="RapportDeVisite", mappedBy="matriculeCol")
+    */
+    protected $rapports;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -366,5 +371,38 @@ class Collaborateur
     public function getMatriculeColAvo()
     {
         return $this->matriculeColAvo;
+    }
+
+    /**
+     * Add rapports
+     *
+     * @param \PPE\GSBBundle\Entity\RapportDeVisite $rapports
+     * @return Collaborateur
+     */
+    public function addRapport(\PPE\GSBBundle\Entity\RapportDeVisite $rapports)
+    {
+        $this->rapports[] = $rapports;
+    
+        return $this;
+    }
+
+    /**
+     * Remove rapports
+     *
+     * @param \PPE\GSBBundle\Entity\RapportDeVisite $rapports
+     */
+    public function removeRapport(\PPE\GSBBundle\Entity\RapportDeVisite $rapports)
+    {
+        $this->rapports->removeElement($rapports);
+    }
+
+    /**
+     * Get rapports
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRapports()
+    {
+        return $this->rapports;
     }
 }
