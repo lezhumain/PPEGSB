@@ -24,7 +24,7 @@ class Presentation
     /**
      * @var string
      *
-     * @ORM\Column(name="libelle_present", type="varchar", length=25, nullable=false)
+     * @ORM\Column(name="libelle_present", type="string", length=25, nullable=false)
      */
     protected $libellePresent;
 

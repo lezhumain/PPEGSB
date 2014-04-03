@@ -99,6 +99,11 @@ class Collaborateur
     protected $matriculeColAvo;
 
     /**
+    * @ORM\OneToMany(targetEntity="RapportDeVisite", mappedBy="matriculeCol")
+    */
+    protected $rapports;
+
+    /**
      * Constructor
      */
     public function __construct()
