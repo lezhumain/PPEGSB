@@ -11,6 +11,15 @@ ppegsb_getFicheRp:
     defaults: { _controller: PPEGSBBundle:Default:getRp}
 
 
+ppegsb_formActComp:
+    pattern:  /GSB/Act/new
+    defaults: { _controller: PPEGSBBundle:Default:formActComp}
+
+ppegsb_getFicheAct:
+    pattern:  /GSB/Act/get-{id}
+    defaults: { _controller: PPEGSBBundle:Default:getAct}
+
+
 
 
 

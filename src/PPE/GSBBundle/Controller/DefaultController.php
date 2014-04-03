@@ -8,9 +8,12 @@ use Symfony\Component\HttpFoundation\Request;
 use PPE\GSBBundle\Entity;
 use PPE\GSBBundle\Entity\Visiteur;
 use PPE\GSBBundle\Entity\RapportDeVisite;
+use PPE\GSBBundle\Entity\ActiviteComplementaire;
 use PPE\GSBBundle\Entity\Medicament;
 use PPE\GSBBundle\Form\RapportDeVisiteType;
 use PPE\GSBBundle\Form\RapportDeVisiteHandler;
+use PPE\GSBBundle\Form\ActiviteComplementaireType;
+use PPE\GSBBundle\Form\ActiviteComplementaireHandler;
 
 class DefaultController extends Controller
 {
@@ -32,13 +35,6 @@ class DefaultController extends Controller
         return $this->render('PPEGSBBundle:Default:liste_rp.html.twig', array('rapports' => $rapports));
     }
 
-    /**
-     * \brief 
-     *      Fonction d'affichage du formulaire dun rapport de visite
-     * \param new
-     *      0 affichage read only
-     *      1 nouveau rapport   
-     */
     public function ficheRpAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
@@ -338,4 +334,32 @@ class DefaultController extends Controller
 
             {% endfor %}
     */
+
+    /****BLOC DE GESTION ACT COMP **/        
+    public function formActCompAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $act = new ActiviteComplementaire();
+        $form = $this->createForm(new ActiviteComplementaireType($em), $act);
+
+        // $formHandler = new ActiviteComplementaireHandler($form, $this->get('request'), $this->getDoctrine()->getManager());
+
+        // if ($formHandler->process()) {
+        //     return $this->redirect($this->generateUrl('ppegsb_homepage'));
+        // }
+
+        return $this->render('PPEGSBBundle:Default:form_actComp.html.twig', array('form' => $form->createView() ));
+    }
+
+    // public function getRpAction($id)
+    // {
+    //     $em = $this->getDoctrine()->getEntityManager();
+    //     $rp = $em->find('PPEGSBBundle:RapportDeVisite', $id);
+
+    //     if (empty($rp)) {
+    //         throw $this->createNotFoundException("Identifiant inconnu");
+    //     }
+
+    //     return $this->render('PPEGSBBundle:Default:get_rp.html.twig', array('rp' => $rp));
+    // }
 }
