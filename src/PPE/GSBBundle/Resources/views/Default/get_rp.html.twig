@@ -29,24 +29,25 @@
 			</h5>
 			
 			<div class="col-md-6">
+					<b>Médicament(s) présenté(s):</b>
+					<br>
 				{% if rp.depotLegalPres is empty %}
 					Aucun médicament n'a été présenté lors de cette visite <br>
 				{% else %}
-					<b>Médicament(s) présenté(s):</b>
-					<br>
 					{% for presentes in rp.depotLegalPres %}
-						<li>{{presentes.nom}}</li>
+						<li><a href="{{ path('ppegsb_ficheMed', {'id':presentes.depotLegal})}}">{{presentes.nom}}</a></li>
 					{% endfor %}
 				{% endif %}
 			</div>
 			
 			<div class="col-md-6">
+					<b>Médicament(s) offert(s) :</b>
+					<br>
 				{% if rp.numRapportOffre is empty %}
 					Aucun médicament n'a été offert lors de cette visite
 				{% else %}
-					<b>Médicament(s) offert(s) :</b>
 					{% for offert in rp.numRapportOffre %}
-						<li>{{offert.depotLegalOffre.nom}} - {{offert.qteOffre}}</li>
+						<li><a href="{{ path('ppegsb_ficheMed', {'id':offert.depotLegalOffre.depotLegal})}}">{{offert.depotLegalOffre.depotLegal}}</a> - {{offert.qteOffre}}</li>
 					{% endfor %}
 				{% endif %}
 			</div>

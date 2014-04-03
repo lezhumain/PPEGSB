@@ -28,7 +28,6 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $rapports = $em->getRepository('PPEGSBBundle:RapportDeVisite')->FindAll();
 
-
     
         return $this->render('PPEGSBBundle:Default:liste_rp.html.twig', array('rapports' => $rapports));
     }
