@@ -8,7 +8,7 @@
 	{% for rp in rapports %}
 		<div onclick="document.location = '{{ path ("ppegsb_getFicheRp", {"id": rp.numRapport} ) }}'" class="col-md-2 col-sm-3 col-xs-6" id="rapport">
 				<div class="well" id="rpContent">
-					<legend>N°{{rp.numRapport}} <span style="float: right;font-size: 75%;margin-top: 5px;">{{rp.dateRapport|date("d/m/Y")}}</span></legend>
+					<legend>N°{{rp.numRapport}} <span style="float: right;font-size: 70%;margin-top: 5px;">{{rp.dateRapport|date("d/m/Y")}}</span></legend>
 					<p>Effectuée par <b>{{rp.matriculePraticien.nomPraticien}} {{rp.matriculePraticien.prenomPraticien}}</b> le <b>{{rp.dateVisite|date("d/m/Y")}}</b></p>
 				</div>
 		</div>
