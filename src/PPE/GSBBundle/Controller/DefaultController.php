@@ -15,6 +15,8 @@ use PPE\GSBBundle\Form\RapportDeVisiteType;
 use PPE\GSBBundle\Form\RapportDeVisiteHandler;
 use PPE\GSBBundle\Form\ActiviteComplementaireType;
 use PPE\GSBBundle\Form\ActiviteComplementaireHandler;
+use PPE\GSBBundle\Form\Avoir;
+use PPE\GSBBundle\Form\Offre;
 
 class DefaultController extends Controller
 {
@@ -44,13 +46,19 @@ class DefaultController extends Controller
         $rp = new RapportDeVisite();
         $form = $this->createForm(new RapportDeVisiteType($em), $rp);
 
+        $utilisateur = $this->container->get('security.context')->getToken()->getUser();
+        $matriculUtilisateur = $utilisateur->getMatriculeColVis()->getMatriculeCol();
+        $medAvoir = $em->getRepository('PPEGSBBundle:Avoir')->FindBy(array('matriculeColAvo' => $matriculUtilisateur));
+
+
+
         $formHandler = new RapportDeVisiteHandler($form, $this->get('request'), $this->getDoctrine()->getManager());
 
         if ($formHandler->process()) {
             return $this->redirect($this->generateUrl('ppegsb_homepage'));
         }
 
-        return $this->render('PPEGSBBundle:Default:fiche_rp.html.twig', array('form' => $form->createView() ));
+        return $this->render('PPEGSBBundle:Default:fiche_rp.html.twig', array('form' => $form->createView(), 'medAvoir' => $medAvoir ));
     }
 
     public function getRpAction($id)

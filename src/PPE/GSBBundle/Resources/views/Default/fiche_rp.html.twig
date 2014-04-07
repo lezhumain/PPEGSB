@@ -68,6 +68,11 @@
 </div>
 
 
+{% for med in medAvoir %}
+    {{med.depotLegalAvoir.depotLegal}}
+{% endfor %}
+
+
 {% endblock %}
 
 {% block inlinejs %}
