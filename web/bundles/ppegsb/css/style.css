@@ -95,6 +95,8 @@
 .panel-body .btn:not(.btn-block) { width:120px;margin-bottom:10px;padding-left: 5px;padding-right: 5px; }
 .panel { height: '' !important;}
 #largeButton { width: 245px;}
+#medBtnR { width: 120px; margin-left: -30px; }
+#medBtnL { width: 120px; margin-left: 19px; }
 
 @media (max-width: 767px) {
   	.familleMed{

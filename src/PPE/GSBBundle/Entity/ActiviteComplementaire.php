@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * ActiviteComplementaire
  *
  * @ORM\Table(name="ACTIVITE_COMPLEMENTAIRE", indexes={@ORM\Index(name="IDX_A6C0FC196CB7C209", columns={"matricule_col_act"})})
- * @ORM\Entity(repositoryClass="PPE\GSBBundle\Repository\ActiviteComplementaireRepository")
+ * @ORM\Entity
  */
 class ActiviteComplementaire
 {
