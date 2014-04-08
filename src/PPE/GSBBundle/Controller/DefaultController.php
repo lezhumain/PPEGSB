@@ -15,8 +15,8 @@ use PPE\GSBBundle\Form\RapportDeVisiteType;
 use PPE\GSBBundle\Form\RapportDeVisiteHandler;
 use PPE\GSBBundle\Form\ActiviteComplementaireType;
 use PPE\GSBBundle\Form\ActiviteComplementaireHandler;
-use PPE\GSBBundle\Form\Avoir;
-use PPE\GSBBundle\Form\Offre;
+use PPE\GSBBundle\Entity\Avoir;
+use PPE\GSBBundle\Entity\Offre;
 
 class DefaultController extends Controller
 {
@@ -43,11 +43,13 @@ class DefaultController extends Controller
     public function ficheRpAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $rp = new RapportDeVisite();
-        $form = $this->createForm(new RapportDeVisiteType($em), $rp);
-
         $utilisateur = $this->container->get('security.context')->getToken()->getUser();
         $matriculUtilisateur = $utilisateur->getMatriculeColVis()->getMatriculeCol();
+
+        $rp = new RapportDeVisite();
+        $rp->setMatriculeCol($utilisateur->getMatriculeColVis());
+
+        $form = $this->createForm(new RapportDeVisiteType($em), $rp);
         $medAvoir = $em->getRepository('PPEGSBBundle:Avoir')->FindBy(array('matriculeColAvo' => $matriculUtilisateur));
 
 
@@ -55,7 +57,29 @@ class DefaultController extends Controller
         $formHandler = new RapportDeVisiteHandler($form, $this->get('request'), $this->getDoctrine()->getManager());
 
         if ($formHandler->process()) {
-            return $this->redirect($this->generateUrl('ppegsb_homepage'));
+            foreach ($medAvoir as $value) {
+                //Gestion des médicaments offert en fonction du stock présent
+                //Pour chaque medicament offert on boucle
+                if ($request->request->get('offre_'.$value->getDepotLegalAvoir()->getDepotLegal()) > 0 && $request->request->get('offre_'.$value->getDepotLegalAvoir()->getDepotLegal()) <= $value->getQteAvoir()){
+
+                    //on créer une nouvelle ligne offre
+                    $offre = new Offre();
+                    $offre->setQteOffre($request->request->get('offre_'.$value->getDepotLegalAvoir()->getDepotLegal()));
+                    $offre->setDepotLegalOffre($value->getDepotLegalAvoir());
+                    $offre->setNumRapportOffre($rp);
+
+                    //on modifie le stock de médicament
+                    $avoir = $em->getRepository('PPEGSBBundle:Avoir')->FindOneBy(array('depotLegalAvoir' => $value->getDepotLegalAvoir(), 'matriculeColAvo' => $matriculUtilisateur));
+                    $avoir->setQteAvoir($avoir->getQteAvoir() - $request->request->get('offre_'.$value->getDepotLegalAvoir()->getDepotLegal()));
+
+                    //On enregistre dans la bdd les deux requettes
+                    $em->persist($offre);
+                    $em->persist($avoir);
+                    $em->flush();
+                }
+            }
+            //On redirige vers le nouveau rapport
+            return $this->redirect($this->generateUrl('ppegsb_getFicheRp', array('id'=> $rp->getNumRapport())));
         }
 
         return $this->render('PPEGSBBundle:Default:fiche_rp.html.twig', array('form' => $form->createView(), 'medAvoir' => $medAvoir ));
