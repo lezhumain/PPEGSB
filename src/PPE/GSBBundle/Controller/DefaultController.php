@@ -42,10 +42,13 @@ class DefaultController extends Controller
 
     public function ficheRpAction(Request $request)
     {
+        //Recuperation des variables
         $em = $this->getDoctrine()->getManager();
         $utilisateur = $this->container->get('security.context')->getToken()->getUser();
         $matriculUtilisateur = $utilisateur->getMatriculeColVis()->getMatriculeCol();
 
+        // Creation du nouveau rapport relié au visiteur connecté
+        // avec le formulaire
         $rp = new RapportDeVisite();
         $rp->setMatriculeCol($utilisateur->getMatriculeColVis());
 
@@ -53,9 +56,10 @@ class DefaultController extends Controller
         $medAvoir = $em->getRepository('PPEGSBBundle:Avoir')->FindBy(array('matriculeColAvo' => $matriculUtilisateur));
 
 
-
         $formHandler = new RapportDeVisiteHandler($form, $this->get('request'), $this->getDoctrine()->getManager());
 
+
+        // Gestion du submit
         if ($formHandler->process()) {
             foreach ($medAvoir as $value) {
                 //Gestion des médicaments offert en fonction du stock présent
@@ -81,10 +85,11 @@ class DefaultController extends Controller
             //On redirige vers le nouveau rapport
             return $this->redirect($this->generateUrl('ppegsb_getFicheRp', array('id'=> $rp->getNumRapport())));
         }
-
         return $this->render('PPEGSBBundle:Default:fiche_rp.html.twig', array('form' => $form->createView(), 'medAvoir' => $medAvoir ));
     }
 
+
+    // Affichage du rapport choisis
     public function getRpAction($id)
     {
         $em = $this->getDoctrine()->getEntityManager();
@@ -103,11 +108,36 @@ class DefaultController extends Controller
 
 
 /*BLOC GESTION DES PRATICIEN*/
-    public function listePraAction()
+    public function listePraAction(Request $Request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $praticien = $em->getRepository('PPEGSBBundle:praticien')->FindAll();
-        return $this->render('PPEGSBBundle:Default:liste_prat.html.twig', array('praticiens' => $praticien));
+        $em = $this->getDoctrine()->getEntityManager();
+        if ($Request->request->get('filtre') !=  '')
+        {
+            $query = $em->createQuery(
+                "SELECT matricule_praticien FROM PPEGSBBundle:praticien WHERE matricule_praticien LIKE '%:value%' OR code_type LIKE '%:value%' OR prenom_praticien LIKE '%:value%' OR nom_praticien LIKE '%:value%' OR adresse_praticien LIKE '%:value%' OR cp_praticien LIKE '%:value%' OR ville_praticien LIKE '%:value%' OR coefnotoriete_praticien LIKE '%:value%' OR titulaire_praticien LIKE '%:value%' OR numTel LIKE '%:value%'
+                ORDER BY matricule_praticien ASC")->setParameter('value', $Request->request->get('filtre'));
+            $praticien = $query->getResult();
+            return $this->render('PPEGSBBundle:Default:table_prat.html.twig', array('praticiens' => $praticien));
+        }
+        else
+        {
+            $praticien = $em->getRepository('PPEGSBBundle:praticien')->FindAll();
+             return $this->render('PPEGSBBundle:Default:liste_prat.html.twig', array('praticiens' => $praticien));
+        }
+SELECT matricule_praticien FROM PPEGSBBundle:praticien 
+WHERE matricule_praticien LIKE '%:value%' 
+OR code_type LIKE '%:value%' 
+OR prenom_praticien LIKE '%:value%' 
+OR nom_praticien LIKE '%:value%' 
+OR adresse_praticien LIKE '%:value%' 
+OR cp_praticien LIKE '%:value%' 
+OR ville_praticien LIKE '%:value%' 
+OR coefnotoriete_praticien LIKE '%:value%' 
+OR titulaire_praticien LIKE '%:value%' 
+OR numTel LIKE '%:value%'
+ORDER BY matricule_praticien ASC
+       
+
     }
 
     /**
