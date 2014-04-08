@@ -46,21 +46,25 @@
 	function filter()
 	{
 		var filtre = $("#filtre").val();
-		$.ajax({
-		    url: "{{ path('ppegsb_listePra') }}",
-		    data: {
-		    	filtre : filtre
-		    },
-		    type: "POST",
-		    dataType : "html",
-		    success: function( data ) {
-			    $("#bodyTable").html(data);
-		    },
-		    error: function( xhr, status ) {
-		        alert( "Sorry, there was a problem!" );
-		        alert(status);
-		    }
-		});
+			$.ajax({
+			    url: "{{ path('ppegsb_listePra') }}",
+			    data: {
+			    	filtre : filtre,
+			    	refreshAjax : 1
+			    },
+			    type: "POST",
+			    dataType : "html",
+			    beforeSend: function(){
+			    	// alert('before');
+			    },
+			    success: function( data ) {
+				    $("#bodyTable").html(data);
+			    },
+			    error: function( xhr, status ) {
+			        alert( "Sorry, there was a problem!" );
+			        alert(status);
+			    }
+			});
 	}
 
 	</script>

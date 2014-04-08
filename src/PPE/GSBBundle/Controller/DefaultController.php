@@ -111,11 +111,14 @@ class DefaultController extends Controller
     public function listePraAction(Request $Request)
     {
         $em = $this->getDoctrine()->getEntityManager();
-        if ($Request->request->get('filtre') !=  '')
+        if ($Request->request->get('filtre') || $Request->request->get('refreshAjax') == "1")
         {
+            $value = $Request->request->get('filtre');
             $query = $em->createQuery(
-                "SELECT matricule_praticien FROM PPEGSBBundle:praticien WHERE matricule_praticien LIKE '%:value%' OR code_type LIKE '%:value%' OR prenom_praticien LIKE '%:value%' OR nom_praticien LIKE '%:value%' OR adresse_praticien LIKE '%:value%' OR cp_praticien LIKE '%:value%' OR ville_praticien LIKE '%:value%' OR coefnotoriete_praticien LIKE '%:value%' OR titulaire_praticien LIKE '%:value%' OR numTel LIKE '%:value%'
-                ORDER BY matricule_praticien ASC")->setParameter('value', $Request->request->get('filtre'));
+                "SELECT p.matriculePraticien, p.prenomPraticien, p.nomPraticien, p.adressePraticien, p.cpPraticien, p.villePraticien, p.coefnotorietePraticien, p.titulairePraticien, tp.typeLieu 
+                FROM PPEGSBBundle:Praticien p 
+                INNER JOIN PPEGSBBundle:TypePraticien tp
+                WHERE p.matriculePraticien LIKE '%".$value."%' OR p.prenomPraticien LIKE '%".$value."%' OR p.nomPraticien LIKE '%".$value."%' OR p.adressePraticien LIKE '%".$value."%' OR p.cpPraticien LIKE '%".$value."%' OR p.villePraticien LIKE '%".$value."%' OR p.coefnotorietePraticien LIKE '%".$value."%' OR p.titulairePraticien LIKE '%".$value."%' ORDER BY p.matriculePraticien ASC");
             $praticien = $query->getResult();
             return $this->render('PPEGSBBundle:Default:table_prat.html.twig', array('praticiens' => $praticien));
         }
@@ -124,19 +127,7 @@ class DefaultController extends Controller
             $praticien = $em->getRepository('PPEGSBBundle:praticien')->FindAll();
              return $this->render('PPEGSBBundle:Default:liste_prat.html.twig', array('praticiens' => $praticien));
         }
-SELECT matricule_praticien FROM PPEGSBBundle:praticien 
-WHERE matricule_praticien LIKE '%:value%' 
-OR code_type LIKE '%:value%' 
-OR prenom_praticien LIKE '%:value%' 
-OR nom_praticien LIKE '%:value%' 
-OR adresse_praticien LIKE '%:value%' 
-OR cp_praticien LIKE '%:value%' 
-OR ville_praticien LIKE '%:value%' 
-OR coefnotoriete_praticien LIKE '%:value%' 
-OR titulaire_praticien LIKE '%:value%' 
-OR numTel LIKE '%:value%'
-ORDER BY matricule_praticien ASC
-       
+
 
     }
 
@@ -204,11 +195,31 @@ ORDER BY matricule_praticien ASC
 
 
 /*BLOC GESTION DES MEDICAMENT*/
-    public function listeMedAction()
+    public function listeMedAction(Request $Request)
     {
         $em = $this->getDoctrine()->getEntityManager();
-        $medicaments = $em->getRepository('PPEGSBBundle:Medicament')->FindAll();
-        return $this->render('PPEGSBBundle:Default:liste_medicament.html.twig', array('medicaments' =>  $medicaments));
+
+
+        if ($Request->request->get('filtre') || $Request->request->get('refreshAjax') == "1")
+        {
+            $value = $Request->request->get('filtre');
+            $query = $em->createQuery(
+                "SELECT p.matriculePraticien, p.prenomPraticien, p.nomPraticien, p.adressePraticien, p.cpPraticien, p.villePraticien, p.coefnotorietePraticien, p.titulairePraticien, tp.typeLieu 
+                FROM PPEGSBBundle:Medicament p 
+                INNER JOIN PPEGSBBundle:TypePraticien tp
+                WHERE p.matriculePraticien LIKE '%".$value."%' OR p.prenomPraticien LIKE '%".$value."%' OR p.nomPraticien LIKE '%".$value."%' OR p.adressePraticien LIKE '%".$value."%' OR p.cpPraticien LIKE '%".$value."%' OR p.villePraticien LIKE '%".$value."%' OR p.coefnotorietePraticien LIKE '%".$value."%' OR p.titulairePraticien LIKE '%".$value."%' ORDER BY p.matriculePraticien ASC");
+            $medicaments = $query->getResult();
+            return $this->render('PPEGSBBundle:Default:table_med.html.twig', array('medicaments' =>  $medicaments));
+        }
+        else
+        {
+            $medicaments = $em->getRepository('PPEGSBBundle:Medicament')->FindAll();
+            return $this->render('PPEGSBBundle:Default:liste_medicament.html.twig', array('medicaments' =>  $medicaments));
+        }
+
+
+
+
     }
 
     /**
