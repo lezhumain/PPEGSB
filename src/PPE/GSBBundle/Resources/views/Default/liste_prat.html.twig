@@ -7,6 +7,7 @@
 	<h2 style="margin-left: 5px;">Praticiens</h2>
 </div>
 <div class="table-responsive">
+	<input type="text" name = "filtre" onkeyup="filter()" id = "filtre">
 	<table class="table table-hover sortable table-striped" id = "tablePrat">
 		<!-- Entête du tableau -->
 		<thead> 
@@ -22,7 +23,7 @@
 			</tr>
 		</thead>
 		<!-- fin de l'entête -->
-		<tbody>
+		<tbody id = "bodyTable">
 		{% for praticien in praticiens %}
 			<tr class="linkFiche" onclick="if ($(window).width() < 767) {document.location = '{{ path ("ppegsb_fichePra", {"id": praticien.matriculePraticien} ) }} '};">
 				<td class = "toFiche"><a href="{{ path ("ppegsb_fichePra", {"id": praticien.matriculePraticien} ) }}"><button class="btn btn-primary"><span class="glyphicon glyphicon-user"></span></button></a></td>
@@ -42,6 +43,29 @@
 
 {% block inlinejs %}
 	<script>
+	function filter()
+	{
+		var filtre = $("#filtre").val();
+			$.ajax({
+			    url: "{{ path('ppegsb_listePra') }}",
+			    data: {
+			    	filtre : filtre,
+			    	refreshAjax : 1
+			    },
+			    type: "POST",
+			    dataType : "html",
+			    beforeSend: function(){
+			    	// alert('before');
+			    },
+			    success: function( data ) {
+				    $("#bodyTable").html(data);
+			    },
+			    error: function( xhr, status ) {
+			        alert( "Sorry, there was a problem!" );
+			        alert(status);
+			    }
+			});
+	}
 
 	</script>
 {% endblock %}

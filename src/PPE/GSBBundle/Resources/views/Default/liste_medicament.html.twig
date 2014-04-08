@@ -18,7 +18,7 @@
 		 			<th>Prix échantillon</th>
 		 		</tr>
 		 	</thead>
- 			<tbody>
+ 			<tbody id = 'bodyTable'>
 			{% for medicament in medicaments %}
 				<tr onclick="if ($(window).width() < 767) {document.location = '{{ path('ppegsb_ficheMed', {'id':medicament.depotLegal})}}' };">
 					<td class="ficheMed"><a href="{{ path('ppegsb_ficheMed', {'id':medicament.depotLegal})}}"><buton class="btn btn-primary"><span class="glyphicon glyphicon-file"></span></buton></a></td>
@@ -32,6 +32,35 @@
 		 	<!-- fin de l'entête -->
 		</table>
 	</div>
+{% endblock %}
+
+
+{% block inlinejs %}
+<script>
+	function filter()
+	{
+		var filtre = $("#filtre").val();
+			$.ajax({
+			    url: "{{ path('ppegsb_listeMed') }}",
+			    data: {
+			    	filtre : filtre,
+			    	refreshAjax : 1
+			    },
+			    type: "POST",
+			    dataType : "html",
+			    beforeSend: function(){
+			    	// alert('before');
+			    },
+			    success: function( data ) {
+				    $("#bodyTable").html(data);
+			    },
+			    error: function( xhr, status ) {
+			        alert( "Sorry, there was a problem!" );
+			        alert(status);
+			    }
+			});
+	}
+</script>
 {% endblock %}
 
 

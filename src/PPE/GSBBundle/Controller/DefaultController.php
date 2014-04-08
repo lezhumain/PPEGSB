@@ -35,17 +35,20 @@ class DefaultController extends Controller
         $matriculUtilisateur = $utilisateur->getMatriculeColVis()->getMatriculeCol();
 
         $em = $this->getDoctrine()->getManager();
-        $rapports = $em->getRepository('PPEGSBBundle:RapportDeVisite')->FindBy(array('matriculeCol' => $matriculUtilisateur));
+		$rapports = $em->getRepository('PPEGSBBundle:RapportDeVisite')->FindBy(array('matriculeCol' => $matriculUtilisateur));
 
         return $this->render('PPEGSBBundle:Default:liste_rp.html.twig', array('rapports' => $rapports));
-    }
+	}
 
     public function ficheRpAction(Request $request)
     {
+        //Recuperation des variables
         $em = $this->getDoctrine()->getManager();
         $utilisateur = $this->container->get('security.context')->getToken()->getUser();
         $matriculUtilisateur = $utilisateur->getMatriculeColVis()->getMatriculeCol();
 
+        // Creation du nouveau rapport relié au visiteur connecté
+        // avec le formulaire
         $rp = new RapportDeVisite();
         $rp->setMatriculeCol($utilisateur->getMatriculeColVis());
 
@@ -53,9 +56,10 @@ class DefaultController extends Controller
         $medAvoir = $em->getRepository('PPEGSBBundle:Avoir')->FindBy(array('matriculeColAvo' => $matriculUtilisateur));
 
 
-
         $formHandler = new RapportDeVisiteHandler($form, $this->get('request'), $this->getDoctrine()->getManager());
 
+
+        // Gestion du submit
         if ($formHandler->process()) {
             foreach ($medAvoir as $value) {
                 //Gestion des médicaments offert en fonction du stock présent
@@ -81,10 +85,11 @@ class DefaultController extends Controller
             //On redirige vers le nouveau rapport
             return $this->redirect($this->generateUrl('ppegsb_getFicheRp', array('id'=> $rp->getNumRapport())));
         }
-
         return $this->render('PPEGSBBundle:Default:fiche_rp.html.twig', array('form' => $form->createView(), 'medAvoir' => $medAvoir ));
     }
 
+
+    // Affichage du rapport choisis
     public function getRpAction($id)
     {
         $em = $this->getDoctrine()->getEntityManager();
@@ -103,11 +108,27 @@ class DefaultController extends Controller
 
 
 /*BLOC GESTION DES PRATICIEN*/
-    public function listePraAction()
+    public function listePraAction(Request $Request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $praticien = $em->getRepository('PPEGSBBundle:praticien')->FindAll();
-        return $this->render('PPEGSBBundle:Default:liste_prat.html.twig', array('praticiens' => $praticien));
+        $em = $this->getDoctrine()->getEntityManager();
+        if ($Request->request->get('filtre') || $Request->request->get('refreshAjax') == "1")
+        {
+            $value = $Request->request->get('filtre');
+            $query = $em->createQuery(
+                "SELECT p.matriculePraticien, p.prenomPraticien, p.nomPraticien, p.adressePraticien, p.cpPraticien, p.villePraticien, p.coefnotorietePraticien, p.titulairePraticien, tp.typeLieu 
+                FROM PPEGSBBundle:Praticien p 
+                INNER JOIN PPEGSBBundle:TypePraticien tp
+                WHERE p.matriculePraticien LIKE '%".$value."%' OR p.prenomPraticien LIKE '%".$value."%' OR p.nomPraticien LIKE '%".$value."%' OR p.adressePraticien LIKE '%".$value."%' OR p.cpPraticien LIKE '%".$value."%' OR p.villePraticien LIKE '%".$value."%' OR p.coefnotorietePraticien LIKE '%".$value."%' OR p.titulairePraticien LIKE '%".$value."%' ORDER BY p.matriculePraticien ASC");
+            $praticien = $query->getResult();
+            return $this->render('PPEGSBBundle:Default:table_prat.html.twig', array('praticiens' => $praticien));
+        }
+        else
+        {
+            $praticien = $em->getRepository('PPEGSBBundle:praticien')->FindAll();
+             return $this->render('PPEGSBBundle:Default:liste_prat.html.twig', array('praticiens' => $praticien));
+        }
+
+
     }
 
     /**
@@ -174,11 +195,31 @@ class DefaultController extends Controller
 
 
 /*BLOC GESTION DES MEDICAMENT*/
-    public function listeMedAction()
+    public function listeMedAction(Request $Request)
     {
         $em = $this->getDoctrine()->getEntityManager();
-        $medicaments = $em->getRepository('PPEGSBBundle:Medicament')->FindAll();
-        return $this->render('PPEGSBBundle:Default:liste_medicament.html.twig', array('medicaments' =>  $medicaments));
+
+
+        if ($Request->request->get('filtre') || $Request->request->get('refreshAjax') == "1")
+        {
+            $value = $Request->request->get('filtre');
+            $query = $em->createQuery(
+                "SELECT p.matriculePraticien, p.prenomPraticien, p.nomPraticien, p.adressePraticien, p.cpPraticien, p.villePraticien, p.coefnotorietePraticien, p.titulairePraticien, tp.typeLieu 
+                FROM PPEGSBBundle:Medicament p 
+                INNER JOIN PPEGSBBundle:TypePraticien tp
+                WHERE p.matriculePraticien LIKE '%".$value."%' OR p.prenomPraticien LIKE '%".$value."%' OR p.nomPraticien LIKE '%".$value."%' OR p.adressePraticien LIKE '%".$value."%' OR p.cpPraticien LIKE '%".$value."%' OR p.villePraticien LIKE '%".$value."%' OR p.coefnotorietePraticien LIKE '%".$value."%' OR p.titulairePraticien LIKE '%".$value."%' ORDER BY p.matriculePraticien ASC");
+            $medicaments = $query->getResult();
+            return $this->render('PPEGSBBundle:Default:table_med.html.twig', array('medicaments' =>  $medicaments));
+        }
+        else
+        {
+            $medicaments = $em->getRepository('PPEGSBBundle:Medicament')->FindAll();
+            return $this->render('PPEGSBBundle:Default:liste_medicament.html.twig', array('medicaments' =>  $medicaments));
+        }
+
+
+
+
     }
 
     /**
@@ -281,7 +322,7 @@ class DefaultController extends Controller
     	
     	$log .= "fin\n";
     	
-    	$monfichier = fopen('log8.txt', 'w');
+    	$monfichier = fopen('log.txt', 'w');
     	fputs($monfichier, $log);
     	fclose($monfichier);
     	
