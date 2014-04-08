@@ -6,8 +6,14 @@
 <div class="titre titreMobile">
 	<h2 style="margin-left: 5px;">Praticiens</h2>
 </div>
+		<div class="col-md-2 col-xs-11 col-xs-offset-1"  id="group-filtre">
+			<div class="input-group">
+				<input type="text" name = "filtre" class="form-control" onkeyup="filter()" id = "filtre" placeholder="Rechercher">
+				
+	  			<span class="input-group-addon" id="input-group-loader"><img src="{{asset('bundles/ppegsb/images/loader.gif')}}" id="gifLoader" alt="Chargement..."></span>
+			</div>
+		</div>
 <div class="table-responsive">
-	<input type="text" name = "filtre" onkeyup="filter()" id = "filtre">
 	<table class="table table-hover sortable table-striped" id = "tablePrat">
 		<!-- Entête du tableau -->
 		<thead> 
@@ -56,9 +62,12 @@
 			    dataType : "html",
 			    beforeSend: function(){
 			    	// alert('before');
+			    	$('#gifLoader').css('visibility', 'visible');
 			    },
 			    success: function( data ) {
 				    $("#bodyTable").html(data);
+			    	$('#gifLoader').hide();
+
 			    },
 			    error: function( xhr, status ) {
 			        alert( "Sorry, there was a problem!" );

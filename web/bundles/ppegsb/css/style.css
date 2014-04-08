@@ -157,7 +157,18 @@
   background-color: rgba(236, 249, 255, 0.88);
 }
 
-#listeRP {
+#group-filtre {
+	margin-right: 5px;
+	margin-bottom: 5px;
+	float: right;
+}
+
+#input-group-loader {
+	background-color: #FFFFFF !important;
+}
+
+#gifLoader {
+	visibility: hidden;
 }
 
 #rapport {
