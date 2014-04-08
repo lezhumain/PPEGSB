@@ -118,7 +118,7 @@ class DefaultController extends Controller
                 "SELECT p.matriculePraticien, p.prenomPraticien, p.nomPraticien, p.adressePraticien, p.cpPraticien, p.villePraticien, p.coefnotorietePraticien, p.titulairePraticien, tp.typeLieu 
                 FROM PPEGSBBundle:Praticien p 
                 INNER JOIN PPEGSBBundle:TypePraticien tp
-                WHERE p.matriculePraticien LIKE '%".$value."%' OR p.prenomPraticien LIKE '%".$value."%' OR p.nomPraticien LIKE '%".$value."%' OR p.adressePraticien LIKE '%".$value."%' OR p.cpPraticien LIKE '%".$value."%' OR p.villePraticien LIKE '%".$value."%' OR p.coefnotorietePraticien LIKE '%".$value."%' OR p.titulairePraticien LIKE '%".$value."%' ORDER BY p.matriculePraticien ASC");
+                WHERE (p.matriculePraticien LIKE '%".$value."%' OR p.prenomPraticien LIKE '%".$value."%' OR p.nomPraticien LIKE '%".$value."%' OR p.adressePraticien LIKE '%".$value."%' OR p.cpPraticien LIKE '%".$value."%' OR p.villePraticien LIKE '%".$value."%' OR p.coefnotorietePraticien LIKE '%".$value."%' OR p.titulairePraticien LIKE '%".$value."%') AND tp.codeType = p.codeType ORDER BY p.matriculePraticien ASC");
             $praticien = $query->getResult();
             return $this->render('PPEGSBBundle:Default:table_prat.html.twig', array('praticiens' => $praticien));
         }
@@ -204,10 +204,11 @@ class DefaultController extends Controller
         {
             $value = $Request->request->get('filtre');
             $query = $em->createQuery(
-                "SELECT p.matriculePraticien, p.prenomPraticien, p.nomPraticien, p.adressePraticien, p.cpPraticien, p.villePraticien, p.coefnotorietePraticien, p.titulairePraticien, tp.typeLieu 
-                FROM PPEGSBBundle:Medicament p 
-                INNER JOIN PPEGSBBundle:TypePraticien tp
-                WHERE p.matriculePraticien LIKE '%".$value."%' OR p.prenomPraticien LIKE '%".$value."%' OR p.nomPraticien LIKE '%".$value."%' OR p.adressePraticien LIKE '%".$value."%' OR p.cpPraticien LIKE '%".$value."%' OR p.villePraticien LIKE '%".$value."%' OR p.coefnotorietePraticien LIKE '%".$value."%' OR p.titulairePraticien LIKE '%".$value."%' ORDER BY p.matriculePraticien ASC");
+                "SELECT DISTINCT m.depotLegal, m.nom, f.libelleFamille, m.prixechantillon
+                FROM PPEGSBBundle:Medicament m 
+                INNER JOIN PPEGSBBundle:Famille f
+                WHERE (m.depotLegal LIKE '%".$value."%' OR m.prixechantillon LIKE '%".$value."%' OR m.nom LIKE '%".$value."%' OR f.libelleFamille LIKE '%".$value."%') AND f.codeFamille = m.codeFamille
+                ");
             $medicaments = $query->getResult();
             return $this->render('PPEGSBBundle:Default:table_med.html.twig', array('medicaments' =>  $medicaments));
         }

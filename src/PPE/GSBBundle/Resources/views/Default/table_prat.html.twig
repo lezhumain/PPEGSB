@@ -1,0 +1,12 @@
+{% for praticien in praticiens %}
+			<tr class="linkFiche" onclick="if ($(window).width() < 767) {document.location = '{{ path ("ppegsb_fichePra", {"id": praticien.matriculePraticien} ) }} '};">
+				<td class = "toFiche"><a href="{{ path ("ppegsb_fichePra", {"id": praticien.matriculePraticien} ) }}"><button class="btn btn-primary"><span class="glyphicon glyphicon-user"></span></button></a></td>
+				<td>{{praticien.nomPraticien}} - <span class="prenom">{{praticien.prenomPraticien}}</span></td>
+				<td class = "adresse">{{praticien.adressePraticien}}</td>
+				<td class = "adresse">{{praticien.cpPraticien}}</td>
+				<td class = "adresse">{{praticien.villePraticien}}</td>
+				<td class = "fullAdresss">{{praticien.adressePraticien}}<br/>{{praticien.villePraticien}} - {{praticien.cpPraticien}}</td>
+				<td class = "notoriete">{{praticien.coefnotorietePraticien}}</td>
+				<td>{{praticien.typeLieu}}</td>
+			</tr>
+{% endfor %}
