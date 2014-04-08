@@ -56,9 +56,11 @@
 			    dataType : "html",
 			    beforeSend: function(){
 			    	// alert('before');
+			    	$('#gifLoader').css('visibility', 'visible');
 			    },
 			    success: function( data ) {
 				    $("#bodyTable").html(data);
+				    $('#gifLoader').css('visibility', 'hidden');
 			    },
 			    error: function( xhr, status ) {
 			        alert( "Sorry, there was a problem!" );
