@@ -3,7 +3,12 @@
 {% block title %}GSB - Liste des médicaments{% endblock %}
 
 {% block body %}
-<input type="text" name = "filtre" onkeyup="filter()" id = "filtre">
+<div class="col-md-2 col-xs-11 col-xs-offset-1"  id="group-filtre">
+	<div class="input-group">
+		<input type="text" name = "filtre" class="form-control" onkeyup="filter()" id = "filtre" placeholder="Rechercher">
+		<span class="input-group-addon" id="input-group-loader"><img src="{{asset('bundles/ppegsb/images/loader.gif')}}" id="gifLoader" alt="Chargement..."></span>
+	</div>
+</div>
 	<div class="titre titreMobile">
 		<h2 style="margin-left: 5px;">Médicaments</h2>
 	</div>
