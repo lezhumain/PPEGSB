@@ -35,10 +35,10 @@ class DefaultController extends Controller
         $matriculUtilisateur = $utilisateur->getMatriculeColVis()->getMatriculeCol();
 
         $em = $this->getDoctrine()->getManager();
-        $rapports = $em->getRepository('PPEGSBBundle:RapportDeVisite')->FindBy(array('matriculeCol' => $matriculUtilisateur));
+		$rapports = $em->getRepository('PPEGSBBundle:RapportDeVisite')->FindBy(array('matriculeCol' => $matriculUtilisateur));
 
         return $this->render('PPEGSBBundle:Default:liste_rp.html.twig', array('rapports' => $rapports));
-    }
+	}
 
     public function ficheRpAction(Request $request)
     {
@@ -322,7 +322,7 @@ class DefaultController extends Controller
     	
     	$log .= "fin\n";
     	
-    	$monfichier = fopen('log8.txt', 'w');
+    	$monfichier = fopen('log.txt', 'w');
     	fputs($monfichier, $log);
     	fclose($monfichier);
     	
