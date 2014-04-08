@@ -11,17 +11,7 @@
 	margin-top: 30px;
 }
 
-#miniMenu {
-	margin-top: 10px;
-	overflow-x: hidden;
-}
 
-#miniMenu .btn:not(.btn-block) {
-	width:120px;
-	margin-bottom:10px;
-	padding-left: 5px;
-	padding-right: 5px; 
-}
 
 #largeButton {
      width: 245px;
@@ -92,11 +82,24 @@
 }
 
 /* DESIGN mobile  */
-.panel-body .btn:not(.btn-block) { width:120px;margin-bottom:10px;padding-left: 5px;padding-right: 5px; }
-.panel { height: '' !important;}
-#largeButton { width: 245px;}
-#medBtnR { width: 120px; margin-left: -30px; }
-#medBtnL { width: 120px; margin-left: 19px; }
+
+#miniMenu {
+	margin-top: 10px;
+	overflow-x: hidden;
+}
+
+#miniMenu .btn:not(.btn-block) {
+	width:120px;
+	margin-bottom:10px;
+	padding-left: 5px;
+	padding-right: 5px; 
+	font-size: 100%;
+}
+
+.titre {
+	margin-top: 0;
+}
+
 
 @media (max-width: 767px) {
   	.familleMed{
@@ -122,15 +125,31 @@
 		margin-bottom: 0px;
 		padding-bottom: 0px;
 	}
+
+	.titre {
+		text-align: center;
+		margin-bottom: 5px;
+		margin-top: 5px;
+	}
+
 }
 
+	#head{
+		margin-bottom: 0px;
+		padding-bottom: 0px;
+	}
 
 
 
 #onMobile{
 	margin-bottom: 0px;
 }
-
+@media (min-width: 767px) {
+	.titreMobile{
+		margin-bottom: 5px;
+		display: none;
+	}
+}
 
 /* Design striped table */
 .table-striped > tbody > tr:nth-child(odd) > td,

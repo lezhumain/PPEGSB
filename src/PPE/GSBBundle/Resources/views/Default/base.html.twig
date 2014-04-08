@@ -34,11 +34,12 @@
                         <li><a href="{{ path('ppegsb_listeMed') }}">Medicaments</a></li>
                         <li><a href="{{ path('ppegsb_mapPra') }}">Carte</a></li>
                         <li><a href="{{ path('ppegsb_homepage' ) }}">Mes rapports</b></a></li>
-                        <li><a href="{{ path('ppegsb_listActComp' ) }}">Activités Complémentaires</b></a></li>
+                        <li><a href="{{ path('ppegsb_listActComp' ) }}">Activités</b></a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right" style="margin-top: 10px; margin-right: 10px;">      
-                        <a href="{{ path('ppegsb_newFicheRp') }}"><button type="button" class="btn btn-primary">Nouveau Rapport</button></a>
-                        <a href="{{ path('ppegsb_logout') }}"><button type="button" class="btn btn-danger">Deconnexion</button></a>
+                        <a href="{{ path('ppegsb_newFicheRp') }}"><button type="button" class="btn btn-primary"  id="btnTooltipRP" data-toggle="tooltip" data-placement="bottom" title="Nouveau rapport" ><span class="glyphicon glyphicon-edit"></span></button></a>
+                        <a href="{{ path('ppegsb_formActComp') }}"><button type="button" class="btn btn-info" id="btnTooltipAct" data-toggle="tooltip" data-placement="bottom" title="Nouvelle activité complémentaire"><span class="glyphicon glyphicon-check"></span></button></a>
+                        <a href="{{ path('ppegsb_logout') }}"><button type="button" class="btn btn-danger" id="btnTooltipOff" data-toggle="tooltip" data-placement="left" title="Deconnexion"><span class="glyphicon glyphicon-off"></span></button></a>
                     </ul>
                 </div><!--/.nav-collapse -->
                 <div class="nav navbar-nav navbar-right" id="bouton-deco-new">
@@ -64,24 +65,15 @@
                                         <div class="row">
                                             <div class="col-xs-6 col-md-6">
                                               <a href="{{ path('ppegsb_homepage' ) }}" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-list"></span> <br/>Mes rapports</a>
-                                              <a href="{{ path('ppegsb_listeMed') }}" class="btn btn-info btn-lg" role="button"><span class="glyphicon glyphicon-list-alt"></span> <br/>Médicaments</a>
+                                              <a href="{{ path('ppegsb_newFicheRp') }}" class="btn btn-warning btn-lg" role="button"><span class="glyphicon glyphicon-edit"></span> <br/>Nouveau</a>
+                                              <a href="{{ path('ppegsb_listActComp') }}" class="btn btn-info btn-lg" role="button"><span class="glyphicon glyphicon-signal"></span> <br/>Activités</a>
+                                              <a href="{{ path('ppegsb_formActComp') }}" class="btn btn-success btn-lg" role="button"><span class="glyphicon glyphicon-check"></span> <br/>Nouvelle activité</a>
                                             </div>
                                             <div class="col-xs-6 col-md-6">
                                               <a href="{{ path('ppegsb_listePra') }}" class="btn btn-success btn-lg" role="button"><span class="glyphicon glyphicon-user"></span> <br/>Praticiens</a>
-                                              <a href="{{ path('ppegsb_logout') }}" class="btn btn-danger btn-lg" role="button"><span class="glyphicon glyphicon-off"></span> <br/>Deconnexion</a>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-xs-6 col-md-6">
-                                                <div class="col-md-6 col-xs-6">
-                                                    <a href="{{ path('ppegsb_newFicheRp') }}" class="btn btn-warning btn-lg btn-block" id="medBtnL" role="button"><span class="glyphicon glyphicon-edit"></span> Nouveau </a>
-                                                </div>
-                                                <div class="col-md-6 col-xs-6">
-                                                    <a href="{{ path('ppegsb_listActComp') }}" class="btn btn-success btn-lg btn-block" id="medBtnR" role="button"><span class="glyphicon glyphicon-check"></span> Activités </a>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-6 col-md-6">
-                                                <a href="{{ path('ppegsb_mapPra') }}" class="btn btn-primary btn-lg btn-block" id="largeButton" role="button"><span class="glyphicon glyphicon-map-marker"></span> Carte</a>
+                                              <a href="{{ path('ppegsb_logout') }}" class="btn btn-danger btn-lg" role="button"><span class="glyphicon glyphicon-off"></span> <br/>Déconnexion</a>
+                                              <a href="{{ path('ppegsb_listeMed') }}" class="btn btn-info btn-lg" role="button"><span class="glyphicon glyphicon-book"></span> <br/>Médicaments</a>
+                                              <a href="{{ path('ppegsb_mapPra') }}" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-map-marker"></span> <br/>Carte</a>
                                             </div>
                                         </div>
                                     </center>
@@ -145,6 +137,10 @@
                 // Bind event listener
                 $(window).resize(checkWidth);
             });
+
+            $('#btnTooltipRP').tooltip()
+            $('#btnTooltipAct').tooltip()
+            $('#btnTooltipOff').tooltip()
         </script>
         {% endblock %}   
 

@@ -5,6 +5,9 @@
 {% block body %}
 
 <div class="container listeRP">
+	<div class="titre">
+		<h2>Mes activités complémentaires</h2>
+	</div>
 	{% for act in activites %}
 		<div onclick="document.location = '{{ path ("ppegsb_getFicheAct", {"id": act.numAct} ) }}'" class="col-md-2 col-sm-3 col-xs-6" id="rapport">
 				<div class="well" id="rpContent">
