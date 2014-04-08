@@ -57,23 +57,31 @@
     				</div>
     			</div>
     	
-    			<div class="row" style='margin-top: 10px;'>
-    				<div class="col-md-12 col-xs-12">{# Submit #}
-    					{{form(form)}}
-    				</div>
-    			</div>
-    		</div>
-            <div class="col-md-6">
+            </div>
+            {% if medAvoir %}
+            <div class="col-md-6 well">
+                <h3>Médicaments</h3>
+                <table>
                 {% for med in medAvoir %}
-                    {{med.depotLegalAvoir.depotLegal}} - <input type="number" min = "0" max = "{{med.qteAvoir}}" name = "offre_{{med.depotLegalAvoir.depotLegal}}" value = "0">
+                    <tr>
+                        <td>{{med.depotLegalAvoir.depotLegal}}</td>
+                        <td>
+                            <input type="number" min = "0" max = "{{med.qteAvoir}}" name = "offre_{{med.depotLegalAvoir.depotLegal}}" class="form-control input-sm" value = "0">
+                        </td>
+                             <td>/ {{med.qteAvoir}}</td>
+                    </tr>
                 {% endfor %}
+                </table>
+            </div>
+            {% endif %}
+        </div>
+        <div class="row" style='margin-top: 10px;'>
+            <div class="col-md-6 col-xs-12" style="margin-bottom: 5px;">{# Submit #}
+                {{form(form)}}
             </div>
         </div>
     </form>
 </div>
-
-
-
 
 {% endblock %}
 
