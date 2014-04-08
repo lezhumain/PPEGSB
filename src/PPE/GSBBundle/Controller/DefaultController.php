@@ -289,12 +289,29 @@ class DefaultController extends Controller
     }
 /******************************/
 
-    /****BLOC DE GESTION ACT COMP **/        
+    /****BLOC DE GESTION ACT COMP **/  
+
+    public function listActCompAction()
+    {
+        $utilisateur = $this->container->get('security.context')->getToken()->getUser();
+        $matriculUtilisateur = $utilisateur->getMatriculeColVis()->getMatriculeCol();
+
+        $em = $this->getDoctrine()->getManager();
+        $act = $em->getRepository('PPEGSBBundle:ActiviteComplementaire')->FindBy(array('matriculeColAct' => $matriculUtilisateur));
+
+        return $this->render('PPEGSBBundle:Default:list_act.html.twig', array('activites' => $act));
+    }
+
     public function formActCompAction(Request $request)
     {
+        $utilisateur = $this->container->get('security.context')->getToken()->getUser();
+        $matriculUtilisateur = $utilisateur->getMatriculeColVis();
+
         $em = $this->getDoctrine()->getManager();
         $act = new ActiviteComplementaire();
         $form = $this->createForm(new ActiviteComplementaireType($em), $act);
+
+        $act->setMatriculeColAct($matriculUtilisateur);
 
         $formHandler = new ActiviteComplementaireHandler($form, $this->get('request'), $this->getDoctrine()->getManager());
 
@@ -305,15 +322,27 @@ class DefaultController extends Controller
         return $this->render('PPEGSBBundle:Default:form_actComp.html.twig', array('form' => $form->createView() ));
     }
 
-    // public function getRpAction($id)
-    // {
-    //     $em = $this->getDoctrine()->getEntityManager();
-    //     $rp = $em->find('PPEGSBBundle:RapportDeVisite', $id);
+    public function updateActCompAction($id) {
+        // On recherche l'avis
+        $em = $this->getDoctrine()->getEntityManager();
+        $act = $em->find('PPEGSBBundle:ActiviteComplementaire', $id) ;
+        
+        if ($act == null) {
+            // S'il n'existe pas, on affiche une page 404
+            throw $this->createNotFoundException("Cette activité n'existe pas");
+        }
+        else {
+            // Création du formulaire
+            $form = $this->createForm(new ActiviteComplementaireType, $act);
+        
+            // Traitement du formulaire
+            $formHandler = new ActiviteComplementaireHandler($form, $this->get('request'), $this->getDoctrine()->getEntityManager()); 
+            if ($formHandler->process()) {
+                return $this->redirect($this->generateUrl('ppegsb_getFicheAct', array('id' => $id)));
+            }
 
-    //     if (empty($rp)) {
-    //         throw $this->createNotFoundException("Identifiant inconnu");
-    //     }
-
-    //     return $this->render('PPEGSBBundle:Default:get_rp.html.twig', array('rp' => $rp));
-    // }
+            // Affichage du formulaire
+            return $this->render('PPEGSBBundle:Default:form_actComp.html.twig', array('form' => $form->createView()));
+        }
+    }
 }

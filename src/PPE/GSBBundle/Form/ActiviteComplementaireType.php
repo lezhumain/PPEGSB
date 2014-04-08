@@ -23,7 +23,7 @@ class ActiviteComplementaireType extends AbstractType
         $builder->add('lieuAct');
 
         //Ici c'est le coll qui est CONNECTE
-        $builder->add('matriculeColAct', 'hidden', array('data' => '1'));   
+        // $builder->add('matriculeColAct', 'hidden', array('data' => '1'));   
                                                         
                                                           
         $builder->add('matriculeColOrg', 'entity', array('class'     =>  'PPEGSBBundle:Collaborateur',
