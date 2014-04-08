@@ -23,6 +23,18 @@
 					<textarea class="form-control" rows="5" disabled>{{ medicament.contreindic }}</textarea>
 				</div>
 			</h5>
+
+			<h5><b>Déconseillé avec : </b></h5>
+			{% if medicament.depotLegalPerturbe|length > 0 %}
+				<ul>
+					{% for perturbant in medicament.depotLegalPerturbe %}
+					<li><a href="{{ path('ppegsb_ficheMed', {'id':perturbant.depotLegal})}}">{{ perturbant.nom }}</a></li>
+					{% endfor %}
+				</ul>
+
+			{% else %}
+				<div class = "well" style = " text-align: center; font-weight: bold;"> Aucune médicament n'est déconseillé avec celui-ci</div>
+			{% endif %}
 			
 	</div>
 
@@ -32,11 +44,5 @@
 		</div>
 	</div>
 </div>
-
-
-{% for perturbant in medicament.depotLegalPerturbe %}
-{{ perturbant.nom }} <br>
-
-{% endfor %}
 
 {% endblock %}

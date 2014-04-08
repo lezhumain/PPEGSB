@@ -12,3 +12,19 @@ parameters:
     mailer_password: null
     locale: fr
     secret: tokendelamortquituepastropbeaucoupalorsmaisunpeuquandmeme
+
+
+     # This file is auto-generated during the composer install
+# parameters:
+#     database_driver: pdo_sqlsrv
+#     database_host: 193.252.48.189
+#     database_port: 1433
+#     database_name: BDD_SIO7
+#     database_user: etudiant3
+#     database_password: vivelabasse
+#     mailer_transport: smtp
+#     mailer_host: 127.0.0.1
+#     mailer_user: null
+#     mailer_password: null
+#     locale: fr
+#     secret: tokendelamortquituepastropbeaucoupalorsmaisunpeuquandmeme

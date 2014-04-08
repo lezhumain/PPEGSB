@@ -5,7 +5,7 @@
 {% block body %}
 
 <div class="container">
-    <form class="form" method = 'post'>
+    <form class="form" method = 'post' {{ form_enctype(form) }}>
     	<div class="row">
     		<legend>Nouveau Rapport</legend>
     		<div class="col-md-6">
@@ -63,9 +63,16 @@
     				</div>
     			</div>
     		</div>
-    	</div>
+            <div class="col-md-6">
+                {% for med in medAvoir %}
+                    {{med.depotLegalAvoir.depotLegal}} - <input type="number" min = "0" max = "{{med.qteAvoir}}" name = "offre_{{med.depotLegalAvoir.depotLegal}}" value = "0">
+                {% endfor %}
+            </div>
+        </div>
     </form>
 </div>
+
+
 
 
 {% endblock %}

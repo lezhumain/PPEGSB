@@ -5,38 +5,17 @@
 {% block body %}
 
 <div class="container listeRP">
+	<div class="titre">
+		<h2>Mes rapports</h2>
+	</div>
 	{% for rp in rapports %}
 		<div onclick="document.location = '{{ path ("ppegsb_getFicheRp", {"id": rp.numRapport} ) }}'" class="col-md-2 col-sm-3 col-xs-6" id="rapport">
 				<div class="well" id="rpContent">
-					<legend>N°{{rp.numRapport}} <span style="float: right;font-size: 75%;margin-top: 5px;">{{rp.dateRapport|date("d/m/Y")}}</span></legend>
+					<legend>N°{{rp.numRapport}} <span style="float: right;font-size: 70%;margin-top: 5px;">{{rp.dateRapport|date("d/m/Y")}}</span></legend>
 					<p>Effectuée par <b>{{rp.matriculePraticien.nomPraticien}} {{rp.matriculePraticien.prenomPraticien}}</b> le <b>{{rp.dateVisite|date("d/m/Y")}}</b></p>
 				</div>
 		</div>
 	{% endfor %}
 </div>
 
-{# <div class="table-responsive">
-	 <table class="table table-hover sortable table-striped" id = "tableRp">
-	 	<!-- Entête du tableau -->
-	 	<thead> 
-	 		<tr>
-	 			<th class="numRapport">Numero</th>
-	 			<th>Praticien</th>
-	 			<th>Date visite</th>
-	 			<th>Date rapport</th>
-	 		</tr>
-	 	</thead>
-	 	<tbody>
- 		{% for rp in rapports %}
-	 		<tr onclick="if ($(window).width() < 767) {document.location = '{{ path ("ppegsb_getFicheRp", {"id": rp.numRapport} ) }}' };">
-				<td class="numRapport"><a href="{{ path ("ppegsb_getFicheRp", {"id": rp.numRapport} ) }}"><button class="btn btn-primary">{{rp.numRapport}}</button></a></td>
-				<td>{{rp.dateVisite|date("d/m/Y")}}</td>
-				<td>{{rp.dateRapport|date("d/m/Y")}}</td>
-				<td>{{rp.matriculePraticien.nomPraticien}} - {{rp.matriculePraticien.prenomPraticien}}</td>
-	 		</tr>
- 		{% endfor %}
-	 	</tbody>
-	 	<!-- fin de l'entête -->
-	 </table>
-</div> #}
 {% endblock %}

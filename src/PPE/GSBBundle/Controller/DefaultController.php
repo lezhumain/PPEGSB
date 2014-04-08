@@ -5,12 +5,18 @@ namespace PPE\GSBBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\SecurityContext;
 use PPE\GSBBundle\Entity;
 use PPE\GSBBundle\Entity\Visiteur;
 use PPE\GSBBundle\Entity\RapportDeVisite;
+use PPE\GSBBundle\Entity\ActiviteComplementaire;
 use PPE\GSBBundle\Entity\Medicament;
 use PPE\GSBBundle\Form\RapportDeVisiteType;
 use PPE\GSBBundle\Form\RapportDeVisiteHandler;
+use PPE\GSBBundle\Form\ActiviteComplementaireType;
+use PPE\GSBBundle\Form\ActiviteComplementaireHandler;
+use PPE\GSBBundle\Entity\Avoir;
+use PPE\GSBBundle\Entity\Offre;
 
 class DefaultController extends Controller
 {
@@ -25,32 +31,58 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
+        $utilisateur = $this->container->get('security.context')->getToken()->getUser();
+        $matriculUtilisateur = $utilisateur->getMatriculeColVis()->getMatriculeCol();
+
         $em = $this->getDoctrine()->getManager();
-        $rapports = $em->getRepository('PPEGSBBundle:RapportDeVisite')->FindAll();
-    
+		$rapports = $em->getRepository('PPEGSBBundle:RapportDeVisite')->FindBy(array('matriculeCol' => $matriculUtilisateur));
+
         return $this->render('PPEGSBBundle:Default:liste_rp.html.twig', array('rapports' => $rapports));
 	}
 
-    /**
-     * \brief 
-     *      Fonction d'affichage du formulaire dun rapport de visite
-     * \param new
-     *      0 affichage read only
-     *      1 nouveau rapport   
-     */
     public function ficheRpAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        $utilisateur = $this->container->get('security.context')->getToken()->getUser();
+        $matriculUtilisateur = $utilisateur->getMatriculeColVis()->getMatriculeCol();
+
         $rp = new RapportDeVisite();
+        $rp->setMatriculeCol($utilisateur->getMatriculeColVis());
+
         $form = $this->createForm(new RapportDeVisiteType($em), $rp);
+        $medAvoir = $em->getRepository('PPEGSBBundle:Avoir')->FindBy(array('matriculeColAvo' => $matriculUtilisateur));
+
+
 
         $formHandler = new RapportDeVisiteHandler($form, $this->get('request'), $this->getDoctrine()->getManager());
 
         if ($formHandler->process()) {
-            return $this->redirect($this->generateUrl('ppegsb_homepage'));
+            foreach ($medAvoir as $value) {
+                //Gestion des médicaments offert en fonction du stock présent
+                //Pour chaque medicament offert on boucle
+                if ($request->request->get('offre_'.$value->getDepotLegalAvoir()->getDepotLegal()) > 0 && $request->request->get('offre_'.$value->getDepotLegalAvoir()->getDepotLegal()) <= $value->getQteAvoir()){
+
+                    //on créer une nouvelle ligne offre
+                    $offre = new Offre();
+                    $offre->setQteOffre($request->request->get('offre_'.$value->getDepotLegalAvoir()->getDepotLegal()));
+                    $offre->setDepotLegalOffre($value->getDepotLegalAvoir());
+                    $offre->setNumRapportOffre($rp);
+
+                    //on modifie le stock de médicament
+                    $avoir = $em->getRepository('PPEGSBBundle:Avoir')->FindOneBy(array('depotLegalAvoir' => $value->getDepotLegalAvoir(), 'matriculeColAvo' => $matriculUtilisateur));
+                    $avoir->setQteAvoir($avoir->getQteAvoir() - $request->request->get('offre_'.$value->getDepotLegalAvoir()->getDepotLegal()));
+
+                    //On enregistre dans la bdd les deux requettes
+                    $em->persist($offre);
+                    $em->persist($avoir);
+                    $em->flush();
+                }
+            }
+            //On redirige vers le nouveau rapport
+            return $this->redirect($this->generateUrl('ppegsb_getFicheRp', array('id'=> $rp->getNumRapport())));
         }
 
-        return $this->render('PPEGSBBundle:Default:fiche_rp.html.twig', array('form' => $form->createView() ));
+        return $this->render('PPEGSBBundle:Default:fiche_rp.html.twig', array('form' => $form->createView(), 'medAvoir' => $medAvoir ));
     }
 
     public function getRpAction($id)
@@ -101,30 +133,6 @@ class DefaultController extends Controller
         return $this->render('PPEGSBBundle:Default:fiche_prat.html.twig', array("gps" => $tab, 'praticien' => $praticien ));
     }
 
-/*    public function mapPraAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $praticien = $em->getRepository('PPEGSBBundle:praticien')->FindAll();
-
-        if (empty($praticien))
-        {
-            throw $this->createNotFoundException("Pas de praticien à localiser :(");
-        }
-
-        $adresses = '';
-        foreach ($praticien as $data)
-        {
-            $adresses .= $data->getAdressePraticien()." ".$data->getCpPraticien()." ".$data->getVillePraticien()."/";
-        }
-        
-//        print_r($adresses);
-
-//        $adresses = json_encode($adresses);
-
-//        print_r($adresses);
-
-        return $this->render('PPEGSBBundle:Default:map.html.twig', array('adresses' => $adresses, 'praticiens' => $praticien));
-    }*/
 
     public function mapPraAction()
     {
@@ -134,17 +142,6 @@ class DefaultController extends Controller
         if (empty($praticien))
             throw $this->createNotFoundException("Pas de praticien à localiser :(");
 
-        $i = 0;
-
-        // foreach ($praticien as $data)
-        // {
-        //     $tab[] = $this->getMapFromAdress($data->getAdressePraticien()." ".$data->getCpPraticien()." ".$data->getVillePraticien());
-        //     echo "{ <br>";
-        //     echo "lat: ". $tab[$i]['lat'] .", <br> lon: ". $tab[$i]['lng']. ", <br> title: '". $data->getNomPraticien()." ". $data->getPrenomPraticien()."', html: '".$data->getNomPraticien()." ". $data->getPrenomPraticien() ."  Tel: ". $data->getNumtel() ."  Adresse: ". $data->getAdressePraticien() .", ". $data->getCpPraticien() .", ". $data->getVillePraticien() ."'<br>";
-        //     echo "}, <br>";
-        // $i++;
-        // }
-        
         return $this->render('PPEGSBBundle:Default:map.html.twig');
     }
 
@@ -164,7 +161,6 @@ class DefaultController extends Controller
         $req = file_get_contents($url);
         $gps = json_decode($req, true);
 
-
         if ($gps['status'] !=  'ZERO_RESULTS')
         {
             $lat = $gps['results'][0]['geometry']['location']['lat'];
@@ -173,12 +169,6 @@ class DefaultController extends Controller
             $tab["lng"] = $lng;
             return $tab;
          }
-         else
-         {
-            
-         }
-         
-
     }
 /******************************/
 
@@ -236,8 +226,7 @@ class DefaultController extends Controller
     private function hachUserMdp($user)
     {
     	if( get_class($user) != "PPE\GSBBundle\Entity\Collaborateur" )
-    		return null;// throw exception...
-			//return "no";
+    		return null;
     	else
     	{
     		$factory = $this->get('security.encoder_factory');
@@ -251,35 +240,9 @@ class DefaultController extends Controller
     		$user->setMdpCol($password);
     		
     		return $user;
-    		//return $oldpass . " | " . $password . " <-> " . $user->getSalt();
     	}
 	}
-
-    /**
-     * \brief
-     *      Hash le mot de passe d'un user
-     *      avec l'algo SHA512 via la fonction
-     *      hash('SHA512', motDePasse.salt)
-     * \param 
-     *      PPE\GSBBundle\Entity\Visiteur $user
-     * \return
-     *      NULL | PPE\GSBBundle\Entity\Visiteur $user
-     */
-/*    private function hachUserMdp1($user)
-    {
-        if( get_class($user) != "PPE\GSBBundle\Entity\Visiteur" )
-            //return null;// throw exception...
-            return "no";
-        else
-        {
-            $oldpass = $user->getPassword();
-            $password = hash('sha512', $oldpass.$user->getSalt());
-    
-            //return $user->setPassword($password);
-            return $oldpass . " | " . $password . " <-> " . $user->getSalt();
-        }
-    }
-*/    
+   
 	/**
 	 * \brief
 	 * 		Genere un salt aleatoire
@@ -307,17 +270,14 @@ class DefaultController extends Controller
 	   		//$col = $this->hachUserMdp($col);
 			if( $col == null ) // erreur
 			{
-				$log .= "Erreur at " . $col->toString() . "\n";
 				$ret = "erreur";
 				break;
 			}
 			else
 				$em->persist($col);
-				//$log .= $col->toString() . "\n\t" . $this->hachMdp($col->getMdpCol(), $col->getSaltCol(), $col) . "\n";
-				//$log .= $col->toString() . "\n";
                 $col->setMdpCol($this->hachMdp('123Soleil', $col->getSaltCol(), $col));
     	}
-    	$em->flush(); // On declenche l'enregistrement
+    	$em->flush();
     	
     	$log .= "fin\n";
     	
@@ -328,13 +288,61 @@ class DefaultController extends Controller
     	return $ret;
     }
 /******************************/
-/*        $medAvoir = $em->getRepository('PPEGSBBundle:Collaborateur')->FindAll();
-            {% for pp in medAvoir %}
-                {% for ppp in pp.matriculeColAvo %}
-                    {{pp.nomCol}} - {{pp.prenomCol}}
-                    {{ ppp.depotLegalAvoir.depotLegal }}
-                {% endfor %}
 
-            {% endfor %}
-    */
+    /****BLOC DE GESTION ACT COMP **/  
+
+    public function listActCompAction()
+    {
+        $utilisateur = $this->container->get('security.context')->getToken()->getUser();
+        $matriculUtilisateur = $utilisateur->getMatriculeColVis()->getMatriculeCol();
+
+        $em = $this->getDoctrine()->getManager();
+        $act = $em->getRepository('PPEGSBBundle:ActiviteComplementaire')->FindBy(array('matriculeColAct' => $matriculUtilisateur));
+
+        return $this->render('PPEGSBBundle:Default:list_act.html.twig', array('activites' => $act));
+    }
+
+    public function formActCompAction(Request $request)
+    {
+        $utilisateur = $this->container->get('security.context')->getToken()->getUser();
+        $matriculUtilisateur = $utilisateur->getMatriculeColVis();
+
+        $em = $this->getDoctrine()->getManager();
+        $act = new ActiviteComplementaire();
+        $form = $this->createForm(new ActiviteComplementaireType($em), $act);
+
+        $act->setMatriculeColAct($matriculUtilisateur);
+
+        $formHandler = new ActiviteComplementaireHandler($form, $this->get('request'), $this->getDoctrine()->getManager());
+
+        if ($formHandler->process()) {
+            return $this->redirect($this->generateUrl('ppegsb_homepage'));
+        }
+
+        return $this->render('PPEGSBBundle:Default:form_actComp.html.twig', array('form' => $form->createView() ));
+    }
+
+    public function updateActCompAction($id) {
+        // On recherche l'avis
+        $em = $this->getDoctrine()->getEntityManager();
+        $act = $em->find('PPEGSBBundle:ActiviteComplementaire', $id) ;
+        
+        if ($act == null) {
+            // S'il n'existe pas, on affiche une page 404
+            throw $this->createNotFoundException("Cette activité n'existe pas");
+        }
+        else {
+            // Création du formulaire
+            $form = $this->createForm(new ActiviteComplementaireType, $act);
+        
+            // Traitement du formulaire
+            $formHandler = new ActiviteComplementaireHandler($form, $this->get('request'), $this->getDoctrine()->getEntityManager()); 
+            if ($formHandler->process()) {
+                return $this->redirect($this->generateUrl('ppegsb_getFicheAct', array('id' => $id)));
+            }
+
+            // Affichage du formulaire
+            return $this->render('PPEGSBBundle:Default:form_actComp.html.twig', array('form' => $form->createView()));
+        }
+    }
 }

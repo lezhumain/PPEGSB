@@ -195,26 +195,26 @@ class Visiteur implements AdvancedUserInterface //, \Serializable
     /*****************************/
     /*   methode de \Serialize   */
     /*****************************/
-    /*
+    
     public function serialize()
     {
     	return serialize(array(
-    			$this->getMatricule(),
+    			$this->matriculeColVis
     	));
     }
-    */
+    
     
     /*
      * see \Serializable::unserialize()
      */
-    /*
+    
     public function unserialize($serialized)
     {
     	list (
-    			$this->getMatricule(),
+    			$this->matriculeColVis
     	) = unserialize($serialized);
     }
-    */
+    
     
     /*****************************/
     /*****************************/
