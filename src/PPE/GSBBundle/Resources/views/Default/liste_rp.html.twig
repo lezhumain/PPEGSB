@@ -5,6 +5,9 @@
 {% block body %}
 
 <div class="container listeRP">
+	<div class="titre">
+		<h2>Mes rapports</h2>
+	</div>
 	{% for rp in rapports %}
 		<div onclick="document.location = '{{ path ("ppegsb_getFicheRp", {"id": rp.numRapport} ) }}'" class="col-md-2 col-sm-3 col-xs-6" id="rapport">
 				<div class="well" id="rpContent">

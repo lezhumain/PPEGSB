@@ -3,7 +3,9 @@
 {% block title %}GSB - Liste des praticiens{% endblock %}
 
 {% block body %}
-
+<div class="titre titreMobile">
+	<h2 style="margin-left: 5px;">Praticiens</h2>
+</div>
 <div class="table-responsive">
 	<table class="table table-hover sortable table-striped" id = "tablePrat">
 		<!-- Entête du tableau -->
@@ -32,7 +34,6 @@
 				<td class = "notoriete">{{praticien.coefnotorietePraticien}}</td>
 				<td>{{praticien.codeType.typeLieu}}</td>
 			</tr>
-		</a>
 		{% endfor %}
 		</tbody>
 	</table>
