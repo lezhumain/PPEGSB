@@ -7,12 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Medicament
  *
- * @ORM\Table(name="MEDICAMENT", indexes=
- * {
- * 		@ORM\Index(name="FK_MEDICAMENT_code_famille", columns={"code_famille"}),
- * 		@ORM\Index(name="FK_MEDICAMENT_code_present", columns={"code_present"})
- * })
- *
+ * @ORM\Table(name="MEDICAMENT", indexes={@ORM\Index(name="IDX_91036F051CD4B68F", columns={"code_famille"}), @ORM\Index(name="IDX_91036F05C51BEA8B", columns={"code_present"})})
  * @ORM\Entity
  */
 class Medicament
@@ -22,44 +17,44 @@ class Medicament
      *
      * @ORM\Column(name="depot_legal", type="string", length=25)
      * @ORM\Id
-	 * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     protected $depotLegal;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="composition", type="text", length=20, nullable=false)
+     * @ORM\Column(name="composition", type="text", length=-1, nullable=false)
      */
-    private $composition;
+    protected $composition;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="text", length=100, nullable=false)
+     * @ORM\Column(name="effet", type="text", length=-1, nullable=false)
      */
-    private $nom;
+    protected $effet;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="effet", type="text", length=16, nullable=false)
+     * @ORM\Column(name="contreindic", type="text", length=-1, nullable=false)
      */
-    private $effet;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="contreindic", type="text", length=16, nullable=false)
-     */
-    private $contreindic;
+    protected $contreindic;
 
     /**
      * @var float
      *
      * @ORM\Column(name="prixechantillon", type="float", precision=53, scale=0, nullable=false)
      */
-    private $prixechantillon;
+    protected $prixechantillon;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=250, nullable=true)
+     */
+    protected $nom;
 
     /**
      * @var \PPE\GSBBundle\Entity\Famille
@@ -69,7 +64,7 @@ class Medicament
      *   @ORM\JoinColumn(name="code_famille", referencedColumnName="code_famille")
      * })
      */
-    private $codeFamille;
+    protected $codeFamille;
 
     /**
      * @var \PPE\GSBBundle\Entity\Presentation
@@ -79,22 +74,7 @@ class Medicament
      *   @ORM\JoinColumn(name="code_present", referencedColumnName="code_present")
      * })
      */
-    private $codePresent;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="PPE\GSBBundle\Entity\Collaborateur", inversedBy="depotLegalAvoir")
-     * @ORM\JoinTable(name="avoir",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="depot_legal_avoir", referencedColumnName="depot_legal")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="matricule_col_avo", referencedColumnName="matricule_col")
-     *   }
-     * )
-     */
-    private $matriculeColAvo;
+    protected $codePresent;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -105,46 +85,49 @@ class Medicament
      *     @ORM\JoinColumn(name="depot_legal_constituer", referencedColumnName="depot_legal")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="code_comp_constituer", referencedColumnName="code_comp")
+     *     @ORM\JoinColumn(name="code_comp", referencedColumnName="code_comp")
      *   }
      * )
      */
-    private $codeComp;
+    protected $codeComp;
+
+    /**
+    * @ORM\OneToMany(targetEntity="Offre", mappedBy="depotLegalOffre")
+    */
+    protected $depotLegalOffre;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="PPE\GSBBundle\Entity\RapportDeVisite", mappedBy="depotLegalOffre")
-     */
-    private $numRapportOffre;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     * 
-     * @ORM\ManyToMany(targetEntity="PPE\GSBBundle\Entity\Medicament")
-     * @ORM\JoinTable
-     * (
-     * 		name="perturbe",
-     *      joinColumns={@ORM\JoinColumn(name="depot_legal_perturbant", referencedColumnName="depot_legal")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="depot_legal_perturbant", referencedColumnName="depot_legal")}
+     * @ORM\ManyToMany(targetEntity="PPE\GSBBundle\Entity\Medicament", inversedBy="depotLegalPerturbant")
+     * @ORM\JoinTable(name="perturbe",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="depot_legal_perturbant", referencedColumnName="depot_legal")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="depot_legal_perturbe", referencedColumnName="depot_legal")
+     *   }
      * )
      */
     protected $depotLegalPerturbe;
-     
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="PPE\GSBBundle\Entity\RapportDeVisite", mappedBy="depotLegalPres")
      */
-    private $numRapportPresente;
+    protected $numRapportPresente;
+
+    /**
+    * @ORM\OneToMany(targetEntity="Avoir", mappedBy="depotLegalAvoir")
+    */
+    protected $depotLegalAvo;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->matriculeColAvo = new \Doctrine\Common\Collections\ArrayCollection();
         $this->codeComp = new \Doctrine\Common\Collections\ArrayCollection();
         $this->numRapportOffre = new \Doctrine\Common\Collections\ArrayCollection();
         $this->depotLegalPerturbe = new \Doctrine\Common\Collections\ArrayCollection();
@@ -171,7 +154,7 @@ class Medicament
     public function setComposition($composition)
     {
         $this->composition = $composition;
-
+    
         return $this;
     }
 
@@ -186,28 +169,6 @@ class Medicament
     }
 
     /**
-     * Set nom
-     *
-     * @param string $nom
-     * @return Medicament
-     */
-    public function setNom($nom)
-    {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
-    /**
-     * Get nom
-     *
-     * @return string 
-     */
-    public function getNom()
-    {
-        return $this->nom;
-    }
-    /**
      * Set effet
      *
      * @param string $effet
@@ -216,7 +177,7 @@ class Medicament
     public function setEffet($effet)
     {
         $this->effet = $effet;
-
+    
         return $this;
     }
 
@@ -239,7 +200,7 @@ class Medicament
     public function setContreindic($contreindic)
     {
         $this->contreindic = $contreindic;
-
+    
         return $this;
     }
 
@@ -262,7 +223,7 @@ class Medicament
     public function setPrixechantillon($prixechantillon)
     {
         $this->prixechantillon = $prixechantillon;
-
+    
         return $this;
     }
 
@@ -277,6 +238,29 @@ class Medicament
     }
 
     /**
+     * Set nom
+     *
+     * @param string $nom
+     * @return Medicament
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+    
+        return $this;
+    }
+
+    /**
+     * Get nom
+     *
+     * @return string 
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    /**
      * Set codeFamille
      *
      * @param \PPE\GSBBundle\Entity\Famille $codeFamille
@@ -285,7 +269,7 @@ class Medicament
     public function setCodeFamille(\PPE\GSBBundle\Entity\Famille $codeFamille = null)
     {
         $this->codeFamille = $codeFamille;
-
+    
         return $this;
     }
 
@@ -308,7 +292,7 @@ class Medicament
     public function setCodePresent(\PPE\GSBBundle\Entity\Presentation $codePresent = null)
     {
         $this->codePresent = $codePresent;
-
+    
         return $this;
     }
 
@@ -323,39 +307,6 @@ class Medicament
     }
 
     /**
-     * Add matriculeColAvo
-     *
-     * @param \PPE\GSBBundle\Entity\Collaborateur $matriculeColAvo
-     * @return Medicament
-     */
-    public function addMatriculeColAvo(\PPE\GSBBundle\Entity\Collaborateur $matriculeColAvo)
-    {
-        $this->matriculeColAvo[] = $matriculeColAvo;
-
-        return $this;
-    }
-
-    /**
-     * Remove matriculeColAvo
-     *
-     * @param \PPE\GSBBundle\Entity\Collaborateur $matriculeColAvo
-     */
-    public function removeMatriculeColAvo(\PPE\GSBBundle\Entity\Collaborateur $matriculeColAvo)
-    {
-        $this->matriculeColAvo->removeElement($matriculeColAvo);
-    }
-
-    /**
-     * Get matriculeColAvo
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getMatriculeColAvo()
-    {
-        return $this->matriculeColAvo;
-    }
-
-    /**
      * Add codeComp
      *
      * @param \PPE\GSBBundle\Entity\Composant $codeComp
@@ -364,7 +315,7 @@ class Medicament
     public function addCodeComp(\PPE\GSBBundle\Entity\Composant $codeComp)
     {
         $this->codeComp[] = $codeComp;
-
+    
         return $this;
     }
 
@@ -397,7 +348,7 @@ class Medicament
     public function addNumRapportOffre(\PPE\GSBBundle\Entity\RapportDeVisite $numRapportOffre)
     {
         $this->numRapportOffre[] = $numRapportOffre;
-
+    
         return $this;
     }
 
@@ -424,24 +375,24 @@ class Medicament
     /**
      * Add depotLegalPerturbe
      *
-     * @param \PPE\GSBBundle\Entity\Medicament $depotLegal
+     * @param \PPE\GSBBundle\Entity\Medicament $depotLegalPerturbe
      * @return Medicament
      */
-    public function addDepotLegalPerturbe(\PPE\GSBBundle\Entity\Medicament $depotLegal)
+    public function addDepotLegalPerturbe(\PPE\GSBBundle\Entity\Medicament $depotLegalPerturbe)
     {
-        $this->depotLegalPerturbe[] = $depotLegal;
-
+        $this->depotLegalPerturbe[] = $depotLegalPerturbe;
+    
         return $this;
     }
 
     /**
      * Remove depotLegalPerturbe
      *
-     * @param \PPE\GSBBundle\Entity\Medicament $depotLegal
+     * @param \PPE\GSBBundle\Entity\Medicament $depotLegalPerturbe
      */
-    public function removeDepotLegalPerturbe(\PPE\GSBBundle\Entity\Medicament $depotLegal)
+    public function removeDepotLegalPerturbe(\PPE\GSBBundle\Entity\Medicament $depotLegalPerturbe)
     {
-        $this->depotLegalPerturbe->removeElement($depotLegal);
+        $this->depotLegalPerturbe->removeElement($depotLegalPerturbe);
     }
 
     /**
@@ -463,7 +414,7 @@ class Medicament
     public function addNumRapportPresente(\PPE\GSBBundle\Entity\RapportDeVisite $numRapportPresente)
     {
         $this->numRapportPresente[] = $numRapportPresente;
-
+    
         return $this;
     }
 
@@ -485,5 +436,38 @@ class Medicament
     public function getNumRapportPresente()
     {
         return $this->numRapportPresente;
+    }
+
+    /**
+     * Add depotLegalAvo
+     *
+     * @param \PPE\GSBBundle\Entity\Avoir $depotLegalAvo
+     * @return Medicament
+     */
+    public function addDepotLegalAvo(\PPE\GSBBundle\Entity\Avoir $depotLegalAvo)
+    {
+        $this->depotLegalAvo[] = $depotLegalAvo;
+    
+        return $this;
+    }
+
+    /**
+     * Remove depotLegalAvo
+     *
+     * @param \PPE\GSBBundle\Entity\Avoir $depotLegalAvo
+     */
+    public function removeDepotLegalAvo(\PPE\GSBBundle\Entity\Avoir $depotLegalAvo)
+    {
+        $this->depotLegalAvo->removeElement($depotLegalAvo);
+    }
+
+    /**
+     * Get depotLegalAvo
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDepotLegalAvo()
+    {
+        return $this->depotLegalAvo;
     }
 }

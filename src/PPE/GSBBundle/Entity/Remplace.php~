@@ -21,7 +21,7 @@ class Remplace
      *   @ORM\JoinColumn(name="matricule_praticien_remplace", referencedColumnName="matricule_praticien", unique=true)
      * })
      */
-    private $matriculePraticienRemplace;
+    protected $matriculePraticienRemplace;
 
     /**
      * @var \PPE\GSBBundle\Entity\Praticien
@@ -32,7 +32,7 @@ class Remplace
      *   @ORM\JoinColumn(name="matricule_praticien_remplacant", referencedColumnName="matricule_praticien", unique=true)
      * })
      */
-    private $matriculePraticienRemplacant;
+    protected $matriculePraticienRemplacant;
 
     /**
      * @var \PPE\GSBBundle\Entity\Date
@@ -43,7 +43,7 @@ class Remplace
      *   @ORM\JoinColumn(name="JJMMAAAA", referencedColumnName="JJMMAAAA", unique=true)
      * })
      */
-    private $jjmmaaaa;
+    protected $jjmmaaaa;
 
 
 

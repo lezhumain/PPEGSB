@@ -19,21 +19,21 @@ class FicheFrais
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $ffMois;
+    protected $ffMois;
 
     /**
      * @var string
      *
      * @ORM\Column(name="ff_NBHorsClassif", type="string", length=25, nullable=true)
      */
-    private $ffNbhorsclassif;
+    protected $ffNbhorsclassif;
 
     /**
      * @var string
      *
      * @ORM\Column(name="ff_MontantHorsClassif", type="string", length=25, nullable=true)
      */
-    private $ffMontanthorsclassif;
+    protected $ffMontanthorsclassif;
 
     /**
      * @var \PPE\GSBBundle\Entity\Collaborateur
@@ -43,7 +43,7 @@ class FicheFrais
      *   @ORM\JoinColumn(name="matricule_col_fic", referencedColumnName="matricule_col")
      * })
      */
-    private $matriculeColFic;
+    protected $matriculeColFic;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -58,7 +58,7 @@ class FicheFrais
      *   }
      * )
      */
-    private $tfCode;
+    protected $tfCode;
 
     /**
      * Constructor

@@ -1,6 +1,6 @@
 {% extends 'PPEGSBBundle::layout.html.twig' %}
-
-{% block title %}GSB - Carte{% endblock %}
+       
+       {% block title %}GSB - Carte{% endblock %}
 
 {% block body %}
 
@@ -9,106 +9,964 @@
         <script src="http://maps.google.com/maps/api/js?sensor=false&libraries=geometry&v=3.7"></script>
         <div class="gmap" id="gmap"></div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <center>
+                <button class="btn btn-default" id="centerPosition">Ma position</button>
+                <button class="btn btn-default" id="dezoom">Vue d'ensemble</button>
+            </center>
+        </div>
+    </div>
 </div>
 {% endblock %}
 
 {% block inlinejs %}
         <script>
-
-        {% autoescape false %}
-            var adresses = '{{ adresses }}';
-        {% endautoescape %}
-
-        adresses = adresses.split("/");
-
-
-        function someFunction(addresses, callback) {
-            var coords = [];
-            for(var i = 0; i < addresses.length - 1 ; i++) {
-                currAddress = addresses[i];
-                var geocoder = new google.maps.Geocoder();
-                if (geocoder) {
-                    geocoder.geocode({'address':currAddress}, function (results, status) {
-                        console.log(google.maps.GeocoderStatus.OK+'  '+status);
-                        if (status == google.maps.GeocoderStatus.OK) {
-                            coords.push(results[0].geometry.location);
-                            if(coords.length == addresses.length) {
-                                if( typeof callback == 'function' ) {
-                                    callback();
-                                }
-                            }
-                        } 
-                    });
-                }
-             }
-          }
-        
-        //Usage
-        someFunction(adresses, function() {
-            alert(coords);
-        });
-
-        // if (navigator.geolocation) navigator.geolocation.getCurrentPosition(function(pos) {
-        //     var me = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-        //     MyLoc = [
-        //         {
-        //             lat: pos.coords.latitude,
-        //             lon: pos.coords.longitude,
-        //             title: 'Ma position',
-        //             html : 'Ma position',
-        //             zoom: 15
+        // function someFunction(addresses, callback) {
+        //     var coords = [];
+        //     for(var i = 0; i < addresses.length - 1 ; i++) {
+        //         currAddress = addresses[i];
+        //         var geocoder = new google.maps.Geocoder();
+        //         if (geocoder) {
+        //             geocoder.geocode({'address':currAddress}, function (results, status) {
+        //                 console.log(google.maps.GeocoderStatus.OK+'  '+status);
+        //                 if (status == google.maps.GeocoderStatus.OK) {
+        //                     coords.push(results[0].geometry.location);
+        //                     if(coords.length == addresses.length) {
+        //                         if( typeof callback == 'function' ) {
+        //                             callback();
+        //                         }
+        //                     }
+        //                 } 
+        //             });
         //         }
-        //     ]
+        //      }
+        //   }
+        
+        // //Usage
+        // someFunction(gpsCoo, function() {
+        //     alert(coords);
+        // });   
 
-        //     var gmapHeight = $('.gmap').height();
-        //     $('.gmap').height(gmapHeight*1.5);
+        if (navigator.geolocation) navigator.geolocation.getCurrentPosition(function(pos) {
+            var me = new google.maps.
+        LatLng(pos.coords.
+                latitude, pos.coords.longitude);
+            MyLoc = [
+                {
+                    
+                    lat: pos.coords.latitude,
+                    lon: pos.coords.longitude,
+                    title: 'Ma position',
+                    
+                    html : 'Ma position',
+                           zoom: 15,
+                           icon: 'http://maps.google.com/mapfiles/marker_purple.png'
+                       }
+            ]
 
-        //         Locs = [
-        //             {% for praticien in praticiens %}
-        //                 {
-        //                     lat: {#{{gpsCoo[loop.index-1]['lat']}}#} ,
-        //                     lon: {#{{gpsCoo[loop.index-1]['lng']}}#} ,
-        //                     title: '{{praticien.nomPraticien}} {{praticien.prenomPraticien}}',
-        //                     html: '{{praticien.nomPraticien}} {{praticien.prenomPraticien}} <br> Tel : {{praticien.numtel}} <br> Adresse : {{praticien.adressePraticien}}, {{praticien.cpPraticien}}, {{praticien.villePraticien}}',
-        //                     zoom: 15
-        //                 },
-        //             {% endfor %}    
-        //         ]
+            var gmapHeight = $('.gmap').height();
+            $('.gmap').height(gmapHeight*1.5);
 
-        //     LocA = MyLoc.concat(Locs);
+                Locs = [
+                        { 
+                        lat: 46.670511, 
+                        lon: -1.426442, 
+                        title: 'Notini Alain', html: 'Notini Alain Tel: Adresse: 114 r Authie, 85000, LA ROCHE SUR YON'
+                        }, 
+                        { 
+                        lat: 49.9151562, 
+                        lon: 2.2543577, 
+                        title: 'Mouel Anne', html: 'Mouel Anne Tel: Adresse: 27 r Auvergne, 80000, AMIENS'
+                        }, 
+                        { 
+                        lat: 48.5783613, 
+                        lon: 7.7627293, 
+                        title: 'Marçais-Lefebvre Bertrand', html: 'Marçais-Lefebvre Bertrand Tel: Adresse: 86Bis r Basse, 67000, STRASBOURG'
+                        }, 
+                        { 
+                        lat: 43.7035634, 
+                        lon: 7.260367, 
+                        title: 'Rossa Claire', html: 'Rossa Claire Tel: Adresse: 14 av Thiers, 06000, NICE'
+                        }, 
+                        { 
+                        lat: 47.491878, 
+                        lon: -0.5478767, 
+                        title: 'Houchard Eliane', html: 'Houchard Eliane Tel: Adresse: 9 r Demolombe, 49100, ANGERS'
+                        }, 
+                        { 
+                        lat: 45.26565, 
+                        lon: 1.771697, 
+                        title: 'Coste Evelyne', html: 'Coste Evelyne Tel: Adresse: 29 r Lucien Nelle, 19000, TULLE'
+                        }, 
+                        { 
+                        lat: 48.879241, 
+                        lon: 2.3430503, 
+                        title: 'Rosenstech Geneviève', html: 'Rosenstech Geneviève Tel: Adresse: 27 r Auvergne, 75000, PARIS'
+                        }, 
+                        { 
+                        lat: 49.4078898, 
+                        lon: 1.0630584, 
+                        title: 'Mosquet Isabelle', html: 'Mosquet Isabelle Tel: Adresse: 22 r Jules Verne, 76000, ROUEN'
+                        }, 
+                        { 
+                        lat: 49.5645183, 
+                        lon: 3.6181958, 
+                        title: 'Ain Jean-Pierre', html: 'Ain Jean-Pierre Tel: Adresse: 25 Rue St Jean, 02000, LAON'
+                        }, 
+                        { 
+                        lat: 48.8568747, 
+                        lon: 2.5877253, 
+                        title: 'Riou Line', html: 'Riou Line Tel: Adresse: 43 av Jean Jaures, 77700, MARNE LA VALLEE'
+                        }, 
+                        { 
+                        lat: 48.185934, 
+                        lon: 0.655979, 
+                        title: 'Millereau Marc', html: 'Millereau Marc Tel: Adresse: 36 av 6 Juin, 72000, LA FERTE BERNARD'
+                        }, 
+                        { 
+                        lat: 44.9306341, 
+                        lon: 2.4467898, 
+                        title: 'Chubilleau Pascal', html: 'Chubilleau Pascal Tel: Adresse: 3 r Collège, 15000, AURRILLAC'
+                        }, 
+                        { 
+                        lat: 47.3393644, 
+                        lon: 0.6523031, 
+                        title: 'Gandon Patrick', html: 'Gandon Patrick Tel: Adresse: 47 av Robert Schuman, 37000, TOURS'
+                        }, 
+                        { 
+                        lat: 47.0864509, 
+                        lon: -1.280468, 
+                        title: 'Grigy Philippe', html: 'Grigy Philippe Tel: Adresse: 15 r Mélingue, 44000, CLISSON'
+                        }, 
+                        { 
+                        lat: 49.0730759, 
+                        lon: 6.1845174, 
+                        title: 'Leménager Pierre', html: 'Leménager Pierre Tel: Adresse: 39 av 6 Juin, 57000, METZ'
+                        }, 
+                        { 
+                        lat: 48.3523883, 
+                        lon: 0.3403613, 
+                        title: 'Leroy Soazig', html: 'Leroy Soazig Tel: Adresse: 45 r Boutiques, 61000, ALENCON'
+                        }, 
+                        { 
+                        lat: 44.7324155, 
+                        lon: 4.6024796, 
+                        title: 'Alliet-Grach Thierry', html: 'Alliet-Grach Thierry Tel: Adresse: 14 Avenue du Général Leclerc, 07000, PRIVAS'
+                        }, 
+                        { 
+                        lat: 48.3061239, 
+                        lon: -0.620935, 
+                        title: 'Laurent Younès', html: 'Laurent Younès Tel: Adresse: 34 r Demolombe, 53000, MAYENNE'
+                        }, 
+                        { 
+                        lat: 47.5860921, 
+                        lon: 1.3359475, 
+                        title: 'Gosselin Albert', html: 'Gosselin Albert Tel: Adresse: 13 r Devon, 41000, BLOIS'
+                        }, 
+                        { 
+                        lat: 47.9943731, 
+                        lon: -4.1338057, 
+                        title: 'Desgranges-Lentz Antoine', html: 'Desgranges-Lentz Antoine Tel: Adresse: 1 r Albert de Mun, 29000, MORLAIX'
+                        }, 
+                        { 
+                        lat: 48.2965919, 
+                        lon: 4.074735, 
+                        title: 'Boscher Bruno', html: 'Boscher Bruno Tel: Adresse: 94 r Falaise, 10000, TROYES'
+                        }, 
+                        { 
+                        lat: 43.184277, 
+                        lon: 3.003078, 
+                        title: 'Cauchy Denis', html: 'Cauchy Denis Tel: Adresse: 5 av Ste Thérèse, 11000, NARBONNE'
+                        }, 
+                        { 
+                        lat: 47.997542, 
+                        lon: -4.097899, 
+                        title: 'Desmons Elisabeth', html: 'Desmons Elisabeth Tel: Adresse: 51 r Bernières, 29000, QUIMPER'
+                        }, 
+                        { 
+                        lat: 49.15894, 
+                        lon: 5.386757, 
+                        title: 'Lefebvre Frédéric', html: 'Lefebvre Frédéric Tel: Adresse: 2 pl Wurzburg, 55000, VERDUN'
+                        }, 
+                        { 
+                        lat: 48.8594948, 
+                        lon: 2.3264059, 
+                        title: 'Pontavice Ghislaine', html: 'Pontavice Ghislaine Tel: Adresse: 8 r Gaillon, 86000, POITIERS'
+                        }, 
+                        { 
+                        lat: 45.5281022, 
+                        lon: 4.8788231, 
+                        title: 'Giraudon Jean-Christophe', html: 'Giraudon Jean-Christophe Tel: Adresse: 1 r Albert Thomas, 38100, VIENNE'
+                        }, 
+                        { 
+                        lat: 49.18239, 
+                        lon: -0.3746857, 
+                        title: 'Chemery Jean-Pierre', html: 'Chemery Jean-Pierre Tel: Adresse: 51 pl Ancienne Boucherie, 14000, CAEN'
+                        }, 
+                        { 
+                        lat: 45.772144, 
+                        lon: -0.5922735, 
+                        title: 'Chubilleau Louis', html: 'Chubilleau Louis Tel: Adresse: 46 r Eglise, 17000, SAINTES'
+                        }, 
+                        { 
+                        lat: 47.322047, 
+                        lon: 5.04148, 
+                        title: 'Dauverne Marie-Christine', html: 'Dauverne Marie-Christine Tel: Adresse: 69 av Charlemagne, 21000, DIJON'
+                        }, 
+                        { 
+                        lat: 48.910408, 
+                        lon: 2.4369215, 
+                        title: 'Robert Pascal', html: 'Robert Pascal Tel: Adresse: 31 r St Jean, 93000, BOBIGNY'
+                        }, 
+                        { 
+                        lat: 45.8971718, 
+                        lon: 6.1251614, 
+                        title: 'Mirouf Patrick', html: 'Mirouf Patrick Tel: Adresse: 22 r Puits Picard, 74000, ANNECY'
+                        }, 
+                        { 
+                        lat: 43.926896, 
+                        lon: 2.146343, 
+                        title: 'Linard Philippe', html: 'Linard Philippe Tel: Adresse: 1 r Albert de Mun, 81000, ALBI'
+                        }, 
+                        { 
+                        lat: 44.016079, 
+                        lon: 1.35295, 
+                        title: 'Née Pierre', html: 'Née Pierre Tel: Adresse: 39 av 6 Juin, 82000, MONTAUBAN'
+                        }, 
+                        { 
+                        lat: 44.609299, 
+                        lon: 2.0332977, 
+                        title: 'Guyot Stéphane', html: 'Guyot Stéphane Tel: Adresse: 42 r République, 46000, FIGEAC'
+                        }, 
+                        { 
+                        lat: 50.7050001, 
+                        lon: 1.5674498, 
+                        title: 'Bayard Thierry', html: 'Bayard Thierry Tel: Adresse: 92 r Falaise, 42000, SAINT ETIENNE'
+                        }, 
+                        { 
+                        lat: 49.2776334, 
+                        lon: -0.1990332, 
+                        title: 'Leroux André', html: 'Leroux André Tel: Adresse: 47 av Robert Schuman, 60000, BEAUVAIS'
+                        }, 
+                        { 
+                        lat: 43.6047275, 
+                        lon: 3.9011747, 
+                        title: 'Dupuy Benoit', html: 'Dupuy Benoit Tel: Adresse: 9 r Demolombe, 34000, MONTPELLIER'
+                        }, 
+                        { 
+                        lat: 47.9108329, 
+                        lon: 1.9157977, 
+                        title: 'Guivarch Chantal', html: 'Guivarch Chantal Tel: Adresse: 4 av Gén Laperrine, 45000, ORLEANS'
+                        }, 
+                        { 
+                        lat: 47.2199659, 
+                        lon: -1.5319758, 
+                        title: 'Guenon Dominique', html: 'Guenon Dominique Tel: Adresse: 98 bd Mar Lyautey, 44000, NANTES'
+                        }, 
+                        { 
+                        lat: 47.5860921, 
+                        lon: 1.3359475, 
+                        title: 'Goussard Emmanuel', html: 'Goussard Emmanuel Tel: Adresse: 9 r Demolombe, 41000, BLOIS'
+                        }, 
+                        { 
+                        lat: 47.619788, 
+                        lon: 6.15428, 
+                        title: 'Martin Frédéric', html: 'Martin Frédéric Tel: Adresse: Bât A 90 r Bayeux, 70000, VESOUL'
+                        }, 
+                        { 
+                        lat: 49.7053278, 
+                        lon: 4.9394913, 
+                        title: 'Blanchais Guy', html: 'Blanchais Guy Tel: Adresse: 2 av du General Margueritte, 08000, SEDAN'
+                        }, 
+                        { 
+                        lat: 46.780764, 
+                        lon: 4.853947, 
+                        title: 'Maury Jean-François', html: 'Maury Jean-François Tel: Adresse: 5 r Pierre Girard, 71000, CHALON SUR SAONE'
+                        }, 
+                        { 
+                        lat: 48.390394, 
+                        lon: -4.486076, 
+                        title: 'Desfaudais Jean-Pierre', html: 'Desfaudais Jean-Pierre Tel: Adresse: 7 pl St Gilles, 29000, BREST'
+                        }, 
+                        { 
+                        lat: 47.0940273, 
+                        lon: 5.4920136, 
+                        title: 'Goessens Marc', html: 'Goessens Marc Tel: Adresse: 6 av Aristide Briand, 39000, DOLE'
+                        }, 
+                        { 
+                        lat: 46.5725151, 
+                        lon: 0.2670066, 
+                        title: 'Lapasset Nhieu', html: 'Lapasset Nhieu Tel: Adresse: 31 av 6 Juin, 52000, CHAUMONT'
+                        }, 
+                        { 
+                        lat: 43.296482, 
+                        lon: 5.36978, 
+                        title: 'Chanteloube Patrice', html: 'Chanteloube Patrice Tel: Adresse: 14 av Thiès, 13000, MARSEILLE'
+                        }, 
+                        { 
+                        lat: 44.349389, 
+                        lon: 2.575986, 
+                        title: 'Cendrier Philippe', html: 'Cendrier Philippe Tel: Adresse: 7 pl St Gilles, 12000, RODEZ'
+                        }, 
+                        { 
+                        lat: 46.3399659, 
+                        lon: 2.606645, 
+                        title: 'Dechâtre Pierre', html: 'Dechâtre Pierre Tel: Adresse: 63 av Thiès, 23000, MONTLUCON'
+                        }, 
+                        { 
+                        lat: 43.296482, 
+                        lon: 5.36978, 
+                        title: 'Chauchard Roger', html: 'Chauchard Roger Tel: Adresse: 9 r Vaucelles, 13000, MARSEILLE'
+                        }, 
+                        { 
+                        lat: 49.3799654, 
+                        lon: 3.3215133, 
+                        title: 'Rault Sylvie', html: 'Rault Sylvie Tel: Adresse: 15 bd Jeanne d\'Arc, 02000, SOISSON'
+                        }, 
+                        { 
+                        lat: 42.964127, 
+                        lon: 1.605232, 
+                        title: 'Bobichon Tristan', html: 'Bobichon Tristan Tel: Adresse: 219 r Caponière, 09000, FOIX'
+                        }, 
+                        { 
+                        lat: 43.8301594, 
+                        lon: 4.35991, 
+                        title: 'Desmoulins Anne', html: 'Desmoulins Anne Tel: Adresse: 31 r St Jean, 30000, NIMES'
+                        }, 
+                        { 
+                        lat: 50.6283417, 
+                        lon: 3.0393693, 
+                        title: 'Lerat Bernard', html: 'Lerat Bernard Tel: Adresse: 31 r St Jean, 59000, LILLE'
+                        }, 
+                        { 
+                        lat: 43.6960355, 
+                        lon: 7.2655896, 
+                        title: 'Bessin-Grosdoit Christophe', html: 'Bessin-Grosdoit Christophe Tel: Adresse: 92 r Falaise, 06000, NICE'
+                        }, 
+                        { 
+                        lat: 45.8162774, 
+                        lon: 1.2623048, 
+                        title: 'Prévot Dominique', html: 'Prévot Dominique Tel: Adresse: 29 r Lucien Nelle, 87000, LIMOGES'
+                        }, 
+                        { 
+                        lat: 44.8350088, 
+                        lon: -0.587269, 
+                        title: 'Desprez Eric', html: 'Desprez Eric Tel: Adresse: 9 r Vaucelles, 33000, BORDEAUX'
+                        }, 
+                        { 
+                        lat: 47.619788, 
+                        lon: 6.15428, 
+                        title: 'Marie Frédérique', html: 'Marie Frédérique Tel: Adresse: 172 r Caponière, 70000, VESOUL'
+                        }, 
+                        { 
+                        lat: 50.291002, 
+                        lon: 2.777535, 
+                        title: 'Leveneur Hugues', html: 'Leveneur Hugues Tel: Adresse: 7 pl St Gilles, 62000, ARRAS'
+                        }, 
+                        { 
+                        lat: 48.4855225, 
+                        lon: 1.4723296, 
+                        title: 'Dennel Jean-Louis', html: 'Dennel Jean-Louis Tel: Adresse: 7 pl St Gilles, 28000, CHARTRES'
+                        }, 
+                        { 
+                        lat: 46.323716, 
+                        lon: -0.464777, 
+                        title: 'Phan JérÃ´me', html: 'Phan JérÃ´me Tel: Adresse: 9 r Clos Caillet, 79000, NIORT'
+                        }, 
+                        { 
+                        lat: 49.116038, 
+                        lon: -1.091398, 
+                        title: 'Laforge Marc', html: 'Laforge Marc Tel: Adresse: 5 résid Prairie, 50000, SAINT LO'
+                        }, 
+                        { 
+                        lat: 46.8054623, 
+                        lon: 0.5430114, 
+                        title: 'Plantet-Besnier Nicole', html: 'Plantet-Besnier Nicole Tel: Adresse: 10 av Pierre Abelin, 86000, CHATELLEREAULT'
+                        }, 
+                        { 
+                        lat: 48.692054, 
+                        lon: 6.184417, 
+                        title: 'Lecuirot Patrice', html: 'Lecuirot Patrice Tel: Adresse: résid St Pères 55 r Pigacière, 54000, NANCY'
+                        }, 
+                        { 
+                        lat: 43.6047275, 
+                        lon: 3.9011747, 
+                        title: 'Duhamel Philippe', html: 'Duhamel Philippe Tel: Adresse: 114 r Authie, 34000, MONTPELLIER'
+                        }, 
+                        { 
+                        lat: 43.893485, 
+                        lon: -0.499782, 
+                        title: 'Goessens Pierre', html: 'Goessens Pierre Tel: Adresse: 22 r Jean Romain, 40000, MONT DE MARSAN'
+                        }, 
+                        { 
+                        lat: 48.6019858, 
+                        lon: 7.7835217, 
+                        title: 'Mabire Roland', html: 'Mabire Roland Tel: Adresse: 11 r Boutiques, 67000, STRASBOURG'
+                        }, 
+                        { 
+                        lat: 48.1769336, 
+                        lon: 6.4460256, 
+                        title: 'Renouf Sylvie', html: 'Renouf Sylvie Tel: Adresse: 98 bd Mar Lyautey, 88000, EPINAL'
+                        }, 
+                        { 
+                        lat: 44.9131011, 
+                        lon: -0.2461498, 
+                        title: 'Duchemin-Laniel Véronique', html: 'Duchemin-Laniel Véronique Tel: Adresse: 130 r St Jean, 33000, LIBOURNE'
+                        }, 
+                        { 
+                        lat: 47.237829, 
+                        lon: 6.0240539, 
+                        title: 'Delahaye André', html: 'Delahaye André Tel: Adresse: 36 av 6 Juin, 25000, BESANCON'
+                        }, 
+                        { 
+                        lat: 47.7498585, 
+                        lon: 7.3970533, 
+                        title: 'Marcouiller Arnaud', html: 'Marcouiller Arnaud Tel: Adresse: 31 r St Jean, 68000, MULHOUSE'
+                        }, 
+                        { 
+                        lat: 48.8737016, 
+                        lon: 2.3005233, 
+                        title: 'Morel Catherine', html: 'Morel Catherine Tel: Adresse: 21 r Chateaubriand, 75000, PARIS'
+                        }, 
+                        { 
+                        lat: 48.1173421, 
+                        lon: -1.7075198, 
+                        title: 'Gaffé Dominique', html: 'Gaffé Dominique Tel: Adresse: 9 av 1ère Armée Française, 35000, RENNES'
+                        }, 
+                        { 
+                        lat: 48.1106219, 
+                        lon: -1.6743364, 
+                        title: 'Flament Elisabeth', html: 'Flament Elisabeth Tel: Adresse: 11 r Pasteur, 35000, RENNES'
+                        }, 
+                        { 
+                        lat: 47.6651895, 
+                        lon: -2.7386728, 
+                        title: 'Lemée Frédéric', html: 'Lemée Frédéric Tel: Adresse: 29 av 6 Juin, 56000, VANNES'
+                        }, 
+                        { 
+                        lat: 43.3092692, 
+                        lon: -0.3646731, 
+                        title: 'Leveneur-Mosquet Guillaume', html: 'Leveneur-Mosquet Guillaume Tel: Adresse: 47 av Robert Schuman, 64000, PAU'
+                        }, 
+                        { 
+                        lat: 45.764043, 
+                        lon: 4.835659, 
+                        title: 'Marie Jean-Claude', html: 'Marie Jean-Claude Tel: Adresse: 26 r Hérouville, 69000, LYON'
+                        }, 
+                        { 
+                        lat: 47.081012, 
+                        lon: 2.398782, 
+                        title: 'Comoz Jean-Pierre', html: 'Comoz Jean-Pierre Tel: Adresse: 35 r Auguste Lechesne, 18000, BOURGES'
+                        }, 
+                        { 
+                        lat: 48.6220326, 
+                        lon: 6.0922185, 
+                        title: 'Lebrun Lucette', html: 'Lebrun Lucette Tel: Adresse: 178 r Auge, 54000, NANCY'
+                        }, 
+                        { 
+                        lat: 48.750043, 
+                        lon: 2.514487, 
+                        title: 'Vittorio Myriam', html: 'Vittorio Myriam Tel: Adresse: 3 pl Champlain, 94000, BOISSY SAINT LEGER'
+                        }, 
+                        { 
+                        lat: 47.260135, 
+                        lon: -0.080893, 
+                        title: 'Jean Pascale', html: 'Jean Pascale Tel: Adresse: 114 r Authie, 49100, SAUMUR'
+                        }, 
+                        { 
+                        lat: 48.962949, 
+                        lon: 4.3730012, 
+                        title: 'Boireaux Philippe', html: 'Boireaux Philippe Tel: Adresse: 44 av de Sainte-Menehould, 51000, CHALON EN CHAMPAGNE'
+                        }, 
+                        { 
+                        lat: 43.6046256, 
+                        lon: 1.444205, 
+                        title: 'Lozier Philippe', html: 'Lozier Philippe Tel: Adresse: 8 r Gaillon, 31000, TOULOUSE'
+                        }, 
+                        { 
+                        lat: 44.517611, 
+                        lon: 3.501873, 
+                        title: 'Guyot Pierre-Laurent', html: 'Guyot Pierre-Laurent Tel: Adresse: 43 bd Gén Vanier, 48000, MENDE'
+                        }, 
+                        { 
+                        lat: 48.736134, 
+                        lon: 1.370889, 
+                        title: 'Delposen Sylvain', html: 'Delposen Sylvain Tel: Adresse: 39 av 6 Juin, 27000, DREUX'
+                        }, 
+                        { 
+                        lat: 45.1703012, 
+                        lon: 5.7234505, 
+                        title: 'Gauchet Thierry', html: 'Gauchet Thierry Tel: Adresse: 7 r Desmoueux, 38100, GRENOBLE'
+                        },  
+                        
+                ]
 
-        //     new Maplace({
-        //         show_markers: true,
-        //         locations: LocA,
-        //         controls_title: 'Liste des praticiens',
-        //         view_all_text: 'Voir tous',
-        //     }).Load();
+            LocA = MyLoc.concat(Locs);
 
-        //     Maplace.ViewOnMap('1');
+            var maplace = new Maplace({
+                show_markers: true,
+                locations: LocA,
+                controls_title: 'Liste des praticiens',
+                view_all_text: 'Voir tous',
+                map_options: {
+                    set_center: [pos.coords.latitude, pos.coords.longitude],
+                    zoom: 15
+                }
+            });
+            maplace.Load();
+            $('#centerPosition').click(function() {
+                maplace.ViewOnMap(1);
+            });
+            $('#dezoom').click(function() {
+                maplace.ViewOnMap('all');
+            });
+            // Maplace.ViewOnMap('1');
 
-        // }, function(){
-        //     var gmapHeight = $('.gmap').height();
-        //     $('.gmap').height(gmapHeight*1.5);
+        }, function(){
+            var gmapHeight = $('.gmap').height();
+            $('.gmap').height(gmapHeight*1.5);
 
-        //         Locs = [
-        //             {% for praticien in praticiens %}
-        //                 {
-        //                     lat: {#{{gpsCoo[loop.index-1]['lat']}} #},
-        //                     lon: {#{{gpsCoo[loop.index-1]['lng']}#} ,
-        //                     title: '{{praticien.nomPraticien}} {{praticien.prenomPraticien}}',
-        //                     html: '{{praticien.nomPraticien}} {{praticien.prenomPraticien}} <br> Tel : {{praticien.numtel}} <br> Adresse : {{praticien.adressePraticien}}, {{praticien.cpPraticien}}, {{praticien.villePraticien}}',
-        //                     zoom: 8
-        //                 },
-        //             {% endfor %}    
-        //         ]
+                Locs = [
+                        { 
+                        lat: 46.670511, 
+                        lon: -1.426442, 
+                        title: 'Notini Alain', html: 'Notini Alain Tel: Adresse: 114 r Authie, 85000, LA ROCHE SUR YON'
+                        }, 
+                        { 
+                        lat: 49.9151562, 
+                        lon: 2.2543577, 
+                        title: 'Mouel Anne', html: 'Mouel Anne Tel: Adresse: 27 r Auvergne, 80000, AMIENS'
+                        }, 
+                        { 
+                        lat: 48.5783613, 
+                        lon: 7.7627293, 
+                        title: 'Marçais-Lefebvre Bertrand', html: 'Marçais-Lefebvre Bertrand Tel: Adresse: 86Bis r Basse, 67000, STRASBOURG'
+                        }, 
+                        { 
+                        lat: 43.7035634, 
+                        lon: 7.260367, 
+                        title: 'Rossa Claire', html: 'Rossa Claire Tel: Adresse: 14 av Thiers, 06000, NICE'
+                        }, 
+                        { 
+                        lat: 47.491878, 
+                        lon: -0.5478767, 
+                        title: 'Houchard Eliane', html: 'Houchard Eliane Tel: Adresse: 9 r Demolombe, 49100, ANGERS'
+                        }, 
+                        { 
+                        lat: 45.26565, 
+                        lon: 1.771697, 
+                        title: 'Coste Evelyne', html: 'Coste Evelyne Tel: Adresse: 29 r Lucien Nelle, 19000, TULLE'
+                        }, 
+                        { 
+                        lat: 48.879241, 
+                        lon: 2.3430503, 
+                        title: 'Rosenstech Geneviève', html: 'Rosenstech Geneviève Tel: Adresse: 27 r Auvergne, 75000, PARIS'
+                        }, 
+                        { 
+                        lat: 49.4078898, 
+                        lon: 1.0630584, 
+                        title: 'Mosquet Isabelle', html: 'Mosquet Isabelle Tel: Adresse: 22 r Jules Verne, 76000, ROUEN'
+                        }, 
+                        { 
+                        lat: 49.5645183, 
+                        lon: 3.6181958, 
+                        title: 'Ain Jean-Pierre', html: 'Ain Jean-Pierre Tel: Adresse: 25 Rue St Jean, 02000, LAON'
+                        }, 
+                        { 
+                        lat: 48.8568747, 
+                        lon: 2.5877253, 
+                        title: 'Riou Line', html: 'Riou Line Tel: Adresse: 43 av Jean Jaures, 77700, MARNE LA VALLEE'
+                        }, 
+                        { 
+                        lat: 48.185934, 
+                        lon: 0.655979, 
+                        title: 'Millereau Marc', html: 'Millereau Marc Tel: Adresse: 36 av 6 Juin, 72000, LA FERTE BERNARD'
+                        }, 
+                        { 
+                        lat: 44.9306341, 
+                        lon: 2.4467898, 
+                        title: 'Chubilleau Pascal', html: 'Chubilleau Pascal Tel: Adresse: 3 r Collège, 15000, AURRILLAC'
+                        }, 
+                        { 
+                        lat: 47.3393644, 
+                        lon: 0.6523031, 
+                        title: 'Gandon Patrick', html: 'Gandon Patrick Tel: Adresse: 47 av Robert Schuman, 37000, TOURS'
+                        }, 
+                        { 
+                        lat: 47.0864509, 
+                        lon: -1.280468, 
+                        title: 'Grigy Philippe', html: 'Grigy Philippe Tel: Adresse: 15 r Mélingue, 44000, CLISSON'
+                        }, 
+                        { 
+                        lat: 49.0730759, 
+                        lon: 6.1845174, 
+                        title: 'Leménager Pierre', html: 'Leménager Pierre Tel: Adresse: 39 av 6 Juin, 57000, METZ'
+                        }, 
+                        { 
+                        lat: 48.3523883, 
+                        lon: 0.3403613, 
+                        title: 'Leroy Soazig', html: 'Leroy Soazig Tel: Adresse: 45 r Boutiques, 61000, ALENCON'
+                        }, 
+                        { 
+                        lat: 44.7324155, 
+                        lon: 4.6024796, 
+                        title: 'Alliet-Grach Thierry', html: 'Alliet-Grach Thierry Tel: Adresse: 14 Avenue du Général Leclerc, 07000, PRIVAS'
+                        }, 
+                        { 
+                        lat: 48.3061239, 
+                        lon: -0.620935, 
+                        title: 'Laurent Younès', html: 'Laurent Younès Tel: Adresse: 34 r Demolombe, 53000, MAYENNE'
+                        }, 
+                        { 
+                        lat: 47.5860921, 
+                        lon: 1.3359475, 
+                        title: 'Gosselin Albert', html: 'Gosselin Albert Tel: Adresse: 13 r Devon, 41000, BLOIS'
+                        }, 
+                        { 
+                        lat: 47.9943731, 
+                        lon: -4.1338057, 
+                        title: 'Desgranges-Lentz Antoine', html: 'Desgranges-Lentz Antoine Tel: Adresse: 1 r Albert de Mun, 29000, MORLAIX'
+                        }, 
+                        { 
+                        lat: 48.2965919, 
+                        lon: 4.074735, 
+                        title: 'Boscher Bruno', html: 'Boscher Bruno Tel: Adresse: 94 r Falaise, 10000, TROYES'
+                        }, 
+                        { 
+                        lat: 43.184277, 
+                        lon: 3.003078, 
+                        title: 'Cauchy Denis', html: 'Cauchy Denis Tel: Adresse: 5 av Ste Thérèse, 11000, NARBONNE'
+                        }, 
+                        { 
+                        lat: 47.997542, 
+                        lon: -4.097899, 
+                        title: 'Desmons Elisabeth', html: 'Desmons Elisabeth Tel: Adresse: 51 r Bernières, 29000, QUIMPER'
+                        }, 
+                        { 
+                        lat: 49.15894, 
+                        lon: 5.386757, 
+                        title: 'Lefebvre Frédéric', html: 'Lefebvre Frédéric Tel: Adresse: 2 pl Wurzburg, 55000, VERDUN'
+                        }, 
+                        { 
+                        lat: 48.8594948, 
+                        lon: 2.3264059, 
+                        title: 'Pontavice Ghislaine', html: 'Pontavice Ghislaine Tel: Adresse: 8 r Gaillon, 86000, POITIERS'
+                        }, 
+                        { 
+                        lat: 45.5281022, 
+                        lon: 4.8788231, 
+                        title: 'Giraudon Jean-Christophe', html: 'Giraudon Jean-Christophe Tel: Adresse: 1 r Albert Thomas, 38100, VIENNE'
+                        }, 
+                        { 
+                        lat: 49.18239, 
+                        lon: -0.3746857, 
+                        title: 'Chemery Jean-Pierre', html: 'Chemery Jean-Pierre Tel: Adresse: 51 pl Ancienne Boucherie, 14000, CAEN'
+                        }, 
+                        { 
+                        lat: 45.772144, 
+                        lon: -0.5922735, 
+                        title: 'Chubilleau Louis', html: 'Chubilleau Louis Tel: Adresse: 46 r Eglise, 17000, SAINTES'
+                        }, 
+                        { 
+                        lat: 47.322047, 
+                        lon: 5.04148, 
+                        title: 'Dauverne Marie-Christine', html: 'Dauverne Marie-Christine Tel: Adresse: 69 av Charlemagne, 21000, DIJON'
+                        }, 
+                        { 
+                        lat: 48.910408, 
+                        lon: 2.4369215, 
+                        title: 'Robert Pascal', html: 'Robert Pascal Tel: Adresse: 31 r St Jean, 93000, BOBIGNY'
+                        }, 
+                        { 
+                        lat: 45.8971718, 
+                        lon: 6.1251614, 
+                        title: 'Mirouf Patrick', html: 'Mirouf Patrick Tel: Adresse: 22 r Puits Picard, 74000, ANNECY'
+                        }, 
+                        { 
+                        lat: 43.926896, 
+                        lon: 2.146343, 
+                        title: 'Linard Philippe', html: 'Linard Philippe Tel: Adresse: 1 r Albert de Mun, 81000, ALBI'
+                        }, 
+                        { 
+                        lat: 44.016079, 
+                        lon: 1.35295, 
+                        title: 'Née Pierre', html: 'Née Pierre Tel: Adresse: 39 av 6 Juin, 82000, MONTAUBAN'
+                        }, 
+                        { 
+                        lat: 44.609299, 
+                        lon: 2.0332977, 
+                        title: 'Guyot Stéphane', html: 'Guyot Stéphane Tel: Adresse: 42 r République, 46000, FIGEAC'
+                        }, 
+                        { 
+                        lat: 50.7050001, 
+                        lon: 1.5674498, 
+                        title: 'Bayard Thierry', html: 'Bayard Thierry Tel: Adresse: 92 r Falaise, 42000, SAINT ETIENNE'
+                        }, 
+                        { 
+                        lat: 49.2776334, 
+                        lon: -0.1990332, 
+                        title: 'Leroux André', html: 'Leroux André Tel: Adresse: 47 av Robert Schuman, 60000, BEAUVAIS'
+                        }, 
+                        { 
+                        lat: 43.6047275, 
+                        lon: 3.9011747, 
+                        title: 'Dupuy Benoit', html: 'Dupuy Benoit Tel: Adresse: 9 r Demolombe, 34000, MONTPELLIER'
+                        }, 
+                        { 
+                        lat: 47.9108329, 
+                        lon: 1.9157977, 
+                        title: 'Guivarch Chantal', html: 'Guivarch Chantal Tel: Adresse: 4 av Gén Laperrine, 45000, ORLEANS'
+                        }, 
+                        { 
+                        lat: 47.2199659, 
+                        lon: -1.5319758, 
+                        title: 'Guenon Dominique', html: 'Guenon Dominique Tel: Adresse: 98 bd Mar Lyautey, 44000, NANTES'
+                        }, 
+                        { 
+                        lat: 47.5860921, 
+                        lon: 1.3359475, 
+                        title: 'Goussard Emmanuel', html: 'Goussard Emmanuel Tel: Adresse: 9 r Demolombe, 41000, BLOIS'
+                        }, 
+                        { 
+                        lat: 47.619788, 
+                        lon: 6.15428, 
+                        title: 'Martin Frédéric', html: 'Martin Frédéric Tel: Adresse: Bât A 90 r Bayeux, 70000, VESOUL'
+                        }, 
+                        { 
+                        lat: 49.7053278, 
+                        lon: 4.9394913, 
+                        title: 'Blanchais Guy', html: 'Blanchais Guy Tel: Adresse: 2 av du General Margueritte, 08000, SEDAN'
+                        }, 
+                        { 
+                        lat: 46.780764, 
+                        lon: 4.853947, 
+                        title: 'Maury Jean-François', html: 'Maury Jean-François Tel: Adresse: 5 r Pierre Girard, 71000, CHALON SUR SAONE'
+                        }, 
+                        { 
+                        lat: 48.390394, 
+                        lon: -4.486076, 
+                        title: 'Desfaudais Jean-Pierre', html: 'Desfaudais Jean-Pierre Tel: Adresse: 7 pl St Gilles, 29000, BREST'
+                        }, 
+                        { 
+                        lat: 47.0940273, 
+                        lon: 5.4920136, 
+                        title: 'Goessens Marc', html: 'Goessens Marc Tel: Adresse: 6 av Aristide Briand, 39000, DOLE'
+                        }, 
+                        { 
+                        lat: 46.5725151, 
+                        lon: 0.2670066, 
+                        title: 'Lapasset Nhieu', html: 'Lapasset Nhieu Tel: Adresse: 31 av 6 Juin, 52000, CHAUMONT'
+                        }, 
+                        { 
+                        lat: 43.296482, 
+                        lon: 5.36978, 
+                        title: 'Chanteloube Patrice', html: 'Chanteloube Patrice Tel: Adresse: 14 av Thiès, 13000, MARSEILLE'
+                        }, 
+                        { 
+                        lat: 44.349389, 
+                        lon: 2.575986, 
+                        title: 'Cendrier Philippe', html: 'Cendrier Philippe Tel: Adresse: 7 pl St Gilles, 12000, RODEZ'
+                        }, 
+                        { 
+                        lat: 46.3399659, 
+                        lon: 2.606645, 
+                        title: 'Dechâtre Pierre', html: 'Dechâtre Pierre Tel: Adresse: 63 av Thiès, 23000, MONTLUCON'
+                        }, 
+                        { 
+                        lat: 43.296482, 
+                        lon: 5.36978, 
+                        title: 'Chauchard Roger', html: 'Chauchard Roger Tel: Adresse: 9 r Vaucelles, 13000, MARSEILLE'
+                        }, 
+                        { 
+                        lat: 49.3799654, 
+                        lon: 3.3215133, 
+                        title: 'Rault Sylvie', html: 'Rault Sylvie Tel: Adresse: 15 bd Jeanne d\'Arc, 02000, SOISSON'
+                        }, 
+                        { 
+                        lat: 42.964127, 
+                        lon: 1.605232, 
+                        title: 'Bobichon Tristan', html: 'Bobichon Tristan Tel: Adresse: 219 r Caponière, 09000, FOIX'
+                        }, 
+                        { 
+                        lat: 43.8301594, 
+                        lon: 4.35991, 
+                        title: 'Desmoulins Anne', html: 'Desmoulins Anne Tel: Adresse: 31 r St Jean, 30000, NIMES'
+                        }, 
+                        { 
+                        lat: 50.6283417, 
+                        lon: 3.0393693, 
+                        title: 'Lerat Bernard', html: 'Lerat Bernard Tel: Adresse: 31 r St Jean, 59000, LILLE'
+                        }, 
+                        { 
+                        lat: 43.6960355, 
+                        lon: 7.2655896, 
+                        title: 'Bessin-Grosdoit Christophe', html: 'Bessin-Grosdoit Christophe Tel: Adresse: 92 r Falaise, 06000, NICE'
+                        }, 
+                        { 
+                        lat: 45.8162774, 
+                        lon: 1.2623048, 
+                        title: 'Prévot Dominique', html: 'Prévot Dominique Tel: Adresse: 29 r Lucien Nelle, 87000, LIMOGES'
+                        }, 
+                        { 
+                        lat: 44.8350088, 
+                        lon: -0.587269, 
+                        title: 'Desprez Eric', html: 'Desprez Eric Tel: Adresse: 9 r Vaucelles, 33000, BORDEAUX'
+                        }, 
+                        { 
+                        lat: 47.619788, 
+                        lon: 6.15428, 
+                        title: 'Marie Frédérique', html: 'Marie Frédérique Tel: Adresse: 172 r Caponière, 70000, VESOUL'
+                        }, 
+                        { 
+                        lat: 50.291002, 
+                        lon: 2.777535, 
+                        title: 'Leveneur Hugues', html: 'Leveneur Hugues Tel: Adresse: 7 pl St Gilles, 62000, ARRAS'
+                        }, 
+                        { 
+                        lat: 48.4855225, 
+                        lon: 1.4723296, 
+                        title: 'Dennel Jean-Louis', html: 'Dennel Jean-Louis Tel: Adresse: 7 pl St Gilles, 28000, CHARTRES'
+                        }, 
+                        { 
+                        lat: 46.323716, 
+                        lon: -0.464777, 
+                        title: 'Phan JérÃ´me', html: 'Phan JérÃ´me Tel: Adresse: 9 r Clos Caillet, 79000, NIORT'
+                        }, 
+                        { 
+                        lat: 49.116038, 
+                        lon: -1.091398, 
+                        title: 'Laforge Marc', html: 'Laforge Marc Tel: Adresse: 5 résid Prairie, 50000, SAINT LO'
+                        }, 
+                        { 
+                        lat: 46.8054623, 
+                        lon: 0.5430114, 
+                        title: 'Plantet-Besnier Nicole', html: 'Plantet-Besnier Nicole Tel: Adresse: 10 av Pierre Abelin, 86000, CHATELLEREAULT'
+                        }, 
+                        { 
+                        lat: 48.692054, 
+                        lon: 6.184417, 
+                        title: 'Lecuirot Patrice', html: 'Lecuirot Patrice Tel: Adresse: résid St Pères 55 r Pigacière, 54000, NANCY'
+                        }, 
+                        { 
+                        lat: 43.6047275, 
+                        lon: 3.9011747, 
+                        title: 'Duhamel Philippe', html: 'Duhamel Philippe Tel: Adresse: 114 r Authie, 34000, MONTPELLIER'
+                        }, 
+                        { 
+                        lat: 43.893485, 
+                        lon: -0.499782, 
+                        title: 'Goessens Pierre', html: 'Goessens Pierre Tel: Adresse: 22 r Jean Romain, 40000, MONT DE MARSAN'
+                        }, 
+                        { 
+                        lat: 48.6019858, 
+                        lon: 7.7835217, 
+                        title: 'Mabire Roland', html: 'Mabire Roland Tel: Adresse: 11 r Boutiques, 67000, STRASBOURG'
+                        }, 
+                        { 
+                        lat: 48.1769336, 
+                        lon: 6.4460256, 
+                        title: 'Renouf Sylvie', html: 'Renouf Sylvie Tel: Adresse: 98 bd Mar Lyautey, 88000, EPINAL'
+                        }, 
+                        { 
+                        lat: 44.9131011, 
+                        lon: -0.2461498, 
+                        title: 'Duchemin-Laniel Véronique', html: 'Duchemin-Laniel Véronique Tel: Adresse: 130 r St Jean, 33000, LIBOURNE'
+                        }, 
+                        { 
+                        lat: 47.237829, 
+                        lon: 6.0240539, 
+                        title: 'Delahaye André', html: 'Delahaye André Tel: Adresse: 36 av 6 Juin, 25000, BESANCON'
+                        }, 
+                        { 
+                        lat: 47.7498585, 
+                        lon: 7.3970533, 
+                        title: 'Marcouiller Arnaud', html: 'Marcouiller Arnaud Tel: Adresse: 31 r St Jean, 68000, MULHOUSE'
+                        }, 
+                        { 
+                        lat: 48.8737016, 
+                        lon: 2.3005233, 
+                        title: 'Morel Catherine', html: 'Morel Catherine Tel: Adresse: 21 r Chateaubriand, 75000, PARIS'
+                        }, 
+                        { 
+                        lat: 48.1173421, 
+                        lon: -1.7075198, 
+                        title: 'Gaffé Dominique', html: 'Gaffé Dominique Tel: Adresse: 9 av 1ère Armée Française, 35000, RENNES'
+                        }, 
+                        { 
+                        lat: 48.1106219, 
+                        lon: -1.6743364, 
+                        title: 'Flament Elisabeth', html: 'Flament Elisabeth Tel: Adresse: 11 r Pasteur, 35000, RENNES'
+                        }, 
+                        { 
+                        lat: 47.6651895, 
+                        lon: -2.7386728, 
+                        title: 'Lemée Frédéric', html: 'Lemée Frédéric Tel: Adresse: 29 av 6 Juin, 56000, VANNES'
+                        }, 
+                        { 
+                        lat: 43.3092692, 
+                        lon: -0.3646731, 
+                        title: 'Leveneur-Mosquet Guillaume', html: 'Leveneur-Mosquet Guillaume Tel: Adresse: 47 av Robert Schuman, 64000, PAU'
+                        }, 
+                        { 
+                        lat: 45.764043, 
+                        lon: 4.835659, 
+                        title: 'Marie Jean-Claude', html: 'Marie Jean-Claude Tel: Adresse: 26 r Hérouville, 69000, LYON'
+                        }, 
+                        { 
+                        lat: 47.081012, 
+                        lon: 2.398782, 
+                        title: 'Comoz Jean-Pierre', html: 'Comoz Jean-Pierre Tel: Adresse: 35 r Auguste Lechesne, 18000, BOURGES'
+                        }, 
+                        { 
+                        lat: 48.6220326, 
+                        lon: 6.0922185, 
+                        title: 'Lebrun Lucette', html: 'Lebrun Lucette Tel: Adresse: 178 r Auge, 54000, NANCY'
+                        }, 
+                        { 
+                        lat: 48.750043, 
+                        lon: 2.514487, 
+                        title: 'Vittorio Myriam', html: 'Vittorio Myriam Tel: Adresse: 3 pl Champlain, 94000, BOISSY SAINT LEGER'
+                        }, 
+                        { 
+                        lat: 47.260135, 
+                        lon: -0.080893, 
+                        title: 'Jean Pascale', html: 'Jean Pascale Tel: Adresse: 114 r Authie, 49100, SAUMUR'
+                        }, 
+                        { 
+                        lat: 48.962949, 
+                        lon: 4.3730012, 
+                        title: 'Boireaux Philippe', html: 'Boireaux Philippe Tel: Adresse: 44 av de Sainte-Menehould, 51000, CHALON EN CHAMPAGNE'
+                        }, 
+                        { 
+                        lat: 43.6046256, 
+                        lon: 1.444205, 
+                        title: 'Lozier Philippe', html: 'Lozier Philippe Tel: Adresse: 8 r Gaillon, 31000, TOULOUSE'
+                        }, 
+                        { 
+                        lat: 44.517611, 
+                        lon: 3.501873, 
+                        title: 'Guyot Pierre-Laurent', html: 'Guyot Pierre-Laurent Tel: Adresse: 43 bd Gén Vanier, 48000, MENDE'
+                        }, 
+                        { 
+                        lat: 48.736134, 
+                        lon: 1.370889, 
+                        title: 'Delposen Sylvain', html: 'Delposen Sylvain Tel: Adresse: 39 av 6 Juin, 27000, DREUX'
+                        }, 
+                        { 
+                        lat: 45.1703012, 
+                        lon: 5.7234505, 
+                        title: 'Gauchet Thierry', html: 'Gauchet Thierry Tel: Adresse: 7 r Desmoueux, 38100, GRENOBLE'
+                        },
+                ]
 
-        //     new Maplace({
-        //         show_markers: true,
-        //         locations: Locs,
-        //         controls_title: 'Liste des praticiens',
-        //         view_all_text: 'Voir tous'
-        //     }).Load();
+            new Maplace({
+                show_markers: true,
+                locations: Locs,
+                controls_title: 'Liste des praticiens',
+                view_all_text: 'Voir tous'
+            }).Load();
 
-        // });
+        });
         </script>
 {% endblock %}

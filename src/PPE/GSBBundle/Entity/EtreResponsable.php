@@ -17,7 +17,7 @@ class EtreResponsable
      *
      * @ORM\Column(name="JJMMAAAA_FIN", type="datetime", nullable=false)
      */
-    private $jjmmaaaaFin;
+    protected $jjmmaaaaFin;
 
     /**
      * @var \PPE\GSBBundle\Entity\Collaborateur
@@ -28,7 +28,7 @@ class EtreResponsable
      *   @ORM\JoinColumn(name="matricule_col_etr", referencedColumnName="matricule_col", unique=true)
      * })
      */
-    private $matriculeColEtr;
+    protected $matriculeColEtr;
 
     /**
      * @var \PPE\GSBBundle\Entity\Calendrier
@@ -39,7 +39,7 @@ class EtreResponsable
      *   @ORM\JoinColumn(name="JJMMAAAA_DEB", referencedColumnName="JJMMAAAA_DEB", unique=true)
      * })
      */
-    private $jjmmaaaaDeb;
+    protected $jjmmaaaaDeb;
 
     /**
      * @var \PPE\GSBBundle\Entity\Secteur
@@ -50,7 +50,7 @@ class EtreResponsable
      *   @ORM\JoinColumn(name="code_secteur", referencedColumnName="code_secteur", unique=true)
      * })
      */
-    private $codeSecteur;
+    protected $codeSecteur;
 
 
 

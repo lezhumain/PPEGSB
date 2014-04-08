@@ -16,6 +16,7 @@ class DefaultController extends Controller
 {
     public function adminAction()
     {
+        //$this->cryptCollabs();
         return $this->render('PPEGSBBundle:Default:admin.html.twig');
     }
 
@@ -26,11 +27,9 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $rapports = $em->getRepository('PPEGSBBundle:RapportDeVisite')->FindAll();
-
-        $msg = "";//$this->cryptCollabs();
-        
-        return $this->render('PPEGSBBundle:Default:liste_rp.html.twig', array('rapports' => $rapports, 'msg' => $msg));
-    }
+    
+        return $this->render('PPEGSBBundle:Default:liste_rp.html.twig', array('rapports' => $rapports));
+	}
 
     /**
      * \brief 
@@ -135,12 +134,18 @@ class DefaultController extends Controller
         if (empty($praticien))
             throw $this->createNotFoundException("Pas de praticien à localiser :(");
 
-        foreach ($praticien as $data)
-        {
-            $gpsCoo[] = $this->getMapFromAdress($data->getAdressePraticien()." ".$data->getCpPraticien()." ".$data->getVillePraticien());
-        }
+        $i = 0;
+
+        // foreach ($praticien as $data)
+        // {
+        //     $tab[] = $this->getMapFromAdress($data->getAdressePraticien()." ".$data->getCpPraticien()." ".$data->getVillePraticien());
+        //     echo "{ <br>";
+        //     echo "lat: ". $tab[$i]['lat'] .", <br> lon: ". $tab[$i]['lng']. ", <br> title: '". $data->getNomPraticien()." ". $data->getPrenomPraticien()."', html: '".$data->getNomPraticien()." ". $data->getPrenomPraticien() ."  Tel: ". $data->getNumtel() ."  Adresse: ". $data->getAdressePraticien() .", ". $data->getCpPraticien() .", ". $data->getVillePraticien() ."'<br>";
+        //     echo "}, <br>";
+        // $i++;
+        // }
         
-        return $this->render('PPEGSBBundle:Default:map.html.twig', array('gpsCoo' => $gpsCoo, 'praticiens' => $praticien));
+        return $this->render('PPEGSBBundle:Default:map.html.twig');
     }
 
     /**
@@ -170,7 +175,7 @@ class DefaultController extends Controller
          }
          else
          {
-            return 0;
+            
          }
          
 
@@ -296,8 +301,8 @@ class DefaultController extends Controller
     	foreach( $collabs as $col )
     	{
     		/* Si pas de salt on le genere */
-	   		//if($col->getSaltCol() == null or $col->getSaltCol() == "")
-    		//	$col->setSaltCol( $this->genSalt() );
+	   		if($col->getSaltCol() == 1)
+    			$col->setSaltCol( $this->genSalt() );
 
 	   		//$col = $this->hachUserMdp($col);
 			if( $col == null ) // erreur
@@ -307,11 +312,12 @@ class DefaultController extends Controller
 				break;
 			}
 			else
-				//$em->persist($col);
-				$log .= $col->toString() . "\n\t" . $this->hachMdp('123Soleil', $col->getSaltCol(), $col) . "\n";
+				$em->persist($col);
+				//$log .= $col->toString() . "\n\t" . $this->hachMdp($col->getMdpCol(), $col->getSaltCol(), $col) . "\n";
 				//$log .= $col->toString() . "\n";
+                $col->setMdpCol($this->hachMdp('123Soleil', $col->getSaltCol(), $col));
     	}
-    	//$em->flush(); // On declenche l'enregistrement
+    	$em->flush(); // On declenche l'enregistrement
     	
     	$log .= "fin\n";
     	
@@ -322,4 +328,13 @@ class DefaultController extends Controller
     	return $ret;
     }
 /******************************/
+/*        $medAvoir = $em->getRepository('PPEGSBBundle:Collaborateur')->FindAll();
+            {% for pp in medAvoir %}
+                {% for ppp in pp.matriculeColAvo %}
+                    {{pp.nomCol}} - {{pp.prenomCol}}
+                    {{ ppp.depotLegalAvoir.depotLegal }}
+                {% endfor %}
+
+            {% endfor %}
+    */
 }

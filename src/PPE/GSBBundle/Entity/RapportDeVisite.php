@@ -19,28 +19,28 @@ class RapportDeVisite
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $numRapport;
+    protected $numRapport;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="date_rapport", type="datetime", nullable=false)
      */
-    private $dateRapport;
+    protected $dateRapport;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="date_visite", type="datetime", nullable=false)
      */
-    private $dateVisite;
+    protected $dateVisite;
 
     /**
      * @var string
      *
      * @ORM\Column(name="bilan_visite", type="text", length=16, nullable=false)
      */
-    private $bilanVisite;
+    protected $bilanVisite;
 
     /**
      * @var \PPE\GSBBundle\Entity\Motif
@@ -50,7 +50,7 @@ class RapportDeVisite
      *   @ORM\JoinColumn(name="code_motif", referencedColumnName="code_motif")
      * })
      */
-    private $codeMotif;
+    protected $codeMotif;
 
     /**
      * @var \PPE\GSBBundle\Entity\Praticien
@@ -60,22 +60,12 @@ class RapportDeVisite
      *   @ORM\JoinColumn(name="matricule_praticien", referencedColumnName="matricule_praticien")
      * })
      */
-    private $matriculePraticien;
+    protected $matriculePraticien;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="PPE\GSBBundle\Entity\Medicament", inversedBy="numRapportOffre")
-     * @ORM\JoinTable(name="offre",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="num_rapport_offre", referencedColumnName="num_rapport")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="depot_legal_offre", referencedColumnName="depot_legal")
-     *   }
-     * )
-     */
-    private $depotLegalOffre;
+   /**
+    * @ORM\OneToMany(targetEntity="Offre", mappedBy="numRapportOffre")
+    */
+    protected $numRapportOffre;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -90,7 +80,7 @@ class RapportDeVisite
      *   }
      * )
      */
-    private $depotLegalPres;
+    protected $depotLegalPres;
 
     /**
      * Constructor
@@ -291,5 +281,38 @@ class RapportDeVisite
     public function getDepotLegalPres()
     {
         return $this->depotLegalPres;
+    }
+
+    /**
+     * Add numRapportOffre
+     *
+     * @param \PPE\GSBBundle\Entity\Offre $numRapportOffre
+     * @return RapportDeVisite
+     */
+    public function addNumRapportOffre(\PPE\GSBBundle\Entity\Offre $numRapportOffre)
+    {
+        $this->numRapportOffre[] = $numRapportOffre;
+    
+        return $this;
+    }
+
+    /**
+     * Remove numRapportOffre
+     *
+     * @param \PPE\GSBBundle\Entity\Offre $numRapportOffre
+     */
+    public function removeNumRapportOffre(\PPE\GSBBundle\Entity\Offre $numRapportOffre)
+    {
+        $this->numRapportOffre->removeElement($numRapportOffre);
+    }
+
+    /**
+     * Get numRapportOffre
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getNumRapportOffre()
+    {
+        return $this->numRapportOffre;
     }
 }

@@ -19,21 +19,21 @@ class Presentation
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $codePresent;
+    protected $codePresent;
 
     /**
      * @var string
      *
      * @ORM\Column(name="libelle_present", type="string", length=25, nullable=false)
      */
-    private $libellePresent;
+    protected $libellePresent;
 
     /**
      * @var string
      *
      * @ORM\Column(name="depot_legal_present", type="string", length=25, nullable=false)
      */
-    private $depotLegalPresent;
+    protected $depotLegalPresent;
 
 
 

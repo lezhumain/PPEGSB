@@ -19,7 +19,7 @@ class Calendrier
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $jjmmaaaaDeb;
+    protected $jjmmaaaaDeb;
 
 
 

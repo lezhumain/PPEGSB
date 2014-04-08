@@ -3,12 +3,24 @@
 {% block title %}GSB - Liste des rapports{% endblock %}
 
 {% block body %}
- <div class="table-responsive">
+
+<div class="container listeRP">
+	{% for rp in rapports %}
+		<div onclick="document.location = '{{ path ("ppegsb_getFicheRp", {"id": rp.numRapport} ) }}'" class="col-md-2 col-sm-3 col-xs-6" id="rapport">
+				<div class="well" id="rpContent">
+					<legend>N°{{rp.numRapport}} <span style="float: right;font-size: 75%;margin-top: 5px;">{{rp.dateRapport|date("d/m/Y")}}</span></legend>
+					<p>Effectuée par <b>{{rp.matriculePraticien.nomPraticien}} {{rp.matriculePraticien.prenomPraticien}}</b> le <b>{{rp.dateVisite|date("d/m/Y")}}</b></p>
+				</div>
+		</div>
+	{% endfor %}
+</div>
+
+{# <div class="table-responsive">
 	 <table class="table table-hover sortable table-striped" id = "tableRp">
 	 	<!-- Entête du tableau -->
 	 	<thead> 
 	 		<tr>
-	 			<th>Numero</th>
+	 			<th class="numRapport">Numero</th>
 	 			<th>Praticien</th>
 	 			<th>Date visite</th>
 	 			<th>Date rapport</th>
@@ -16,8 +28,8 @@
 	 	</thead>
 	 	<tbody>
  		{% for rp in rapports %}
-	 		<tr>
-				<td><a href="{{ path ("ppegsb_getFicheRp", {"id": rp.numRapport} ) }}">{{rp.numRapport}}</a></td>
+	 		<tr onclick="if ($(window).width() < 767) {document.location = '{{ path ("ppegsb_getFicheRp", {"id": rp.numRapport} ) }}' };">
+				<td class="numRapport"><a href="{{ path ("ppegsb_getFicheRp", {"id": rp.numRapport} ) }}"><button class="btn btn-primary">{{rp.numRapport}}</button></a></td>
 				<td>{{rp.dateVisite|date("d/m/Y")}}</td>
 				<td>{{rp.dateRapport|date("d/m/Y")}}</td>
 				<td>{{rp.matriculePraticien.nomPraticien}} - {{rp.matriculePraticien.prenomPraticien}}</td>
@@ -26,10 +38,5 @@
 	 	</tbody>
 	 	<!-- fin de l'entête -->
 	 </table>
-</div>
-
-<div style="border: thin solid black; background-color: green; color: white">
-	{{ msg }}<br>
-</div>
-
+</div> #}
 {% endblock %}

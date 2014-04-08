@@ -31,8 +31,54 @@
 	background-color: #f8f8f8;
 }
 
+#fichePraticien .panel-heading{
+	text-align: center;
+}
+
+@media (min-width: 767px) {
+	.lienFiche {
+		pointer-events: none;
+	   	cursor: default;
+	}
+}
+
 @media (max-width: 532px) {
   #largeButton { width: 120px !important;}
+}
+@media (max-width: 766px) {
+  #head { 
+  	padding-bottom: 0 !important;
+  }
+  .navbar-static-top {
+	margin-bottom: 0;
+  }
+}
+
+@media (max-width: 801px) {
+  .navbar-right button{
+  	font-size: 80%;
+  }
+}
+
+@media (max-width: 400px) {
+  .numRapport {
+  	display: none;
+  }
+}
+
+@media (max-width: 680px) {
+  .table-responsive > .table > thead > tr > th,
+  .table-responsive > .table > tbody > tr > th,
+  .table-responsive > .table > tfoot > tr > th,
+  .table-responsive > .table > thead > tr > td,
+  .table-responsive > .table > tbody > tr > td,
+  .table-responsive > .table > tfoot > tr > td {
+    white-space: initial;
+  }
+
+  .notoriete {
+  	display: none;
+  }
 }
 
 
@@ -52,6 +98,10 @@
 
 @media (max-width: 767px) {
   	.familleMed{
+  		display: none;
+  	}
+
+  	.ficheMed {
   		display: none;
   	}
 
@@ -84,4 +134,17 @@
 .table-striped > tbody > tr:nth-child(odd) > td,
 .table-striped > tbody > tr:nth-child(odd) > th {
   background-color: rgba(236, 249, 255, 0.88);
+}
+
+#listeRP {
+}
+
+#rapport {
+	padding: 10px;
+	height: 181px;
+}
+
+#rpContent {
+	height: 100%;
+	cursor: pointer;
 }

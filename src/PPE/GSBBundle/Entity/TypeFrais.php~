@@ -19,28 +19,28 @@ class TypeFrais
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $tfCode;
+    protected $tfCode;
 
     /**
      * @var string
      *
      * @ORM\Column(name="tf_libelle", type="string", length=25, nullable=true)
      */
-    private $tfLibelle;
+    protected $tfLibelle;
 
     /**
      * @var string
      *
      * @ORM\Column(name="tf_forfait", type="string", length=25, nullable=true)
      */
-    private $tfForfait;
+    protected $tfForfait;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="PPE\GSBBundle\Entity\FicheFrais", mappedBy="tfCode")
      */
-    private $ffMois;
+    protected $ffMois;
 
     /**
      * Constructor

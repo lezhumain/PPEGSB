@@ -3,32 +3,32 @@
 {% block title %}GSB - Liste des médicaments{% endblock %}
 
 {% block body %}
-		 <div class="table-responsive">
-			 <table class="table table-hover sortable table-striped" id = "tableMed">
-			 	<!-- Entête du tableau -->
-			 	<thead> 
-			 		<tr>
-			 			<th>INFOSISI</th>
-			 			<th>Depot legal</th>
-			 			<th>Nom commerciale</th>
-			 			<th class = "familleMed">Famille</th>
-			 			<th>Prix échantillon</th>
-			 		</tr>
-			 	</thead>
-	 			<tbody>
-				{% for medicament in medicaments %}
-					<tr>
-						<th><a href="{{ path('ppegsb_ficheMed', {'id':medicament.depotLegal})}}">INFOSISI</a></th>
-						<td>{{medicament.depotLegal}}</td>
-						<td>{{medicament.nom}}</td>
-						<td class = "familleMed">{{medicament.codeFamille.libelleFamille}}</td>
-						<td>{{medicament.prixechantillon}}</td>
-					</tr>
-				{% endfor %}
-				</tbody>
-			 	<!-- fin de l'entête -->
-			 </table>
-
+	<div class="table-responsive">
+		<table class="table table-hover sortable table-striped" id = "tableMed">
+		 	<!-- Entête du tableau -->
+		 	<thead> 
+		 		<tr>
+		 			<th class="ficheMed">Fiche</th>
+		 			<th>Depot legal</th>
+		 			<th>Nom commerciale</th>
+		 			<th class = "familleMed">Famille</th>
+		 			<th>Prix échantillon</th>
+		 		</tr>
+		 	</thead>
+ 			<tbody>
+			{% for medicament in medicaments %}
+				<tr onclick="if ($(window).width() < 767) {document.location = '{{ path('ppegsb_ficheMed', {'id':medicament.depotLegal})}}' };">
+					<td class="ficheMed"><a href="{{ path('ppegsb_ficheMed', {'id':medicament.depotLegal})}}"><buton class="btn btn-primary"><span class="glyphicon glyphicon-file"></span></buton></a></td>
+					<td>{{medicament.depotLegal}}</td>
+					<td>{{medicament.nom}}</td>
+					<td class = "familleMed">{{medicament.codeFamille.libelleFamille}}</td>
+					<td>{{medicament.prixechantillon}}</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		 	<!-- fin de l'entête -->
+		</table>
+	</div>
 {% endblock %}
 
 

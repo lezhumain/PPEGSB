@@ -19,21 +19,21 @@ class Composant
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $codeComp;
+    protected $codeComp;
 
     /**
      * @var string
      *
      * @ORM\Column(name="libelle_comp", type="string", length=250, nullable=false)
      */
-    private $libelleComp;
+    protected $libelleComp;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="PPE\GSBBundle\Entity\Medicament", mappedBy="codeComp")
      */
-    private $depotLegalConstituer;
+    protected $depotLegalConstituer;
 
     /**
      * Constructor

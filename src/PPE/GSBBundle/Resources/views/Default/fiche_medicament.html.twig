@@ -4,4 +4,39 @@
 
 {% block body %}
 
+<div class="container">
+	<div class="row">
+		<div class="col-md-5 col-md-offset-3 well">
+			<legend>Dépot légal : {{ medicament.depotLegal }} <span style="float: right; font-size: 80%;margin-top: 5px;">{{ medicament.nom }}</span></legend>
+			<h5><b>Prix de l'echantillon : </b>{{ medicament.prixechantillon }} €</h5>
+			<h5>
+				<b>Effets :</b> 
+				<br><br>
+				<div>
+					<textarea class="form-control" rows="5" disabled>{{ medicament.effet }}</textarea>
+				</div>
+			</h5>
+			<h5>
+				<b>Contre-indications :</b> 
+				<br><br>
+				<div>
+					<textarea class="form-control" rows="5" disabled>{{ medicament.contreindic }}</textarea>
+				</div>
+			</h5>
+			
+	</div>
+
+	<div class="row">
+		<div class="col-md-5 col-md-offset-3">
+			<a href="{{ path('ppegsb_listeMed') }}"><button class="col-md-12 btn btn-primary">Retour</button></a>
+		</div>
+	</div>
+</div>
+
+
+{% for perturbant in medicament.depotLegalPerturbe %}
+{{ perturbant.nom }} <br>
+
+{% endfor %}
+
 {% endblock %}

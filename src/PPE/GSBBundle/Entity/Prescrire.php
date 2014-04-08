@@ -17,7 +17,7 @@ class Prescrire
      *
      * @ORM\Column(name="posologie", type="string", length=25, nullable=false)
      */
-    private $posologie;
+    protected $posologie;
 
     /**
      * @var \PPE\GSBBundle\Entity\Medicament
@@ -28,7 +28,7 @@ class Prescrire
      *   @ORM\JoinColumn(name="depot_legal_prescr", referencedColumnName="depot_legal", unique=true)
      * })
      */
-    private $depotLegalPrescr;
+    protected $depotLegalPrescr;
 
     /**
      * @var \PPE\GSBBundle\Entity\Dosage
@@ -39,7 +39,7 @@ class Prescrire
      *   @ORM\JoinColumn(name="code_dosage", referencedColumnName="code_dosage", unique=true)
      * })
      */
-    private $codeDosage;
+    protected $codeDosage;
 
     /**
      * @var \PPE\GSBBundle\Entity\TypeIndividu
@@ -50,7 +50,7 @@ class Prescrire
      *   @ORM\JoinColumn(name="code_individu", referencedColumnName="code_individu", unique=true)
      * })
      */
-    private $codeIndividu;
+    protected $codeIndividu;
 
 
 
