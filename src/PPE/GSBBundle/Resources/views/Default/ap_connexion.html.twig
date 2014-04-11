@@ -9,6 +9,7 @@
 {% block body %}
 		<div class="col-md-6 col-md-offset-3 well" id = "formConnexion">
 			<form action="{{ path('ppegsb_logincheck') }}" method="post">
+				<img src="{{asset('bundles/ppegsb/images/gsb.png')}}" id="LogoGSB" alt="Application GSB" width="90px">
 				<h2>Connectez-vous</h2>
 				
   				{% if error != "" %}
