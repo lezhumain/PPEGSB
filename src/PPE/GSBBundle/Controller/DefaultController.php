@@ -74,11 +74,20 @@ class DefaultController extends Controller
 
                     //on modifie le stock de médicament
                     $avoir = $em->getRepository('PPEGSBBundle:Avoir')->FindOneBy(array('depotLegalAvoir' => $value->getDepotLegalAvoir(), 'matriculeColAvo' => $matriculUtilisateur));
-                    $avoir->setQteAvoir($avoir->getQteAvoir() - $request->request->get('offre_'.$value->getDepotLegalAvoir()->getDepotLegal()));
+
+                    if ($avoir->getQteAvoir() - $request->request->get('offre_'.$value->getDepotLegalAvoir()->getDepotLegal()) > 0)
+                    {
+                        $avoir->setQteAvoir($avoir->getQteAvoir() - $request->request->get('offre_'.$value->getDepotLegalAvoir()->getDepotLegal()));
+                        $em->persist($avoir);
+                    }
+                    else
+                    {
+                        $em->remove($avoir);
+                    }
 
                     //On enregistre dans la bdd les deux requettes
                     $em->persist($offre);
-                    $em->persist($avoir);
+                    
                     $em->flush();
                 }
             }

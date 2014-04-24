@@ -26,9 +26,9 @@ class ActiviteComplementaireType extends AbstractType
         // $builder->add('matriculeColAct', 'hidden', array('data' => '1'));   
                                                         
                                                           
-        $builder->add('matriculeColOrg', 'entity', array('class'     =>  'PPEGSBBundle:Collaborateur',
-                                                        'property'  =>  'nomCol',
-                                                        'multiple'  =>  true));
+        // $builder->add('matriculeColOrg', 'entity', array('class'     =>  'PPEGSBBundle:Collaborateur',
+        //                                                 'property'  =>  'nomCol',
+        //                                                 'multiple'  =>  true));
         $builder->add('matriculePraticien', 'entity', array('class'     =>  'PPEGSBBundle:Praticien',
                                                         'property'  =>  'nomPraticien',
                                                         'multiple'  =>  true));
