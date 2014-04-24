@@ -69,6 +69,6 @@ ppegsb_logincheck:
 ppegsb_logout:
     pattern:  /logout
 
-ppegsb_admin:
-    pattern:  /admin
-    defaults: { _controller: PPEGSBBundle:Default:admin }
+# ppegsb_admin:
+#     pattern:  /admin
+#     defaults: { _controller: PPEGSBBundle:Default:admin }

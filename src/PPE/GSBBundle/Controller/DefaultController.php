@@ -20,6 +20,11 @@ use PPE\GSBBundle\Entity\Offre;
 
 class DefaultController extends Controller
 {
+
+    /**
+     * Fonction de test de connexion + reinit les mot de passe 
+     * @return [type] [description]
+     */
     public function adminAction()
     {
         //$this->cryptCollabs();
@@ -40,6 +45,11 @@ class DefaultController extends Controller
         return $this->render('PPEGSBBundle:Default:liste_rp.html.twig', array('rapports' => $rapports));
 	}
 
+
+    /**
+     * Fonction de création d'un nouveau rapport
+     * @param  Request $request la requete http
+     */
     public function ficheRpAction(Request $request)
     {
         //Recuperation des variables
@@ -98,7 +108,10 @@ class DefaultController extends Controller
     }
 
 
-    // Affichage du rapport choisis
+    /**
+     * Affichage du rapport choisis
+     * @param  int $id l'id du rapport
+     */
     public function getRpAction($id)
     {
         $em = $this->getDoctrine()->getEntityManager();
@@ -112,11 +125,10 @@ class DefaultController extends Controller
     }
 
 
-/******************************/
-
-
-
-/*BLOC GESTION DES PRATICIEN*/
+    /**
+     * Affiche la liste des praticiens
+     * @param  Request $Request requette http
+     */
     public function listePraAction(Request $Request)
     {
         $em = $this->getDoctrine()->getEntityManager();
@@ -200,15 +212,19 @@ class DefaultController extends Controller
             return $tab;
          }
     }
-/******************************/
 
 
-/*BLOC GESTION DES MEDICAMENT*/
+
+    /**
+     * Affiche la liste des médicaments
+     * @param  Request $Request Requuette http
+     */
     public function listeMedAction(Request $Request)
     {
         $em = $this->getDoctrine()->getEntityManager();
 
 
+        //Requette pour les filtres
         if ($Request->request->get('filtre') || $Request->request->get('refreshAjax') == "1")
         {
             $value = $Request->request->get('filtre');
@@ -221,15 +237,12 @@ class DefaultController extends Controller
             $medicaments = $query->getResult();
             return $this->render('PPEGSBBundle:Default:table_med.html.twig', array('medicaments' =>  $medicaments));
         }
+        //Requette de base
         else
         {
             $medicaments = $em->getRepository('PPEGSBBundle:Medicament')->FindAll();
             return $this->render('PPEGSBBundle:Default:liste_medicament.html.twig', array('medicaments' =>  $medicaments));
         }
-
-
-
-
     }
 
     /**
@@ -250,7 +263,9 @@ class DefaultController extends Controller
 
 
 
-/*BLOC DE GESTION DE LUTILISATEUR*/
+    /**
+     * Fonction de connexion de l'utilisateur
+     */
     public function connexionAction()
     {
         return $this->render('PPEGSBBundle:Default:ap_connexion.html.twig');
@@ -338,10 +353,11 @@ class DefaultController extends Controller
     	
     	return $ret;
     }
-/******************************/
 
-    /****BLOC DE GESTION ACT COMP **/  
 
+    /**
+     * Affiche la liste des activitées complémentaires
+     */
     public function listActCompAction()
     {
         $utilisateur = $this->container->get('security.context')->getToken()->getUser();
@@ -353,6 +369,12 @@ class DefaultController extends Controller
         return $this->render('PPEGSBBundle:Default:list_act.html.twig', array('activites' => $act));
     }
 
+
+    /**
+     * Fonction de création et d'ajout d'une nouvelle activité complémentaire
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
     public function formActCompAction(Request $request)
     {
         $utilisateur = $this->container->get('security.context')->getToken()->getUser();
@@ -373,6 +395,12 @@ class DefaultController extends Controller
         return $this->render('PPEGSBBundle:Default:form_actComp.html.twig', array('form' => $form->createView() ));
     }
 
+
+    /**
+     * µµFonction de modification d'une activité complémentaire 
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
     public function updateActCompAction($id) {
         // On recherche l'avis
         $em = $this->getDoctrine()->getEntityManager();
